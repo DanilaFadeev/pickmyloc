@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<!--<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>-->
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="995.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.Controller">
+   <children>
+      <Pane prefHeight="432.0" prefWidth="64.0" style="-fx-background-color: #003b60;">
+         <children>
+            <JFXButton layoutX="10.0" layoutY="83.0" onAction="#onAddContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #ccc;" text=" ">
+               <graphic>
+                  <!--<FontAwesomeIconView glyphName="PLUS" size="24.0" />-->
+               </graphic>
+            </JFXButton>
+         </children></Pane>
+      <AnchorPane fx:id="rootPane" prefHeight="526.0" prefWidth="461.0" HBox.hgrow="ALWAYS">
+         <children>
+            <JFXTreeTableView fx:id="contactsTable" layoutX="12.0" layoutY="51.0" prefHeight="465.0" prefWidth="459.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="51.0">
+               <columnResizePolicy>
+                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </JFXTreeTableView>
+            <JFXTextField fx:id="searchField" layoutX="229.0" layoutY="14.0" prefHeight="26.0" prefWidth="237.0" promptText="Search.." />
+            <Label layoutX="14.0" layoutY="10.0" text="My contacts">
+               <font>
+                  <Font name="TeXGyreAdventor-Regular" size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="526.0" prefWidth="458.0" HBox.hgrow="SOMETIMES">
+         <children>
+            <ImageView fitHeight="500.0" fitWidth="435.0" layoutX="13.0" layoutY="15.0" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="15.0">
+               <image>
+                  <Image url="@../fake_map.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

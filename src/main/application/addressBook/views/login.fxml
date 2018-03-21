@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="368.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="123.0" layoutY="32.0" prefHeight="35.0" prefWidth="122.0" text="PickMyLoc">
+         <font>
+            <Font name="Noto Sans CJK JP Bold" size="22.0" />
+         </font>
+      </Label>
+      <JFXPasswordField layoutX="132.0" layoutY="180.0" />
+      <JFXTextField layoutX="132.0" layoutY="128.0" />
+      <JFXButton layoutX="262.0" layoutY="339.0" prefHeight="45.0" prefWidth="83.0" />
+      <FontAwesomeIconView glyphName="USER" layoutX="92.0" layoutY="153.0" size="24.0" />
+      <FontAwesomeIconView glyphName="LOCK" layoutX="94.0" layoutY="201.0" size="24.0" />
+      <FontAwesomeIconView glyphName="MAP" layoutX="251.0" layoutY="59.0" size="28.0" />
+   </children>
+</Pane>
