@@ -1,5 +1,9 @@
 package addressBook;
 
+import com.google.code.geocoder.Geocoder;
+import com.google.code.geocoder.GeocoderRequestBuilder;
+import com.google.code.geocoder.model.GeocodeResponse;
+import com.google.code.geocoder.model.GeocoderRequest;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +29,12 @@ public class Main extends Application {
         primaryStage.setTitle("Address book");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+        // Geocoder
+//        final Geocoder geocoder = new Geocoder();
+//        GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress("Беларусь, Минск ул. Янки Лучины").setLanguage("ru").getGeocoderRequest();
+//        GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
+//        System.out.println(geocoderResponse.getResults().get(0).getGeometry().getLocation());
     }
 
 

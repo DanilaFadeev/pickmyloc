@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,15 +11,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<!--<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>-->
-
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="995.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.FormController">
    <children>
       <Pane prefHeight="432.0" prefWidth="64.0" style="-fx-background-color: #003b60;">
          <children>
-            <JFXButton layoutX="10.0" layoutY="83.0" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #ccc;" text=" ">
+            <JFXButton contentDisplay="GRAPHIC_ONLY" ellipsisString="" layoutX="10.0" layoutY="83.0" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #ccc;" textAlignment="CENTER">
                <graphic>
-                  <!--<FontAwesomeIconView glyphName="PLUS" size="24.0" />-->
+                  <FontAwesomeIconView glyphName="PLUS" size="24.0" />
                </graphic>
             </JFXButton>
          </children></Pane>
@@ -29,7 +28,7 @@
                   <Font name="TeXGyreAdventor-Regular" size="22.0" />
                </font>
             </Label>
-            <JFXTextField layoutX="140.0" layoutY="75.0" prefHeight="26.0" prefWidth="251.0"  fx:id="nameField" />
+            <JFXTextField fx:id="nameField" layoutX="140.0" layoutY="75.0" prefHeight="26.0" prefWidth="251.0" />
             <Label layoutX="38.0" layoutY="78.0" text="Name">
                <font>
                   <Font size="16.0" />
@@ -53,7 +52,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <JFXButton layoutX="340.0" layoutY="269.0" prefHeight="35.0" prefWidth="79.0" style="-fx-background-color: #003b60;" text="Save" textFill="WHITE" onAction="#saveContact"/>
+            <JFXButton layoutX="340.0" layoutY="269.0" onAction="#saveContact" prefHeight="35.0" prefWidth="79.0" style="-fx-background-color: #003b60;" text="Save" textFill="WHITE" />
             <JFXButton layoutX="251.0" layoutY="269.0" prefHeight="35.0" prefWidth="79.0" style="-fx-background-color: #003b60;" text="Back" textFill="WHITE" />
          </children>
       </AnchorPane>
