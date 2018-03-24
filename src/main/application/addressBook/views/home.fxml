@@ -3,11 +3,10 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import com.lynden.gmapsfx.GoogleMapView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -38,13 +37,9 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="526.0" prefWidth="458.0" HBox.hgrow="SOMETIMES">
+      <AnchorPane prefHeight="526.0" prefWidth="455.0" HBox.hgrow="SOMETIMES">
          <children>
-            <ImageView fitHeight="500.0" fitWidth="435.0" layoutX="13.0" layoutY="15.0" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="15.0">
-               <image>
-                  <Image url="@../fake_map.png" />
-               </image>
-            </ImageView>
+            <GoogleMapView fx:id="googleMapView" layoutX="9.0" layoutY="15.0" prefHeight="497.0" prefWidth="438.0" AnchorPane.bottomAnchor="15.0" AnchorPane.topAnchor="15.0" />
          </children>
       </AnchorPane>
    </children>
