@@ -1,33 +1,20 @@
 package addressBook.controllers;
 
-import com.google.code.geocoder.Geocoder;
-import com.google.code.geocoder.GeocoderRequestBuilder;
-import com.google.code.geocoder.model.GeocodeResponse;
-import com.google.code.geocoder.model.GeocoderRequest;
+import addressBook.Classes.GoogleMapManager;
+import addressBook.Main;
+import addressBook.helpers.SwitchScene;
+import addressBook.models.Contact;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.lynden.gmapsfx.GoogleMapView;
-import com.lynden.gmapsfx.javascript.event.GMapMouseEvent;
-import com.lynden.gmapsfx.javascript.event.UIEventType;
-import com.lynden.gmapsfx.javascript.object.*;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.util.Callback;
-import addressBook.helpers.SwitchScene;
-import addressBook.models.Contact;
 
-import addressBook.Main;
-
-import java.net.URL;
-import java.util.Random;
-import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 
@@ -68,37 +55,13 @@ public class Controller {
                         || treeItem.getValue().phone.get().contains(newValue)
                 ));
 
-        googleMapView.addMapInializedListener(() -> configureMap());
+        googleMapView.addMapInializedListener(() -> GoogleMapManager.configureMap(googleMapView));
     }
 
-    protected void configureMap() {
-        MapOptions mapOptions = new MapOptions();
 
-        mapOptions.center(new LatLong(53.902174, 27.5614256))
-                .mapType(MapTypeIdEnum.ROADMAP)
-                .zoom(11);
-        map = googleMapView.createMap(mapOptions, false);
-
-//        map.addMouseEventHandler(UIEventType.click, (GMapMouseEvent event) -> {
-//            LatLong latLong = event.getLatLong();
-//            latitudeLabel.setText(formatter.format(latLong.getLatitude()));
-//            longitudeLabel.setText(formatter.format(latLong.getLongitude()));
-//        });
-
-        for (int i = 0; i < 10; i++) {
-            Random rand = new Random();
-
-            float x = rand.nextFloat() / 10 - 0.02f;
-            float y = rand.nextFloat() / 10 - 0.02f;
-
-            MarkerOptions markerOptions1 = new MarkerOptions();
-            markerOptions1.position(new LatLong(53.9 + x, 27.5 + y));
-
-            map.addMarker(new Marker(markerOptions1));
-        }
+    void addContact(String name) {
+        Main.data.add(new Contact(name, name, name, name));
     }
-
-    private GoogleMap map;
 
     @FXML
     private GoogleMapView googleMapView;
@@ -113,10 +76,6 @@ public class Controller {
     private void onAddContact(ActionEvent event) {
         SwitchScene<FormController> switchScene = new SwitchScene<>("../views/contactForm.fxml");
         switchScene.switchScene(event);
-    }
-
-    void addContact(String name) {
-       Main.data.add(new Contact(name, name, name, name));
     }
 
 }

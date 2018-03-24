@@ -16,11 +16,11 @@ import addressBook.models.Contact;
 public class Main extends Application {
 
     public static ObservableList<Contact> data = FXCollections.observableArrayList(
-            new Contact("Jacob", "Smith", "Minsk, Spilivskogo", "299 23 54"),
-            new Contact("Isabella", "Johnson", "Minsk, Octabryskaya", "299 45 23"),
-            new Contact("Ethan", "Williams", "Minsk, Kuprevicha", "299 50 23"),
-            new Contact("Emma", "Jones", "Minsk", "299 64 92"),
-            new Contact("Michael", "Brown", "Moskow", "299 51 38")
+            new Contact("Jacob", "Smith", "г. Минск ул. Янки Лучины", "299 23 54"),
+            new Contact("Isabella", "Johnson", "Беларусь, Минск ул. Петруся Бровки", "299 45 23"),
+            new Contact("Ethan", "Williams", "Беларусь, Минск ул. Голубева", "299 50 23"),
+            new Contact("Emma", "Jones", "Беларусь, Минск ул. Янки Купалы", "299 64 92"),
+            new Contact("Michael", "Brown", "Беларусь, Минск Уручье", "299 51 38")
     );
 
     @Override
@@ -29,12 +29,6 @@ public class Main extends Application {
         primaryStage.setTitle("Address book");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
-        // Geocoder
-//        final Geocoder geocoder = new Geocoder();
-//        GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress("Беларусь, Минск ул. Янки Лучины").setLanguage("ru").getGeocoderRequest();
-//        GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
-//        System.out.println(geocoderResponse.getResults().get(0).getGeometry().getLocation());
     }
 
 
