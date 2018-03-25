@@ -48,6 +48,19 @@ public class Controller {
         contactsTable.setRoot(root);
         contactsTable.setShowRoot(false);
 
+
+        // onSelect row
+        contactsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                RecursiveTreeItem selectedContact = (RecursiveTreeItem)contactsTable.getSelectionModel().getSelectedItem();
+                Contact contact = (Contact)selectedContact.getValue();
+
+                GoogleMapManager.setMarker(contact.location);
+            }
+        });
+
+
+        // Search initialization
         searchField.textProperty().addListener((observable, oldValue, newValue) ->
                 contactsTable.setPredicate((Predicate<TreeItem<Contact>>) treeItem ->
                         treeItem.getValue().name.get().toLowerCase().contains(newValue.toLowerCase())
@@ -55,6 +68,7 @@ public class Controller {
                         || treeItem.getValue().phone.get().contains(newValue)
                 ));
 
+        // Map initialization
         googleMapView.addMapInializedListener(() -> GoogleMapManager.configureMap(googleMapView));
     }
 

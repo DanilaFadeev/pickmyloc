@@ -1,6 +1,7 @@
 package addressBook.models;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -9,7 +10,7 @@ public class Contact extends RecursiveTreeObject<Contact>{
     public StringProperty surname;
     public StringProperty address;
     public StringProperty phone;
-    public StringProperty location;
+    public LatLong location;
 
 
     public Contact(String name, String surname, String address, String phone) {
@@ -19,4 +20,7 @@ public class Contact extends RecursiveTreeObject<Contact>{
         this.phone = new SimpleStringProperty(phone);
     }
 
+    public void setLocation(LatLong location) {
+        this.location = location;
+    }
 }
