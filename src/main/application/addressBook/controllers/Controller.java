@@ -4,10 +4,7 @@ import addressBook.Classes.GoogleMapManager;
 import addressBook.Main;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.lynden.gmapsfx.GoogleMapView;
 import javafx.collections.ObservableList;
@@ -37,6 +34,9 @@ public class Controller {
         JFXTreeTableColumn<Contact, String> addressColumn = new JFXTreeTableColumn<>("Address");
         addressColumn.setCellValueFactory(param -> param.getValue().getValue().address);
 
+        // Btns
+        manageAdditionalButtons(false);
+
         // Style preferences
         JFXTreeTableColumn[] columns = { nameColumn, surnameColumn, phoneColumn, addressColumn };
         for (JFXTreeTableColumn column: columns ) {
@@ -52,10 +52,12 @@ public class Controller {
         // onSelect row
         contactsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                RecursiveTreeItem selectedContact = (RecursiveTreeItem)contactsTable.getSelectionModel().getSelectedItem();
-                Contact contact = (Contact)selectedContact.getValue();
+                RecursiveTreeItem selectedContact = (RecursiveTreeItem) contactsTable.getSelectionModel().getSelectedItem();
+                Contact contact = (Contact) selectedContact.getValue();
 
-                GoogleMapManager.setMarker(contact.location);
+                manageAdditionalButtons(true);
+
+                GoogleMapManager.setMarker(googleMapView, contact.location);
             }
         });
 
@@ -77,6 +79,13 @@ public class Controller {
         Main.data.add(new Contact(name, name, name, name));
     }
 
+    private void manageAdditionalButtons(boolean isShow) {
+        contactInfoBtn.setVisible(isShow);
+        allContactsBtn.setVisible(isShow);
+        editContactBtn.setVisible(isShow);
+        removeContactBtn.setVisible(isShow);
+    }
+
     @FXML
     private GoogleMapView googleMapView;
 
@@ -87,9 +96,29 @@ public class Controller {
     private JFXTextField searchField;
 
     @FXML
+    private JFXButton contactInfoBtn;
+
+    @FXML
+    private JFXButton allContactsBtn;
+
+    @FXML
+    private JFXButton editContactBtn;
+
+    @FXML
+    private JFXButton removeContactBtn;
+
+    @FXML
     private void onAddContact(ActionEvent event) {
-        SwitchScene<FormController> switchScene = new SwitchScene<>("../views/contactForm.fxml");
+        SwitchScene<newContactController> switchScene = new SwitchScene<>("../views/newContactForm.fxml");
         switchScene.switchScene(event);
+    }
+
+    @FXML
+    private void onDeselectContacts(ActionEvent event) {
+        contactsTable.getSelectionModel().clearSelection();
+        manageAdditionalButtons(false);
+
+        GoogleMapManager.setAllMarkers(Main.data);
     }
 
 }

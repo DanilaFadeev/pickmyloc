@@ -7,15 +7,20 @@ import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.GeocodeResponse;
 import com.google.code.geocoder.model.GeocoderGeometry;
 import com.google.code.geocoder.model.GeocoderRequest;
+import com.google.code.geocoder.model.GeocoderResult;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.javascript.object.*;
+import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class GoogleMapManager {
     private static final double initLatitude = 53.902174;
     private static final double initLongitude = 27.5614256;
     private static final int initZoom = 11;
+    private static final int locationZoom = 14;
 
-    public static GoogleMap map;
+    private static GoogleMap map;
 
     public static void configureMap(GoogleMapView googleMapView) {
         MapOptions mapOptions = new MapOptions();
@@ -26,15 +31,12 @@ public class GoogleMapManager {
 
         map = googleMapView.createMap(mapOptions, false);
 
-        for (Contact c: Main.data ) {
-            LatLong contactCoords = getCoordsByAddress(c.address.getValue());
-            c.setLocation(contactCoords);
+        setAllMarkers(Main.data);
+    }
 
-            MarkerOptions markerOptions1 = new MarkerOptions();
-            markerOptions1.position( contactCoords );
-
-            map.addMarker( new Marker(markerOptions1) );
-        }
+    public static void setDefaultMapOptions() {
+        map.setCenter(new LatLong(initLatitude, initLongitude));
+        map.setZoom(initZoom);
     }
 
     public static LatLong getCoordsByAddress(String address) {
@@ -46,7 +48,13 @@ public class GoogleMapManager {
                 .getGeocoderRequest();
 
         GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
-        GeocoderGeometry geometryResult = geocoderResponse.getResults().get(0).getGeometry();
+        List<GeocoderResult> geoResults = geocoderResponse.getResults();
+
+        if (geoResults.size() == 0) {
+            return null;
+        }
+
+        GeocoderGeometry geometryResult = geoResults.get(0).getGeometry();
 
         double latitude = geometryResult.getLocation().getLat().doubleValue();
         double longitude = geometryResult.getLocation().getLng().doubleValue();
@@ -54,11 +62,29 @@ public class GoogleMapManager {
         return new LatLong(latitude, longitude);
     }
 
-    public static void setMarker(LatLong coords) {
+    public static void setAllMarkers(ObservableList<Contact> contacts) { // need to be optimized
+        for (Contact c: contacts) {
+            LatLong contactCoords = getCoordsByAddress(c.address.getValue());
+            c.setLocation(contactCoords);
+
+            MarkerOptions markerOptions1 = new MarkerOptions();
+            markerOptions1.position( contactCoords );
+
+            map.addMarker( new Marker(markerOptions1) );
+        }
+
+        setDefaultMapOptions();
+    }
+
+    public static void setMarker(GoogleMapView googleMapView, LatLong coords) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(coords);
 
         map.clearMarkers();
+
+        googleMapView.setCenter(coords.getLatitude(), coords.getLongitude());
+        googleMapView.setZoom(locationZoom);
+
         map.addMarker( new Marker(markerOptions) );
     }
 }

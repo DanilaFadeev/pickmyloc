@@ -16,9 +16,34 @@
    <children>
       <Pane prefHeight="432.0" prefWidth="64.0" style="-fx-background-color: #003b60;">
          <children>
-            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="83.0" onAction="#onAddContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #ccc;" text=" " textAlignment="CENTER">
+            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="14.0" onAction="#onAddContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView glyphName="PLUS" size="24.0" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="24.0" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="contactInfoBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="125.0" onAction="#onAddContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER" size="24.0" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="allContactsBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="69.0" onAction="#onDeselectContacts" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USERS" size="24.0" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="editContactBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="181.0" onAction="#onAddContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="24.0" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="removeContactBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="237.0" onAction="#onAddContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TRASH_ALT" size="24.0" />
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="471.0" onAction="#onAddContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" size="24.0" />
                </graphic>
             </JFXButton>
          </children></Pane>
