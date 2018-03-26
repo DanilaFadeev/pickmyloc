@@ -8,7 +8,9 @@ import com.google.code.geocoder.model.GeocodeResponse;
 import com.google.code.geocoder.model.GeocoderGeometry;
 import com.google.code.geocoder.model.GeocoderRequest;
 import com.google.code.geocoder.model.GeocoderResult;
+import com.jfoenix.controls.JFXSpinner;
 import com.lynden.gmapsfx.GoogleMapView;
+import com.lynden.gmapsfx.javascript.event.MapStateEventType;
 import com.lynden.gmapsfx.javascript.object.*;
 import javafx.collections.ObservableList;
 
@@ -22,7 +24,7 @@ public class GoogleMapManager {
 
     private static GoogleMap map;
 
-    public static void configureMap(GoogleMapView googleMapView) {
+    public static void configureMap(GoogleMapView googleMapView, JFXSpinner spinner) {
         MapOptions mapOptions = new MapOptions();
 
         mapOptions.center(new LatLong(initLatitude, initLongitude))
@@ -30,6 +32,8 @@ public class GoogleMapManager {
                 .zoom(initZoom);
 
         map = googleMapView.createMap(mapOptions, false);
+
+        map.addStateEventHandler(MapStateEventType.tilesloaded, () -> spinner.setVisible(false));
 
         setAllMarkers(Main.data);
     }

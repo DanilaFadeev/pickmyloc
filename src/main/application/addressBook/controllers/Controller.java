@@ -71,7 +71,7 @@ public class Controller {
                 ));
 
         // Map initialization
-        googleMapView.addMapInializedListener(() -> GoogleMapManager.configureMap(googleMapView));
+        googleMapView.addMapInializedListener(() -> GoogleMapManager.configureMap(googleMapView, mapLoadingSpinner));
     }
 
 
@@ -88,6 +88,9 @@ public class Controller {
 
     @FXML
     private GoogleMapView googleMapView;
+
+    @FXML
+    private JFXSpinner mapLoadingSpinner;
 
     @FXML
     private JFXTreeTableView contactsTable;
