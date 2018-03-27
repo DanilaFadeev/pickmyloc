@@ -2,7 +2,6 @@ package addressBook.controllers;
 
 import addressBook.Classes.GoogleMapManager;
 import addressBook.Main;
-import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -10,12 +9,16 @@ import com.lynden.gmapsfx.GoogleMapView;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.util.function.Predicate;
 
 
-public class Controller {
+public class MainController {
 
     @FXML
     public void initialize() {
@@ -72,6 +75,7 @@ public class Controller {
 
         // Map initialization
         googleMapView.addMapInializedListener(() -> GoogleMapManager.configureMap(googleMapView, mapLoadingSpinner));
+
     }
 
 
@@ -85,6 +89,9 @@ public class Controller {
         editContactBtn.setVisible(isShow);
         removeContactBtn.setVisible(isShow);
     }
+
+    @FXML
+    private AnchorPane rootPane;
 
     @FXML
     private GoogleMapView googleMapView;
@@ -112,8 +119,16 @@ public class Controller {
 
     @FXML
     private void onAddContact(ActionEvent event) {
-        SwitchScene<newContactController> switchScene = new SwitchScene<>("../views/newContactForm.fxml");
-        switchScene.switchScene(event);
+//        SwitchScene<AddPanelController> switchScene = new SwitchScene<>("../views/AddPanel.fxml");
+//        switchScene.switchScene(event);
+
+        // test anchor pane
+        try {
+            Node pane = (Node)FXMLLoader.load(getClass().getResource("../views/AddPanel.fxml"));
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -125,3 +140,5 @@ public class Controller {
     }
 
 }
+
+// TODO add birthday date to contact as date picker

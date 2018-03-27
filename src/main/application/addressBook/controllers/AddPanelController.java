@@ -1,34 +1,23 @@
 package addressBook.controllers;
 
 import addressBook.Classes.GoogleMapManager;
+import addressBook.helpers.SwitchScene;
 import com.jfoenix.controls.JFXTextField;
-import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import addressBook.helpers.SwitchScene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 
-public class newContactController {
-    @FXML
-    public void initialize() {
-        googleMapView.addMapInializedListener(() -> GoogleMapManager.configureMap(googleMapView, null));
-    }
-
-    @FXML
-    private GoogleMapView googleMapView;
+public class AddPanelController {
 
     @FXML
     private JFXTextField nameField;
@@ -67,10 +56,10 @@ public class newContactController {
         String address = addressField.getText();
         LatLong coords = GoogleMapManager.getCoordsByAddress(address);
 
-        if (coords != null)
-            GoogleMapManager.setMarker(googleMapView, coords);
-        else
-            errorAddressLabel.setVisible(true);
+//        if (coords != null)
+//            GoogleMapManager.setMarker(googleMapView, coords);
+//        else
+//            errorAddressLabel.setVisible(true);
     }
 
     @FXML
@@ -82,17 +71,17 @@ public class newContactController {
 
     @FXML
     private void saveContact(ActionEvent event) {
-        SwitchScene switchObj = new SwitchToContact("../views/home.fxml", true);
+        SwitchScene switchObj = new SwitchToContact("../views/MainForm.fxml", true);
         switchObj.switchScene(event);
     }
 
     @FXML
     private void backToHome(ActionEvent event) {
-        SwitchScene switchObj = new SwitchToContact("../views/home.fxml", false);
+        SwitchScene switchObj = new SwitchToContact("../views/MainForm.fxml", false);
         switchObj.switchScene(event);
     }
 
-    class SwitchToContact extends SwitchScene<Controller> {
+    class SwitchToContact extends SwitchScene<MainController> {
         SwitchToContact(String FXMLPath) {
             super(FXMLPath);
         }

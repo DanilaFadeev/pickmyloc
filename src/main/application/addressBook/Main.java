@@ -20,8 +20,8 @@ public class Main extends Application {
     );
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("views/home.fxml"));
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("views/MainForm.fxml"));
         primaryStage.setTitle("Address book");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
