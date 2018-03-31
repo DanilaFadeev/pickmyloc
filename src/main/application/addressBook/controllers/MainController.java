@@ -3,75 +3,42 @@ package addressBook.controllers;
 import addressBook.Classes.GoogleMapManager;
 import addressBook.Main;
 import addressBook.models.Contact;
-import com.jfoenix.controls.*;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXSpinner;
 import com.lynden.gmapsfx.GoogleMapView;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.TreeItem;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.util.function.Predicate;
+import java.util.Optional;
 
 
 public class MainController {
 
+    private ContactsPanel contactsPanel;
+
     @FXML
     public void initialize() {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("../views/ContactsPanel.fxml"));
 
-        ObservableList<Contact> filteredContacts = Main.data;
-
-        JFXTreeTableColumn<Contact, String> nameColumn = new JFXTreeTableColumn<>("Name");
-        nameColumn.setCellValueFactory(param -> param.getValue().getValue().name);
-
-        JFXTreeTableColumn<Contact, String> surnameColumn = new JFXTreeTableColumn<>("Surname");
-        surnameColumn.setCellValueFactory(param -> param.getValue().getValue().surname);
-
-        JFXTreeTableColumn<Contact, String> phoneColumn = new JFXTreeTableColumn<>("Phone");
-        phoneColumn.setCellValueFactory(param -> param.getValue().getValue().phone);
-
-        JFXTreeTableColumn<Contact, String> addressColumn = new JFXTreeTableColumn<>("Address");
-        addressColumn.setCellValueFactory(param -> param.getValue().getValue().address);
-
-        // Btns
-        manageAdditionalButtons(false);
-
-        // Style preferences
-        JFXTreeTableColumn[] columns = { nameColumn, surnameColumn, phoneColumn, addressColumn };
-        for (JFXTreeTableColumn column: columns ) {
-            column.setStyle("-fx-font-size: 11px");
+        try {
+            Node pane = Loader.load();
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException e) {
+            System.out.println(e.getStackTrace());
         }
 
-        TreeItem<Contact> root = new RecursiveTreeItem<>(filteredContacts, RecursiveTreeObject::getChildren);
-        contactsTable.getColumns().setAll(nameColumn, surnameColumn, phoneColumn, addressColumn);
-        contactsTable.setRoot(root);
-        contactsTable.setShowRoot(false);
+        contactsPanel = Loader.getController();
+        contactsPanel.setMainController(this);
 
-
-        // onSelect row
-        contactsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                RecursiveTreeItem selectedContact = (RecursiveTreeItem) contactsTable.getSelectionModel().getSelectedItem();
-                Contact contact = (Contact) selectedContact.getValue();
-
-                manageAdditionalButtons(true);
-
-                GoogleMapManager.setMarker(googleMapView, contact.location);
-            }
-        });
-
-
-        // Search initialization
-        searchField.textProperty().addListener((observable, oldValue, newValue) ->
-                contactsTable.setPredicate((Predicate<TreeItem<Contact>>) treeItem ->
-                        treeItem.getValue().name.get().toLowerCase().contains(newValue.toLowerCase())
-                        || treeItem.getValue().surname.get().toLowerCase().contains(newValue.toLowerCase())
-                        || treeItem.getValue().phone.get().contains(newValue)
-                ));
+        // hide buttons
+        manageAdditionalButtons(false);
 
         // Map initialization
         googleMapView.addMapInializedListener(() -> GoogleMapManager.configureMap(googleMapView, mapLoadingSpinner));
@@ -83,7 +50,7 @@ public class MainController {
         Main.data.add(new Contact(name, name, name, name));
     }
 
-    private void manageAdditionalButtons(boolean isShow) {
+    public void manageAdditionalButtons(boolean isShow) {
         contactInfoBtn.setVisible(isShow);
         allContactsBtn.setVisible(isShow);
         editContactBtn.setVisible(isShow);
@@ -91,40 +58,30 @@ public class MainController {
     }
 
     @FXML
-    private AnchorPane rootPane;
+    protected AnchorPane rootPane;
 
     @FXML
-    private GoogleMapView googleMapView;
+    protected GoogleMapView googleMapView;
 
     @FXML
-    private JFXSpinner mapLoadingSpinner;
+    protected JFXSpinner mapLoadingSpinner;
 
     @FXML
-    private JFXTreeTableView contactsTable;
+    protected JFXButton contactInfoBtn;
 
     @FXML
-    private JFXTextField searchField;
+    protected JFXButton allContactsBtn;
 
     @FXML
-    private JFXButton contactInfoBtn;
+    protected JFXButton editContactBtn;
 
     @FXML
-    private JFXButton allContactsBtn;
+    protected JFXButton removeContactBtn;
 
     @FXML
-    private JFXButton editContactBtn;
-
-    @FXML
-    private JFXButton removeContactBtn;
-
-    @FXML
-    private void onAddContact(ActionEvent event) {
-//        SwitchScene<AddPanelController> switchScene = new SwitchScene<>("../views/AddPanel.fxml");
-//        switchScene.switchScene(event);
-
-        // test anchor pane
+    protected void onAddContact() {
         try {
-            Node pane = (Node)FXMLLoader.load(getClass().getResource("../views/AddPanel.fxml"));
+            Node pane = FXMLLoader.load(getClass().getResource("../views/AddPanel.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException e) {
             e.printStackTrace();
@@ -132,13 +89,29 @@ public class MainController {
     }
 
     @FXML
-    private void onDeselectContacts(ActionEvent event) {
-        contactsTable.getSelectionModel().clearSelection();
+    protected void onDeselectContacts() {
+        contactsPanel.contactsTable.getSelectionModel().clearSelection();
         manageAdditionalButtons(false);
 
         GoogleMapManager.setAllMarkers(Main.data);
     }
 
+    @FXML
+    protected void onRemoveContact() {
+        Alert removeConfirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        String contactName = contactsPanel.getSelectedContact().name.getValue();
+        removeConfirmAlert.setContentText("Do you really want to delete `" + contactName + "` from \nyour contacts?");
+
+        removeConfirmAlert.setGraphic(null);
+        removeConfirmAlert.setHeaderText(null);
+
+        Optional<ButtonType> result = removeConfirmAlert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            Main.data.remove(contactsPanel.getSelectedContact());
+            onDeselectContacts();
+        }
+    }
+
 }
 
-// TODO add birthday date to contact as date picker

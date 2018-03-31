@@ -32,3 +32,17 @@ public class Main extends Application {
         launch(args);
     }
 }
+
+// TODO list
+// expand fields of contact class according add form
+// make method for dynamic location buttons for the left panel
+// add anchor panel for details about contact
+// choose and implement new font for whole app
+// make all form responsive with anchor panel
+// method for remove selected contact
+// method for edit contact (open addForm with contact data)
+// connection to DB (SQLite)
+// CRUD operations
+// Add some validation for addForm
+// Login form connected to app
+// Create a register form
