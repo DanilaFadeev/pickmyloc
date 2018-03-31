@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="526.0" prefWidth="461.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.ContactDetails">
+         <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="214.0" layoutX="28.0" layoutY="48.0" stroke="BLACK" strokeType="INSIDE" width="405.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.9278846153846154">
+               <stops>
+                  <Stop color="#613d3d5e" />
+                  <Stop color="#0000005e" offset="0.07666666666666666" />
+                  <Stop color="#1fffa7" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+            <Label layoutX="11.0" layoutY="9.0" text="Contact information">
+               <font>
+                  <Font name="TeXGyreAdventor-Regular" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="nameField" layoutX="342.0" layoutY="66.0" text="Name">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="surnameField" layoutX="260.0" layoutY="66.0" text="Surname">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="phoneField" layoutX="251.0" layoutY="147.0" text="Phone">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="addressField" layoutX="67.0" layoutY="231.0" text="Address">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="351.0" layoutY="476.0" prefHeight="35.0" prefWidth="79.0" style="-fx-background-color: #003b60;" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="31.0" />
+            <JFXButton layoutX="14.0" layoutY="477.0" onAction="#backToHome" prefHeight="35.0" prefWidth="79.0" style="-fx-background-color: #003b60;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" />
+            <Label fx:id="errorAddressLabel" layoutX="23.0" layoutY="340.0" text="The address is not found. Type the full one " textFill="#e80404" visible="false" />
+            <Label fx:id="mobilePhoneField" layoutX="260.0" layoutY="100.0" text="Mobile phone">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="34.0" layoutY="276.0" text="Company">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="114.0" layoutY="276.0" text="Position">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="contactImageView" fitHeight="151.0" fitWidth="164.0" layoutX="38.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/ava.png" />
+         </image></ImageView>
+      <Label fx:id="birthdayField" layoutX="252.0" layoutY="180.0" text="Birhday">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <FontAwesomeIconView glyphName="PHONE" layoutX="225.0" layoutY="163.0" size="18.0" />
+      <FontAwesomeIconView glyphName="USER" layoutX="224.0" layoutY="82.0" size="22.0" />
+      <FontAwesomeIconView glyphName="MOBILE" layoutX="228.0" layoutY="117.0" size="22" />
+      <FontAwesomeIconView glyphName="BIRTHDAY_CAKE" layoutX="224.0" layoutY="195.0" size="18.0" />
+      <FontAwesomeIconView glyphName="MAP_MARKER" layoutX="45.0" layoutY="246.0" size="18.0" />
+      <JFXTextArea layoutX="34.0" layoutY="328.0" prefHeight="127.0" prefWidth="396.0" promptText="Send message to him.." />
+         </children>
+      </AnchorPane>

@@ -17,7 +17,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="24.0" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="contactInfoBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="125.0" onAction="#onAddContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+            <JFXButton fx:id="contactInfoBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="125.0" onAction="#onShowContactInfo" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="USER" size="24.0" />
                </graphic>

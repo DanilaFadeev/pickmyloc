@@ -6,7 +6,6 @@ import addressBook.models.Contact;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.lynden.gmapsfx.GoogleMapView;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -45,18 +44,6 @@ public class MainController {
 
     }
 
-
-    void addContact(String name) {
-        Main.data.add(new Contact(name, name, name, name));
-    }
-
-    public void manageAdditionalButtons(boolean isShow) {
-        contactInfoBtn.setVisible(isShow);
-        allContactsBtn.setVisible(isShow);
-        editContactBtn.setVisible(isShow);
-        removeContactBtn.setVisible(isShow);
-    }
-
     @FXML
     protected AnchorPane rootPane;
 
@@ -88,6 +75,21 @@ public class MainController {
         }
     }
 
+    @FXML void onShowContactInfo() {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("../views/DetailInformation.fxml"));
+
+        try {
+            Node pane = Loader.load();
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException e) {
+            System.out.println(e.getStackTrace());
+        }
+
+        ContactDetails detailsPanel = Loader.getController();
+        detailsPanel.setContactInfo(contactsPanel.getSelectedContact());
+    }
+
     @FXML
     protected void onDeselectContacts() {
         contactsPanel.contactsTable.getSelectionModel().clearSelection();
@@ -112,6 +114,19 @@ public class MainController {
             onDeselectContacts();
         }
     }
+
+
+    public void addContact(String name) {
+        Main.data.add(new Contact(name, name, name, name));
+    }
+
+    public void manageAdditionalButtons(boolean isShow) {
+        contactInfoBtn.setVisible(isShow);
+        allContactsBtn.setVisible(isShow);
+        editContactBtn.setVisible(isShow);
+        removeContactBtn.setVisible(isShow);
+    }
+
 
 }
 
