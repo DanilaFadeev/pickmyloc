@@ -8,8 +8,8 @@ import javafx.beans.property.StringProperty;
 public class Contact extends RecursiveTreeObject<Contact>{
     public StringProperty name;
     public StringProperty surname;
-    public StringProperty address;
     public StringProperty phone;
+    public StringProperty address;
     public LatLong location;
 
 

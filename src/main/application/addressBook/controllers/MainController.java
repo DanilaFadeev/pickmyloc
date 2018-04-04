@@ -6,14 +6,20 @@ import addressBook.models.Contact;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.lynden.gmapsfx.GoogleMapView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
 
 
@@ -27,8 +33,8 @@ public class MainController {
         Loader.setLocation(getClass().getResource("../views/ContactsPanel.fxml"));
 
         try {
-            Node pane = Loader.load();
-            rootPane.getChildren().setAll(pane);
+            AnchorPane pane = Loader.load();
+            rootPane.getChildren().setAll(pane.getChildren());
         } catch (IOException e) {
             System.out.println(e.getStackTrace());
         }
@@ -115,6 +121,19 @@ public class MainController {
         }
     }
 
+    @FXML
+    protected void onSignOut(ActionEvent event) throws IOException {
+        URL url = new File("src/main/application/addressBook/views/Login.fxml").toURL();
+        FXMLLoader Loader = new FXMLLoader(url);
+
+        Loader.load();
+        Parent mainForm = Loader.getRoot();
+
+        Scene scene = new Scene(mainForm);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage.setScene(scene);
+    }
 
     public void addContact(String name) {
         Main.data.add(new Contact(name, name, name, name));

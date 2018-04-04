@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import addressBook.models.Contact;
 
@@ -21,9 +22,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("views/MainForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/Login.fxml"));
         primaryStage.setTitle("Address book");
-        primaryStage.setScene(new Scene(root));
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("styles/main.css");
+
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
@@ -36,10 +41,8 @@ public class Main extends Application {
 // TODO list
 // expand fields of contact class according add form
 // make method for dynamic location buttons for the left panel
-// add anchor panel for details about contact
 // choose and implement new font for whole app
 // make all form responsive with anchor panel
-// method for remove selected contact
 // method for edit contact (open addForm with contact data)
 // connection to DB (SQLite)
 // CRUD operations

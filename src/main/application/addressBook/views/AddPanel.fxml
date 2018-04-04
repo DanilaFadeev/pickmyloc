@@ -21,7 +21,7 @@
          <font>
             <Font size="12.0" />
          </font></JFXTextField>
-            <Label layoutX="23.0" layoutY="60.0" text="Name*">
+            <Label layoutX="23.0" layoutY="60.0" style="-fx-font-family: 'Myra 4F Caps';" text="Name*">
                <font>
                   <Font size="14.0" />
                </font>
@@ -30,7 +30,7 @@
          <font>
             <Font size="12.0" />
          </font></JFXTextField>
-            <Label layoutX="23.0" layoutY="95.0" text="Surname">
+            <Label layoutX="23.0" layoutY="95.0" style="-fx-font-family: 'Myra 4F Caps';" text="Surname">
                <font>
                   <Font size="14.0" />
                </font>
@@ -39,7 +39,7 @@
          <font>
             <Font size="12.0" />
          </font></JFXTextField>
-            <Label layoutX="23.0" layoutY="130.0" text="Phone">
+            <Label layoutX="23.0" layoutY="130.0" style="-fx-font-family: 'Myra 4F Caps';" text="Phone">
                <font>
                   <Font size="14.0" />
                </font>
@@ -53,15 +53,15 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXButton layoutX="375.0" layoutY="477.0" onAction="#saveContact" prefHeight="35.0" prefWidth="79.0" style="-fx-background-color: #003b60;" text="Save" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="10.0" />
-            <JFXButton layoutX="14.0" layoutY="477.0" onAction="#backToHome" prefHeight="35.0" prefWidth="79.0" style="-fx-background-color: #003b60;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" />
+            <JFXButton layoutX="375.0" layoutY="477.0" onAction="#saveContact" prefHeight="35.0" prefWidth="79.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-background-color: #003b60;" text="Save" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="10.0" />
+            <JFXButton layoutX="14.0" layoutY="477.0" onAction="#backToHome" prefHeight="35.0" prefWidth="79.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-background-color: #003b60;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" />
             <Label fx:id="errorAddressLabel" layoutX="23.0" layoutY="340.0" text="The address is not found. Type the full one " textFill="#e80404" visible="false" />
             <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="406.0" layoutY="302.0" onAction="#onSearchAddress" prefHeight="35.0" prefWidth="33.0" textAlignment="CENTER" />
             <JFXTextField fx:id="phoneField1" layoutX="145.0" layoutY="161.0" prefHeight="26.0" prefWidth="251.0">
          <font>
             <Font size="12.0" />
          </font></JFXTextField>
-            <Label layoutX="23.0" layoutY="165.0" text="Mobile phone">
+            <Label layoutX="23.0" layoutY="165.0" style="-fx-font-family: 'Myra 4F Caps';" text="Mobile phone">
                <font>
                   <Font size="14.0" />
                </font>

@@ -15,11 +15,11 @@
                 <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </JFXTreeTableView>
-        <JFXTextField fx:id="searchField" layoutX="229.0" layoutY="14.0" prefHeight="26.0" prefWidth="237.0" promptText="Search.." />
-        <Label layoutX="14.0" layoutY="10.0" text="My contacts">
-            <font>
-                <Font name="TeXGyreAdventor-Regular" size="22.0" />
-            </font>
+        <JFXTextField fx:id="searchField" layoutX="300.0" layoutY="13.0" maxWidth="300.0" prefHeight="26.0" prefWidth="240.0" promptText="Search.." AnchorPane.rightAnchor="5.0" />
+        <Label layoutX="12.0" layoutY="12.0" style="-fx-font-family: 'Myra 4F Caps';" text="My contacts">
+         <font>
+            <Font size="22.0" />
+         </font>
         </Label>
     </children>
 </AnchorPane>

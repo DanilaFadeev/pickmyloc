@@ -11,6 +11,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
+import javafx.scene.text.Font;
 
 import java.util.function.Predicate;
 
@@ -63,6 +64,9 @@ public class ContactsPanel {
                                 || treeItem.getValue().surname.get().toLowerCase().contains(newValue.toLowerCase())
                                 || treeItem.getValue().phone.get().contains(newValue)
                 ));
+
+
+        //Font.loadFont(ContactsPanel.class.getResource("views/OT-ttk/Myra 4F Caps Bold.ttf").toExternalForm(), 14);
     }
 
     private MainController mainController = null;

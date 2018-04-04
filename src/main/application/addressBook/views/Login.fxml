@@ -8,18 +8,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="368.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="406.0" style="-fx-background-color: #C5E1A5;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.LoginFormController">
    <children>
-      <Label layoutX="123.0" layoutY="32.0" prefHeight="35.0" prefWidth="122.0" text="PickMyLoc">
+      <Label layoutX="115.0" layoutY="29.0" prefHeight="35.0" prefWidth="122.0" text="PickMyLoc">
          <font>
             <Font name="Noto Sans CJK JP Bold" size="22.0" />
          </font>
       </Label>
-      <JFXPasswordField layoutX="132.0" layoutY="180.0" />
-      <JFXTextField layoutX="132.0" layoutY="128.0" />
-      <JFXButton layoutX="262.0" layoutY="339.0" prefHeight="45.0" prefWidth="83.0" />
-      <FontAwesomeIconView glyphName="USER" layoutX="92.0" layoutY="153.0" size="24.0" />
-      <FontAwesomeIconView glyphName="LOCK" layoutX="94.0" layoutY="201.0" size="24.0" />
-      <FontAwesomeIconView glyphName="MAP" layoutX="251.0" layoutY="59.0" size="28.0" />
+      <JFXPasswordField fx:id="passwordField" layoutX="99.0" layoutY="155.0" prefHeight="26.0" prefWidth="231.0" />
+      <JFXTextField fx:id="usernameField" layoutX="99.0" layoutY="103.0" prefHeight="26.0" prefWidth="231.0" />
+      <JFXButton layoutX="289.0" layoutY="220.0" onAction="#onSignIn" prefHeight="45.0" prefWidth="83.0" style="-fx-background-color: #9CCC65;" text="Sign In" />
+      <FontAwesomeIconView glyphName="USER" layoutX="57.0" layoutY="124.0" size="24.0" />
+      <FontAwesomeIconView glyphName="LOCK" layoutX="58.0" layoutY="176.0" size="24.0" />
+      <FontAwesomeIconView glyphName="MAP" layoutX="243.0" layoutY="56.0" size="28.0" />
    </children>
 </Pane>
