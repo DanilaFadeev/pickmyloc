@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="526.0" prefWidth="461.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.AddPanelController">
          <children>
-            <Label layoutX="11.0" layoutY="9.0" text="Add new contact">
+            <Label layoutX="11.0" layoutY="9.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-font-weight: bold;" text="Add new contact">
                <font>
                   <Font name="TeXGyreAdventor-Regular" size="22.0" />
                </font>
@@ -21,7 +21,7 @@
          <font>
             <Font size="12.0" />
          </font></JFXTextField>
-            <Label layoutX="23.0" layoutY="60.0" style="-fx-font-family: 'Myra 4F Caps';" text="Name*">
+            <Label layoutX="23.0" layoutY="60.0" style="-fx-font-family: 'Myra 4F Caps';" text="Name">
                <font>
                   <Font size="14.0" />
                </font>
@@ -48,7 +48,7 @@
          <font>
             <Font size="12.0" />
          </font></JFXTextField>
-            <Label layoutX="23.0" layoutY="270.0" text="Address*">
+            <Label layoutX="23.0" layoutY="270.0" style="-fx-font-family: 'Myra 4F Caps';" text="Address">
                <font>
                   <Font size="14.0" />
                </font>
@@ -56,8 +56,11 @@
             <JFXButton layoutX="375.0" layoutY="477.0" onAction="#saveContact" prefHeight="35.0" prefWidth="79.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-background-color: #003b60;" text="Save" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="10.0" />
             <JFXButton layoutX="14.0" layoutY="477.0" onAction="#backToHome" prefHeight="35.0" prefWidth="79.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-background-color: #003b60;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" />
             <Label fx:id="errorAddressLabel" layoutX="23.0" layoutY="340.0" text="The address is not found. Type the full one " textFill="#e80404" visible="false" />
-            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="406.0" layoutY="302.0" onAction="#onSearchAddress" prefHeight="35.0" prefWidth="33.0" textAlignment="CENTER" />
-            <JFXTextField fx:id="phoneField1" layoutX="145.0" layoutY="161.0" prefHeight="26.0" prefWidth="251.0">
+            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="406.0" layoutY="262.0" onAction="#onSearchAddress" prefHeight="35.0" prefWidth="33.0" textAlignment="CENTER">
+         <graphic>
+                  <FontAwesomeIconView glyphName="SEARCH" size="24.0" />
+         </graphic></JFXButton>
+            <JFXTextField fx:id="mobilePhoneField" layoutX="145.0" layoutY="161.0" prefHeight="26.0" prefWidth="251.0">
          <font>
             <Font size="12.0" />
          </font></JFXTextField>
@@ -66,32 +69,31 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="phoneField11" layoutX="145.0" layoutY="196.0" prefHeight="26.0" prefWidth="251.0">
+            <JFXTextField fx:id="companyField" layoutX="145.0" layoutY="196.0" prefHeight="26.0" prefWidth="251.0">
          <font>
             <Font size="12.0" />
          </font></JFXTextField>
-            <Label layoutX="23.0" layoutY="200.0" text="Company">
+            <Label layoutX="23.0" layoutY="200.0" style="-fx-font-family: 'Myra 4F Caps';" text="Company">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="phoneField111" layoutX="145.0" layoutY="231.0" prefHeight="26.0" prefWidth="251.0">
+            <JFXTextField fx:id="positionField" layoutX="145.0" layoutY="231.0" prefHeight="26.0" prefWidth="251.0">
          <font>
             <Font size="12.0" />
          </font></JFXTextField>
-            <Label layoutX="23.0" layoutY="235.0" text="Position">
+            <Label layoutX="23.0" layoutY="235.0" style="-fx-font-family: 'Myra 4F Caps';" text="Position">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <JFXButton layoutX="21.0" layoutY="366.0" onAction="#chooseImage" style="-fx-background-color: #a7d16b;" text="Choose an image" />
             <ImageView fx:id="contactImageView" fitHeight="123.0" fitWidth="137.0" layoutX="168.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true" />
-            <FontAwesomeIconView glyphName="SEARCH" layoutX="408.0" layoutY="289.0" size="24.0" />
-      <Label layoutX="23.0" layoutY="311.0" text="Birhday">
+      <Label layoutX="23.0" layoutY="311.0" style="-fx-font-family: 'Myra 4F Caps';" text="Birthday">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXDatePicker defaultColor="#a7d16b" layoutX="145.0" layoutY="307.0" />
+      <JFXDatePicker fx:id="birthdayField" defaultColor="#a7d16b" layoutX="145.0" layoutY="307.0" />
          </children>
       </AnchorPane>

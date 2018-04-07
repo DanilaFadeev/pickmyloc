@@ -2,7 +2,6 @@ package addressBook.controllers;
 
 import addressBook.Classes.GoogleMapManager;
 import addressBook.Main;
-import addressBook.models.Contact;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.lynden.gmapsfx.GoogleMapView;
@@ -81,16 +80,24 @@ public class MainController {
         }
     }
 
-    @FXML void onShowContactInfo() {
+    @FXML
+    protected void onEditContact() throws IOException {
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("../views/AddPanel.fxml"));
+
+        Node pane = Loader.load();
+        rootPane.getChildren().setAll(pane);
+
+        AddPanelController addPanelController = Loader.getController();
+        addPanelController.setEditingContact(contactsPanel.getSelectedContact());
+    }
+
+    @FXML void onShowContactInfo() throws IOException {
         FXMLLoader Loader = new FXMLLoader();
         Loader.setLocation(getClass().getResource("../views/DetailInformation.fxml"));
 
-        try {
-            Node pane = Loader.load();
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException e) {
-            System.out.println(e.getStackTrace());
-        }
+        AnchorPane pane = Loader.load();
+        rootPane.getChildren().setAll(pane.getChildren());
 
         ContactDetails detailsPanel = Loader.getController();
         detailsPanel.setContactInfo(contactsPanel.getSelectedContact());
@@ -133,10 +140,6 @@ public class MainController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         stage.setScene(scene);
-    }
-
-    public void addContact(String name) {
-        Main.data.add(new Contact(name, name, name, name));
     }
 
     public void manageAdditionalButtons(boolean isShow) {

@@ -15,11 +15,12 @@
             <Font name="Noto Sans CJK JP Bold" size="22.0" />
          </font>
       </Label>
-      <JFXPasswordField fx:id="passwordField" layoutX="99.0" layoutY="155.0" prefHeight="26.0" prefWidth="231.0" />
-      <JFXTextField fx:id="usernameField" layoutX="99.0" layoutY="103.0" prefHeight="26.0" prefWidth="231.0" />
+      <JFXTextField fx:id="usernameField" layoutX="100.0" layoutY="88.0" prefHeight="26.0" prefWidth="231.0" />
+      <JFXPasswordField fx:id="passwordField" layoutX="100.0" layoutY="140.0" prefHeight="26.0" prefWidth="231.0" />
       <JFXButton layoutX="289.0" layoutY="220.0" onAction="#onSignIn" prefHeight="45.0" prefWidth="83.0" style="-fx-background-color: #9CCC65;" text="Sign In" />
-      <FontAwesomeIconView glyphName="USER" layoutX="57.0" layoutY="124.0" size="24.0" />
-      <FontAwesomeIconView glyphName="LOCK" layoutX="58.0" layoutY="176.0" size="24.0" />
+      <FontAwesomeIconView glyphName="USER" layoutX="58.0" layoutY="109.0" size="24.0" />
+      <FontAwesomeIconView glyphName="LOCK" layoutX="59.0" layoutY="161.0" size="24.0" />
       <FontAwesomeIconView glyphName="MAP" layoutX="243.0" layoutY="56.0" size="28.0" />
+      <Label fx:id="errorMsgLabel" layoutX="96.0" layoutY="189.0" text="Login or password is not correct!" textFill="#eb2525" visible="false" />
    </children>
 </Pane>

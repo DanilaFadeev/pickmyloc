@@ -21,10 +21,13 @@ public class ContactDetails {
     private Label addressField;
 
     @FXML
-    private Label errorAddressLabel;
+    private Label mobilePhoneField;
 
     @FXML
-    private Label mobilePhoneField;
+    private Label companyField;
+
+    @FXML
+    private Label positionField;
 
     @FXML
     private ImageView contactImageView;
@@ -33,15 +36,21 @@ public class ContactDetails {
     private Label birthdayField;
 
     @FXML
+    private Label errorAddressLabel;
+
+    @FXML
     void backToHome(ActionEvent event) {
 
     }
 
-    public void setContactInfo(Contact contact) {
-        nameField.setText( contact.name.getValue() );
-        surnameField.setText( contact.surname.getValue() );
-
-        addressField.setText( contact.address.getValue() );
+    void setContactInfo(Contact contact) {
+        nameField.setText(contact.name.getValue());
+        surnameField.setText(contact.surname.getValue());
+        phoneField.setText(contact.phone.getValue());
+        mobilePhoneField.setText(contact.mobilePhone.getValue());
+        companyField.setText(contact.company.getValue());
+        positionField.setText(contact.position.getValue());
+        addressField.setText(contact.address.getValue());
     }
 
 }

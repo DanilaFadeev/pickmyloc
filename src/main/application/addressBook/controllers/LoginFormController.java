@@ -2,17 +2,18 @@ package addressBook.controllers;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 public class LoginFormController {
     @FXML
@@ -20,6 +21,9 @@ public class LoginFormController {
 
     @FXML
     private JFXPasswordField passwordField;
+
+    @FXML
+    private Label errorMsgLabel;
 
     @FXML
     public void onSignIn(ActionEvent event) throws IOException {
@@ -31,8 +35,8 @@ public class LoginFormController {
         String password = passwordField.getText();
 
         if (username.equals(login) && password.equals(pass)) {
-            URL url = new File("src/main/application/addressBook/views/MainForm.fxml").toURL();
-            FXMLLoader Loader = new FXMLLoader(url);
+            FXMLLoader Loader = new FXMLLoader();
+            Loader.setLocation(getClass().getResource("../views/MainForm.fxml"));
 
             Loader.load();
             Parent mainForm = Loader.getRoot();
@@ -41,8 +45,26 @@ public class LoginFormController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             stage.setScene(scene);
+
+            stage.centerOnScreen();
+            stage.setResizable(true);
         } else {
-            System.out.println("Error in login");
+            errorMsgLabel.setVisible(true);
+
+            passwordField.setText("");
+
+            shakeAnimation(usernameField);
+            shakeAnimation(passwordField);
+            shakeAnimation(errorMsgLabel);
         }
+    }
+
+    public void shakeAnimation(Node node) {
+        TranslateTransition ft = new TranslateTransition(Duration.millis(70), node);
+        ft.setFromX(0f);
+        ft.setByX(10f);
+        ft.setCycleCount(3);
+        ft.setAutoReverse(true);
+        ft.playFromStart();
     }
 }
