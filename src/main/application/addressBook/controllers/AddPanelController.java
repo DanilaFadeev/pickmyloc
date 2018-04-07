@@ -1,7 +1,7 @@
 package addressBook.controllers;
 
-import addressBook.Classes.GoogleMapManager;
 import addressBook.Main;
+import addressBook.helpers.GoogleMapManager;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
 import com.jfoenix.controls.JFXDatePicker;
@@ -94,14 +94,14 @@ public class AddPanelController {
     private void saveContact(ActionEvent event) {
         createOrUpdateContact();
 
-        SwitchScene switchObj = new SwitchToContact("../views/MainForm.fxml", true);
-        switchObj.switchScene(event);
+        SwitchScene<MainController> switchScene = new SwitchScene<>("../views/MainForm.fxml");
+        switchScene.loadScene(event);
     }
 
     @FXML
     private void backToHome(ActionEvent event) {
-        SwitchScene switchObj = new SwitchToContact("../views/MainForm.fxml", false);
-        switchObj.switchScene(event);
+        SwitchScene<MainController> switchScene = new SwitchScene<>("../views/MainForm.fxml");
+        switchScene.loadScene(event);
     }
 
     private Contact editingContact = null;
@@ -137,27 +137,6 @@ public class AddPanelController {
 
         if (editingContact == null) {
             Main.data.add(contact);
-        }
-    }
-
-    class SwitchToContact extends SwitchScene<MainController> {
-        SwitchToContact(String FXMLPath) {
-            super(FXMLPath);
-        }
-
-        SwitchToContact(String FXMLPath, boolean isSave) {
-            super(FXMLPath);
-            this.isSave = isSave;
-        }
-
-        boolean isSave = false;
-
-        @Override
-        public void action() {
-            if (isSave) {
-                //String name = nameField.getText();
-                //SceneController.addContact(name);
-            }
         }
     }
 }

@@ -1,12 +1,13 @@
 package addressBook.controllers;
 
+import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class ContactDetails {
+public class ContactDetailsController {
 
     @FXML
     private Label nameField;
@@ -39,8 +40,9 @@ public class ContactDetails {
     private Label errorAddressLabel;
 
     @FXML
-    void backToHome(ActionEvent event) {
-
+    private void backToHome(ActionEvent event) {
+        SwitchScene<MainController> switchScene = new SwitchScene<>("../views/MainForm.fxml");
+        switchScene.loadScene(event);
     }
 
     void setContactInfo(Contact contact) {

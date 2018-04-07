@@ -5,39 +5,69 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SwitchScene<ControllerType> {
-    private FXMLLoader Loader;
-    protected ControllerType SceneController;
-
-    public SwitchScene(String FXMLPath) {
+public class SwitchScene<Controller> {
+    public SwitchScene(String fxml) {
         Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource(FXMLPath));
+        this.fxml = fxml;
+    }
+
+    public SwitchScene(String fxml, boolean isCentered, boolean isResizable) {
+        Loader = new FXMLLoader();
+
+        this.fxml = fxml;
+        this.isCentered = isCentered;
+        this.isResizible = isResizable;
+    }
+
+    private String fxml;
+    private boolean isCentered = false;
+    private boolean isResizible = false;
+    private FXMLLoader Loader;
+
+    public Controller loadToPane(Pane rootPane) {
+        Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource(fxml));
 
         try {
-            Loader.load();
+            Node pane = Loader.load();
+            rootPane.getChildren().setAll(pane);
         } catch (IOException e) {
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
         }
 
-        SceneController = Loader.getController();
+        return Loader.getController();
     }
 
-    public void action() {
+    public Controller loadScene(ActionEvent event) {
+        Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource(fxml));
 
-    }
+        Parent mainForm = null;
 
-    public void switchScene(ActionEvent event) {
-        action();
-        Parent contactForm = Loader.getRoot();
+        try {
+            mainForm = Loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Scene scene = new Scene(contactForm);
+        Scene scene = new Scene(mainForm);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         stage.setScene(scene);
-        stage.show();
+
+        if (isCentered) {
+            stage.centerOnScreen();
+        }
+
+        stage.setResizable(isResizible);
+
+        return Loader.getController();
     }
 }
+
+

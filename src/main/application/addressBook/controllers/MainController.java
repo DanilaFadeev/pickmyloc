@@ -1,24 +1,17 @@
 package addressBook.controllers;
 
-import addressBook.Classes.GoogleMapManager;
 import addressBook.Main;
+import addressBook.helpers.GoogleMapManager;
+import addressBook.helpers.SwitchScene;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.lynden.gmapsfx.GoogleMapView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.Optional;
 
 
@@ -28,17 +21,9 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("../views/ContactsPanel.fxml"));
+        SwitchScene<ContactsPanel> switchScene = new SwitchScene<>("../views/ContactsPanel.fxml");
+        contactsPanel = switchScene.loadToPane(rootPane);
 
-        try {
-            AnchorPane pane = Loader.load();
-            rootPane.getChildren().setAll(pane.getChildren());
-        } catch (IOException e) {
-            System.out.println(e.getStackTrace());
-        }
-
-        contactsPanel = Loader.getController();
         contactsPanel.setMainController(this);
 
         // hide buttons
@@ -46,7 +31,6 @@ public class MainController {
 
         // Map initialization
         googleMapView.addMapInializedListener(() -> GoogleMapManager.configureMap(googleMapView, mapLoadingSpinner));
-
     }
 
     @FXML
@@ -72,35 +56,29 @@ public class MainController {
 
     @FXML
     protected void onAddContact() {
-        try {
-            Node pane = FXMLLoader.load(getClass().getResource("../views/AddPanel.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SwitchScene<AddPanelController> switchScene = new SwitchScene<>("../views/AddPanel.fxml");
+        switchScene.loadToPane(rootPane);
     }
 
     @FXML
-    protected void onEditContact() throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("../views/AddPanel.fxml"));
+    protected void onEditContact() {
+        SwitchScene<AddPanelController> switchScene = new SwitchScene<>("../views/AddPanel.fxml");
 
-        Node pane = Loader.load();
-        rootPane.getChildren().setAll(pane);
-
-        AddPanelController addPanelController = Loader.getController();
+        AddPanelController addPanelController = switchScene.loadToPane(rootPane);
         addPanelController.setEditingContact(contactsPanel.getSelectedContact());
     }
 
-    @FXML void onShowContactInfo() throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("../views/DetailInformation.fxml"));
+    @FXML void onShowContactInfo() {
+        SwitchScene<ContactDetailsController> switchScene = new SwitchScene<>("../views/DetailsPanel.fxml");
 
-        AnchorPane pane = Loader.load();
-        rootPane.getChildren().setAll(pane.getChildren());
-
-        ContactDetails detailsPanel = Loader.getController();
+        ContactDetailsController detailsPanel = switchScene.loadToPane(rootPane);
         detailsPanel.setContactInfo(contactsPanel.getSelectedContact());
+    }
+
+    @FXML
+    protected void onSignOut(ActionEvent event) {
+        SwitchScene<LoginFormController> switchScene = new SwitchScene<>("../views/Login.fxml", true, false);
+        switchScene.loadScene(event);
     }
 
     @FXML
@@ -113,7 +91,7 @@ public class MainController {
 
     @FXML
     protected void onRemoveContact() {
-        Alert removeConfirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert removeConfirmAlert = new Alert( Alert.AlertType.CONFIRMATION );
 
         String contactName = contactsPanel.getSelectedContact().name.getValue();
         removeConfirmAlert.setContentText("Do you really want to delete `" + contactName + "` from \nyour contacts?");
@@ -122,24 +100,11 @@ public class MainController {
         removeConfirmAlert.setHeaderText(null);
 
         Optional<ButtonType> result = removeConfirmAlert.showAndWait();
+
         if (result.get() == ButtonType.OK) {
             Main.data.remove(contactsPanel.getSelectedContact());
             onDeselectContacts();
         }
-    }
-
-    @FXML
-    protected void onSignOut(ActionEvent event) throws IOException {
-        URL url = new File("src/main/application/addressBook/views/Login.fxml").toURL();
-        FXMLLoader Loader = new FXMLLoader(url);
-
-        Loader.load();
-        Parent mainForm = Loader.getRoot();
-
-        Scene scene = new Scene(mainForm);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
     }
 
     public void manageAdditionalButtons(boolean isShow) {
@@ -148,7 +113,5 @@ public class MainController {
         editContactBtn.setVisible(isShow);
         removeContactBtn.setVisible(isShow);
     }
-
-
 }
 

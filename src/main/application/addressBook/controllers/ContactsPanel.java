@@ -1,6 +1,6 @@
 package addressBook.controllers;
 
-import addressBook.Classes.GoogleMapManager;
+import addressBook.helpers.GoogleMapManager;
 import addressBook.Main;
 import addressBook.models.Contact;
 import com.jfoenix.controls.JFXTextField;
@@ -11,7 +11,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
-import javafx.scene.text.Font;
 
 import java.util.function.Predicate;
 

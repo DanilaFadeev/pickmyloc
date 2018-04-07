@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="526.0" prefWidth="461.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.ContactDetails">
+<AnchorPane prefHeight="526.0" prefWidth="461.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.ContactDetailsController">
          <children>
       <Pane layoutX="24.0" layoutY="47.0" prefHeight="206.0" prefWidth="401.0" style="-fx-background-color: #C5CAE9;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <children>

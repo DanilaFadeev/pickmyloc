@@ -1,4 +1,4 @@
-package addressBook.Classes;
+package addressBook.helpers;
 
 import addressBook.Main;
 import addressBook.models.Contact;
