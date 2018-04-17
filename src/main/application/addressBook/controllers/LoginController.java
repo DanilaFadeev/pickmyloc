@@ -4,12 +4,10 @@ import addressBook.helpers.Animations;
 import addressBook.helpers.SwitchScene;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.util.Duration;
+import javafx.scene.input.MouseEvent;
 
 public class LoginController {
     @FXML
@@ -42,5 +40,11 @@ public class LoginController {
             Animations.shakeAnimation(passwordField);
             Animations.shakeAnimation(errorMsgLabel);
         }
+    }
+
+    @FXML
+    public void onRegisterClick(MouseEvent event) {
+        SwitchScene<RegistrationController> switchScene = new SwitchScene<>("../views/forms/Registration.fxml");
+        switchScene.loadScene(event);
     }
 }

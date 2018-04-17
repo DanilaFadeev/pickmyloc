@@ -9,7 +9,7 @@ public class Animations {
         TranslateTransition ft = new TranslateTransition(Duration.millis(70), node);
         ft.setFromX(0f);
         ft.setByX(10f);
-        ft.setCycleCount(3);
+        ft.setCycleCount(4);
         ft.setAutoReverse(true);
         ft.playFromStart();
     }

@@ -55,7 +55,6 @@ public class Main extends Application {
 // CRUD operations
 
 // ******* Register form *******
-// Create a register form
+// validation to register form
 
-// rename !!!!
 // resizing troubles

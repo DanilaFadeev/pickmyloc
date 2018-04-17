@@ -7,20 +7,23 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="406.0" style="-fx-background-color: #C5E1A5;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.LoginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="395.0" style="-fx-background-color: #C5E1A5;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.LoginController">
    <children>
-      <Label layoutX="115.0" layoutY="29.0" prefHeight="35.0" prefWidth="122.0" text="PickMyLoc">
+      <Label layoutX="120.0" layoutY="24.0" prefHeight="35.0" prefWidth="122.0" text="PickMyLoc">
          <font>
             <Font name="Noto Sans CJK JP Bold" size="22.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="usernameField" layoutX="100.0" layoutY="88.0" prefHeight="26.0" prefWidth="231.0" />
-      <JFXPasswordField fx:id="passwordField" layoutX="100.0" layoutY="140.0" prefHeight="26.0" prefWidth="231.0" />
-      <JFXButton layoutX="289.0" layoutY="220.0" onAction="#onSignIn" prefHeight="45.0" prefWidth="83.0" style="-fx-background-color: #9CCC65;" text="Sign In" />
-      <FontAwesomeIconView glyphName="USER" layoutX="58.0" layoutY="109.0" size="24.0" />
-      <FontAwesomeIconView glyphName="LOCK" layoutX="59.0" layoutY="161.0" size="24.0" />
-      <FontAwesomeIconView glyphName="MAP" layoutX="243.0" layoutY="56.0" size="28.0" />
-      <Label fx:id="errorMsgLabel" layoutX="96.0" layoutY="189.0" text="Login or password is not correct!" textFill="#eb2525" visible="false" />
+      <JFXTextField fx:id="usernameField" layoutX="103.0" layoutY="79.0" prefHeight="26.0" prefWidth="231.0" />
+      <JFXPasswordField fx:id="passwordField" layoutX="103.0" layoutY="131.0" prefHeight="26.0" prefWidth="231.0" />
+      <JFXButton layoutX="128.0" layoutY="212.0" onAction="#onSignIn" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #9CCC65;" text="Sign In" />
+      <FontAwesomeIconView glyphName="USER" layoutX="61.0" layoutY="100.0" size="24.0" />
+      <FontAwesomeIconView glyphName="LOCK" layoutX="62.0" layoutY="152.0" size="24.0" />
+      <FontAwesomeIconView glyphName="MAP" layoutX="248.0" layoutY="51.0" size="28.0" />
+      <Label fx:id="errorMsgLabel" layoutX="91.0" layoutY="175.0" text="Login or password is not correct!" textFill="#eb2525" visible="false" />
+      <Text layoutX="85.0" layoutY="272.0" onMouseClicked="#onRegisterClick" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-font-size: 12;" text="Register" underline="true" />
+      <Text layoutX="145.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-font-size: 12;" text="if you haven't got an account" />
    </children>
 </Pane>

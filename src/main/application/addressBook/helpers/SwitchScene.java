@@ -1,6 +1,7 @@
 package addressBook.helpers;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -43,7 +44,7 @@ public class SwitchScene<Controller> {
         return Loader.getController();
     }
 
-    public Controller loadScene(ActionEvent event) {
+    public Controller loadScene(Event event) {
         Loader = new FXMLLoader();
         Loader.setLocation(getClass().getResource(fxml));
 
