@@ -44,7 +44,8 @@ public class LoginController {
 
     @FXML
     public void onRegisterClick(MouseEvent event) {
-        SwitchScene<RegistrationController> switchScene = new SwitchScene<>("../views/forms/Registration.fxml");
+        SwitchScene<RegistrationController> switchScene =
+                new SwitchScene<>("../views/forms/Registration.fxml", true, false);
         switchScene.loadScene(event);
     }
 }

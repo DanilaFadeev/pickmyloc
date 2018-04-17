@@ -18,7 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("views/forms/Login.fxml"));
-        primaryStage.setTitle("Address book");
+        primaryStage.setTitle("PickMyLoc");
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add("styles/main.css");
@@ -54,7 +54,5 @@ public class Main extends Application {
 // connection to DB (SQLite)
 // CRUD operations
 
-// ******* Register form *******
-// validation to register form
 
 // resizing troubles
