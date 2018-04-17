@@ -17,7 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("views/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/forms/Login.fxml"));
         primaryStage.setTitle("Address book");
 
         Scene scene = new Scene(root);
@@ -58,3 +58,4 @@ public class Main extends Application {
 // Create a register form
 
 // rename !!!!
+// resizing troubles

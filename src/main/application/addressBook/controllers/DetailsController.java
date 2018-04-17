@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class ContactDetailsController {
+public class DetailsController {
 
     @FXML
     private Label nameField;
@@ -41,7 +41,7 @@ public class ContactDetailsController {
 
     @FXML
     private void backToHome(ActionEvent event) {
-        SwitchScene<MainController> switchScene = new SwitchScene<>("../views/MainForm.fxml");
+        SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml");
         switchScene.loadScene(event);
     }
 

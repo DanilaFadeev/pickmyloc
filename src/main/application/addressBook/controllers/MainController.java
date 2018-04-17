@@ -17,11 +17,11 @@ import java.util.Optional;
 
 public class MainController {
 
-    private ContactsPanel contactsPanel;
+    private ContactsController contactsPanel;
 
     @FXML
     public void initialize() {
-        SwitchScene<ContactsPanel> switchScene = new SwitchScene<>("../views/ContactsPanel.fxml");
+        SwitchScene<ContactsController> switchScene = new SwitchScene<>("../views/panels/Contacts.fxml");
         contactsPanel = switchScene.loadToPane(rootPane);
 
         contactsPanel.setMainController(this);
@@ -56,28 +56,31 @@ public class MainController {
 
     @FXML
     protected void onAddContact() {
-        SwitchScene<AddPanelController> switchScene = new SwitchScene<>("../views/AddPanel.fxml");
-        switchScene.loadToPane(rootPane);
+        SwitchScene<ContactFormController> switchScene = new SwitchScene<>("../views/panels/ContactForm.fxml");
+
+        ContactFormController addPanelController = switchScene.loadToPane(rootPane);
+        addPanelController.setGoogleMapView(googleMapView);
     }
 
     @FXML
     protected void onEditContact() {
-        SwitchScene<AddPanelController> switchScene = new SwitchScene<>("../views/AddPanel.fxml");
+        SwitchScene<ContactFormController> switchScene = new SwitchScene<>("../views/panels/ContactForm.fxml");
 
-        AddPanelController addPanelController = switchScene.loadToPane(rootPane);
+        ContactFormController addPanelController = switchScene.loadToPane(rootPane);
         addPanelController.setEditingContact(contactsPanel.getSelectedContact());
+        addPanelController.setGoogleMapView(googleMapView);
     }
 
     @FXML void onShowContactInfo() {
-        SwitchScene<ContactDetailsController> switchScene = new SwitchScene<>("../views/DetailsPanel.fxml");
+        SwitchScene<DetailsController> switchScene = new SwitchScene<>("../views/panels/Details.fxml");
 
-        ContactDetailsController detailsPanel = switchScene.loadToPane(rootPane);
+        DetailsController detailsPanel = switchScene.loadToPane(rootPane);
         detailsPanel.setContactInfo(contactsPanel.getSelectedContact());
     }
 
     @FXML
     protected void onSignOut(ActionEvent event) {
-        SwitchScene<LoginFormController> switchScene = new SwitchScene<>("../views/Login.fxml", true, false);
+        SwitchScene<LoginController> switchScene = new SwitchScene<>("../views/forms/Login.fxml", true, false);
         switchScene.loadScene(event);
     }
 

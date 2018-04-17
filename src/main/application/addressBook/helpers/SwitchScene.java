@@ -26,7 +26,7 @@ public class SwitchScene<Controller> {
 
     private String fxml;
     private boolean isCentered = false;
-    private boolean isResizible = false;
+    private boolean isResizible = true;
     private FXMLLoader Loader;
 
     public Controller loadToPane(Pane rootPane) {
@@ -34,8 +34,8 @@ public class SwitchScene<Controller> {
         Loader.setLocation(getClass().getResource(fxml));
 
         try {
-            Node pane = Loader.load();
-            rootPane.getChildren().setAll(pane);
+            Pane pane = Loader.load();
+            rootPane.getChildren().setAll(pane.getChildren());
         } catch (IOException e) {
             e.printStackTrace();
         }

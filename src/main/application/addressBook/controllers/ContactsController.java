@@ -14,7 +14,7 @@ import javafx.scene.control.TreeItem;
 
 import java.util.function.Predicate;
 
-public class ContactsPanel {
+public class ContactsController {
     @FXML
     protected JFXTreeTableView contactsTable;
 
@@ -64,8 +64,6 @@ public class ContactsPanel {
                                 || treeItem.getValue().phone.get().contains(newValue)
                 ));
 
-
-        //Font.loadFont(ContactsPanel.class.getResource("views/OT-ttk/Myra 4F Caps Bold.ttf").toExternalForm(), 14);
     }
 
     private MainController mainController = null;

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="526.0" prefWidth="461.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.ContactsPanel">
+<AnchorPane fx:id="rootPane" prefHeight="526.0" prefWidth="461.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.ContactsController">
     <children>
         <JFXTreeTableView fx:id="contactsTable" layoutX="12.0" layoutY="51.0" prefHeight="465.0" prefWidth="459.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="51.0">
             <columnResizePolicy>
@@ -16,7 +16,7 @@
             </columnResizePolicy>
         </JFXTreeTableView>
         <JFXTextField fx:id="searchField" layoutX="300.0" layoutY="13.0" maxWidth="300.0" prefHeight="26.0" prefWidth="240.0" promptText="Search.." AnchorPane.rightAnchor="5.0" />
-        <Label layoutX="12.0" layoutY="12.0" style="-fx-font-family: 'Myra 4F Caps';" text="My contacts">
+        <Label layoutX="12.0" layoutY="12.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-font-weight: bold;" text="My contacts">
          <font>
             <Font size="22.0" />
          </font>
