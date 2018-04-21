@@ -43,7 +43,9 @@ public class Main extends Application {
 // validation: check address correct, phone and mobile(not letters)
 
 // ******** Settings ************
-// choose start coords for map
+// export / import in xml
+// choose lang for search
+// choose start coords for map: by click on map or type
 
 
 // ******** Details ************

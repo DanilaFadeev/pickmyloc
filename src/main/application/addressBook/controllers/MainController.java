@@ -110,6 +110,12 @@ public class MainController {
         }
     }
 
+    @FXML
+    protected void onSettings() {
+        SwitchScene<SettingsController> switchScene = new SwitchScene<>("../views/panels/Settings.fxml");
+        switchScene.loadToPane(rootPane);
+    }
+
     public void manageAdditionalButtons(boolean isShow) {
         contactInfoBtn.setVisible(isShow);
         allContactsBtn.setVisible(isShow);

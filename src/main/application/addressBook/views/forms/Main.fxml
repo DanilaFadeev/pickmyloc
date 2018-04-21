@@ -41,6 +41,11 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" size="24.0" />
                </graphic>
             </JFXButton>
+            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="12.0" layoutY="410.0" onAction="#onSettings" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="COGS" size="24.0" />
+               </graphic>
+            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="rootPane" prefHeight="526.0" prefWidth="461.0" HBox.hgrow="ALWAYS" />
