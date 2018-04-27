@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
+import org.sqlite.core.DB;
 
 import java.util.Optional;
 
@@ -111,7 +112,9 @@ public class MainController {
         Optional<ButtonType> result = removeConfirmAlert.showAndWait();
 
         if (result.get() == ButtonType.OK) {
-           // Main.data.remove(contactsPanel.getSelectedContact());
+            DBConnection.getConnection().deleteContact(contactsPanel.getSelectedContact().id);
+            MainController.contacts.remove(contactsPanel.getSelectedContact());
+
             onDeselectContacts();
         }
     }

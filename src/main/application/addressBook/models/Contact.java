@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Contact extends RecursiveTreeObject<Contact>{
+    public int id = 0;
     public StringProperty name;
     public StringProperty surname;
     public StringProperty patronymic;
@@ -35,5 +36,9 @@ public class Contact extends RecursiveTreeObject<Contact>{
         this.position = new SimpleStringProperty(position);
         this.birthday = birthday;
         this.location = location;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

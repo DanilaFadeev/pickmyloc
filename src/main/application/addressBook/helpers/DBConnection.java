@@ -61,6 +61,7 @@ public class DBConnection {
             ResultSet result = stmt.executeQuery(sql);
 
             while (result.next()) {
+                Integer id = result.getInt("id");
                 String name = result.getString("name");
                 String surname = result.getString("surname");
                 String patronymic = result.getString("patronymic");
@@ -80,6 +81,7 @@ public class DBConnection {
 
                 Contact contact = new Contact(name, surname, patronymic, email, phone,
                         mobile, imagePath, company, position, birthday, location);
+                contact.setId(id);
 
                 contacts.add(contact);
             }
@@ -89,6 +91,18 @@ public class DBConnection {
         }
 
         return contacts;
+    }
+
+    public void deleteContact(Integer id) {
+        String sql = "DELETE FROM `contacts` WHERE id=" + id;
+
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private String makeInsertSQL(String table, Map<String, Object> params) {
@@ -158,8 +172,8 @@ public class DBConnection {
         if (!contact.mobile.getValue().isEmpty())
             fields.put("mobile", contact.mobile.getValue());
 
-        if (!contact.imagePath.getValue().isEmpty())
-            fields.put("image_path", contact.imagePath.getValue());
+//        if (!contact.imagePath.getValue().isEmpty())
+//            fields.put("image_path", contact.imagePath.getValue());
 
         if (!contact.company.getValue().isEmpty())
             fields.put("company", contact.company.getValue());

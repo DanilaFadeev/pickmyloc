@@ -1,6 +1,5 @@
 package addressBook.controllers;
 
-import addressBook.Main;
 import addressBook.data.Location;
 import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
@@ -17,17 +16,12 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
 
 
 public class ContactFormController {
@@ -53,6 +47,9 @@ public class ContactFormController {
     private JFXTextField surnameField;
 
     @FXML
+    private JFXTextField patronymicField;
+
+    @FXML
     private JFXTextField phoneField;
 
     @FXML
@@ -74,9 +71,6 @@ public class ContactFormController {
     private JFXDatePicker birthdayField;
 
     @FXML
-    private ImageView contactImageView;
-
-    @FXML
     private Label errorLabel;
 
     @FXML
@@ -91,12 +85,6 @@ public class ContactFormController {
         fileChooser.getExtensionFilters().add(pngExtension);
 
         File imageFile = fileChooser.showOpenDialog(nameField.getScene().getWindow());
-
-        try {
-            contactImageView.setImage(new Image(new FileInputStream(imageFile)));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -150,44 +138,41 @@ public class ContactFormController {
 
         nameField.setText(contact.name.getValue());
         surnameField.setText(contact.surname.getValue());
+        patronymicField.setText(contact.patronymic.getValue());
         phoneField.setText(contact.phone.getValue());
         mobilePhoneField.setText(contact.mobile.getValue());
+        emailField.setText(contact.email.getValue());
         companyField.setText(contact.company.getValue());
         positionField.setText(contact.position.getValue());
         addressField.setText(contact.location.getAddress());
+        birthdayField.setValue(contact.birthday);
     }
 
     public void createOrUpdateContact() {
-        Contact contact = null;
+        LatLong coords = GoogleMapManager.getCoordsByAddress(addressField.getText());
+        Location location = new Location(addressField.getText(), coords.getLatitude(), coords.getLongitude());
 
-        if (editingContact != null) {
-            contact = editingContact;
-        } else {
-            LatLong coords = GoogleMapManager.getCoordsByAddress(addressField.getText());
-            Location location = new Location(addressField.getText(), coords.getLatitude(), coords.getLongitude());
+        if (editingContact != null && editingContact.id != 0)
+            DBConnection.getConnection().deleteContact(editingContact.id);
 
-            contact = new Contact(
-                nameField.getText(),
-                surnameField.getText(),
-                "",
-                emailField.getText(),
-                phoneField.getText(),
-                mobilePhoneField.getText(),
-                "",
-                companyField.getText(),
-                positionField.getText(),
-                birthdayField.getValue(),
-                location
-            );
-        }
+        Contact contact = new Contact(
+            nameField.getText(),
+            surnameField.getText(),
+            patronymicField.getText(),
+            emailField.getText(),
+            phoneField.getText(),
+            mobilePhoneField.getText(),
+            "",
+            companyField.getText(),
+            positionField.getText(),
+            birthdayField.getValue(),
+            location
+        );
 
-        if (editingContact == null) {
-            try {
-                DBConnection.getConnection().createContact(contact);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            // Main.data.add(contact);
+        try {
+            DBConnection.getConnection().createContact(contact);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
