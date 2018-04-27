@@ -1,6 +1,8 @@
 package addressBook.controllers;
 
+import addressBook.helpers.DBConnection;
 import addressBook.helpers.SwitchScene;
+import addressBook.models.Contact;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
@@ -12,6 +14,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tooltip;
 import javafx.scene.shape.Rectangle;
+
+import java.beans.*;
+import java.io.*;
+import java.net.SocketTimeoutException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingsController {
     @FXML
@@ -54,5 +64,74 @@ public class SettingsController {
     private void backToHome(ActionEvent event) {
         SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml");
         switchScene.loadScene(event);
+    }
+
+    @FXML
+    private void onExportContacts(ActionEvent event) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream("contacts.xml");
+
+            XMLEncoder encoder = new XMLEncoder(fos);
+
+            encoder.setExceptionListener(new ExceptionListener() {
+                public void exceptionThrown(Exception e) {
+                    System.out.println("Exception! :"+e.toString());
+                }
+            });
+
+            encoder.setPersistenceDelegate(LocalDate.class,
+                    new PersistenceDelegate() {
+                        @Override
+                        protected Expression instantiate(Object localDate, Encoder encdr) {
+                            return new Expression(localDate,
+                                    LocalDate.class,
+                                    "parse",
+                                    new Object[]{localDate.toString()});
+                        }
+                    });
+
+            for (Contact contact: MainController.contacts) {
+                encoder.writeObject(contact);
+            }
+
+            encoder.close();
+
+            fos.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onImportContacts(ActionEvent event) {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream("contacts.xml");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        XMLDecoder decoder = new XMLDecoder(fis);
+
+        try {
+            for (;;) {
+                Contact contact = (Contact) decoder.readObject();
+                DBConnection.getConnection().createContact(contact);
+            }
+        } catch (ArrayIndexOutOfBoundsException exc) {
+            // do nothing
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        decoder.close();
+
+        try {
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

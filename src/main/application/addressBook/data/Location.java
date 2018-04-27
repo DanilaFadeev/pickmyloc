@@ -4,6 +4,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Location {
+    public void setAddress(String address) {
+        this.address.set(address);
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
     public StringProperty address;
     private Double latitude;
     private Double longitude;
@@ -13,6 +25,8 @@ public class Location {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    public Location() {}
 
     public String getAddress() {
         return address.getValue();
