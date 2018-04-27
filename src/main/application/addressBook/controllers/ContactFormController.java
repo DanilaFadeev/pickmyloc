@@ -1,6 +1,8 @@
 package addressBook.controllers;
 
 import addressBook.Main;
+import addressBook.data.Location;
+import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
@@ -23,7 +25,9 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 public class ContactFormController {
@@ -56,6 +60,9 @@ public class ContactFormController {
 
     @FXML
     private JFXTextField mobilePhoneField;
+
+    @FXML
+    private JFXTextField emailField;
 
     @FXML
     private JFXTextField companyField;
@@ -144,31 +151,43 @@ public class ContactFormController {
         nameField.setText(contact.name.getValue());
         surnameField.setText(contact.surname.getValue());
         phoneField.setText(contact.phone.getValue());
-        mobilePhoneField.setText(contact.mobilePhone.getValue());
+        mobilePhoneField.setText(contact.mobile.getValue());
         companyField.setText(contact.company.getValue());
         positionField.setText(contact.position.getValue());
-        addressField.setText(contact.address.getValue());
+        addressField.setText(contact.location.getAddress());
     }
 
     public void createOrUpdateContact() {
-        Contact contact;
+        Contact contact = null;
 
         if (editingContact != null) {
             contact = editingContact;
         } else {
-            contact = new Contact();
+            LatLong coords = GoogleMapManager.getCoordsByAddress(addressField.getText());
+            Location location = new Location(addressField.getText(), coords.getLatitude(), coords.getLongitude());
+
+            contact = new Contact(
+                nameField.getText(),
+                surnameField.getText(),
+                "",
+                emailField.getText(),
+                phoneField.getText(),
+                mobilePhoneField.getText(),
+                "",
+                companyField.getText(),
+                positionField.getText(),
+                birthdayField.getValue(),
+                location
+            );
         }
 
-        contact.setName(nameField.getText());
-        contact.setSurname(surnameField.getText());
-        contact.setPhone(phoneField.getText());
-        contact.setCompany(companyField.getText());
-        contact.setPosition(positionField.getText());
-        contact.setMobilePhone(mobilePhoneField.getText());
-        contact.setAddress(addressField.getText());
-
         if (editingContact == null) {
-            Main.data.add(contact);
+            try {
+                DBConnection.getConnection().createContact(contact);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            // Main.data.add(contact);
         }
     }
 

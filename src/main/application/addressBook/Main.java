@@ -1,19 +1,12 @@
 package addressBook;
 
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import addressBook.models.Contact;
-import addressBook.data.ContactsData;
-
 public class Main extends Application {
-
-    // hardcoded contacts data for testing
-    public static ObservableList<Contact> data = ContactsData.getContactsList();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -37,6 +30,16 @@ public class Main extends Application {
 
 // TODO list
 
+// Create select method which can get contacts from db
+// and convert to complete Contact object
+
+
+
+
+
+
+
+
 // ********* Add contact ***********
 // birthday field
 // upload and save image
@@ -57,4 +60,4 @@ public class Main extends Application {
 // CRUD operations
 
 
-// resizing troubles
+// resizing trouble

@@ -1,6 +1,7 @@
 package addressBook.helpers;
 
 import addressBook.Main;
+import addressBook.controllers.MainController;
 import addressBook.models.Contact;
 import com.google.code.geocoder.Geocoder;
 import com.google.code.geocoder.GeocoderRequestBuilder;
@@ -35,7 +36,7 @@ public class GoogleMapManager {
 
         map.addStateEventHandler(MapStateEventType.tilesloaded, () -> spinner.setVisible(false));
 
-        setAllMarkers(Main.data);
+        setAllMarkers(MainController.contacts);
     }
 
     public static void setDefaultMapOptions() {
@@ -68,11 +69,11 @@ public class GoogleMapManager {
 
     public static void setAllMarkers(ObservableList<Contact> contacts) { // need to be optimized
         for (Contact c: contacts) {
-            LatLong contactCoords = getCoordsByAddress(c.address.getValue());
-            c.setLocation(contactCoords);
+            if (c.location == null)
+                continue;
 
             MarkerOptions markerOptions1 = new MarkerOptions();
-            markerOptions1.position( contactCoords );
+            markerOptions1.position( new LatLong(c.location.getLatitude(), c.location.getLongitude()) );
 
             map.addMarker( new Marker(markerOptions1) );
         }

@@ -1,66 +1,39 @@
 package addressBook.models;
 
+import addressBook.data.Location;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Contact extends RecursiveTreeObject<Contact>{
     public StringProperty name;
     public StringProperty surname;
+    public StringProperty patronymic;
+    public StringProperty email;
     public StringProperty phone;
-    public StringProperty mobilePhone;
-    public StringProperty address;
+    public StringProperty mobile;
+    public StringProperty imagePath;
     public StringProperty company;
     public StringProperty position;
-    public Date birthday;
-    public LatLong location;
+    public LocalDate birthday;
+    public Location location;
 
-    public Contact() {}
-
-    // deprecated
-    public Contact(String name, String surname, String address, String phone) {
+    public Contact(String name, String surname, String patronymic, String email, String phone, String mobile,
+               String imagePath, String company, String position, LocalDate birthday, Location location) {
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
-        this.address = new SimpleStringProperty(address);
+        this.patronymic = new SimpleStringProperty(patronymic);
+        this.email = new SimpleStringProperty(email);
         this.phone = new SimpleStringProperty(phone);
-    }
-
-    public void setName(String name) {
-        this.name = new SimpleStringProperty(name);
-    }
-
-    public void setSurname(String surname) {
-        this.surname = new SimpleStringProperty(surname);
-    }
-
-    public void setPhone(String phone) {
-        this.phone = new SimpleStringProperty(phone);
-    }
-
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = new SimpleStringProperty(mobilePhone);
-    }
-
-    public void setAddress(String address) {
-        this.address = new SimpleStringProperty(address);
-    }
-
-    public void setCompany(String company) {
+        this.mobile = new SimpleStringProperty(mobile);
+        this.imagePath = new SimpleStringProperty(imagePath);
         this.company = new SimpleStringProperty(company);
-    }
-
-    public void setPosition(String position) {
         this.position = new SimpleStringProperty(position);
-    }
-
-    public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public void setLocation(LatLong location) {
         this.location = location;
     }
 }

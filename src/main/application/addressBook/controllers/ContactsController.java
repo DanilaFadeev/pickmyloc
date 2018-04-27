@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
@@ -23,7 +24,7 @@ public class ContactsController {
 
     @FXML
     public void initialize() {
-        ObservableList<Contact> filteredContacts = Main.data;
+        ObservableList<Contact> filteredContacts = MainController.contacts;
 
         JFXTreeTableColumn<Contact, String> nameColumn = new JFXTreeTableColumn<>("Name");
         nameColumn.setCellValueFactory(param -> param.getValue().getValue().name);
@@ -35,7 +36,7 @@ public class ContactsController {
         phoneColumn.setCellValueFactory(param -> param.getValue().getValue().phone);
 
         JFXTreeTableColumn<Contact, String> addressColumn = new JFXTreeTableColumn<>("Address");
-        addressColumn.setCellValueFactory(param -> param.getValue().getValue().address);
+        addressColumn.setCellValueFactory(param -> param.getValue().getValue().location.address);
 
         // Style preferences
         JFXTreeTableColumn[] columns = { nameColumn, surnameColumn, phoneColumn, addressColumn };
@@ -53,7 +54,12 @@ public class ContactsController {
         contactsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 mainController.manageAdditionalButtons(true);
-                GoogleMapManager.setMarker(mainController.googleMapView, getSelectedContact().location);
+
+                LatLong coords = new LatLong(
+                        getSelectedContact().location.getLatitude(),
+                        getSelectedContact().location.getLongitude()
+                );
+                GoogleMapManager.setMarker(mainController.googleMapView, coords);
             }
         });
 

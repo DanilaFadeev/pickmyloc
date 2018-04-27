@@ -49,10 +49,10 @@ public class DetailsController {
         nameField.setText(contact.name.getValue());
         surnameField.setText(contact.surname.getValue());
         phoneField.setText(contact.phone.getValue());
-        mobilePhoneField.setText(contact.mobilePhone.getValue());
+        mobilePhoneField.setText(contact.mobile.getValue());
         companyField.setText(contact.company.getValue());
         positionField.setText(contact.position.getValue());
-        addressField.setText(contact.address.getValue());
+        addressField.setText(contact.location.getAddress());
     }
 
 }

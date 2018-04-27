@@ -1,11 +1,14 @@
 package addressBook.controllers;
 
-import addressBook.Main;
+import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
 import addressBook.helpers.SwitchScene;
+import addressBook.models.Contact;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.lynden.gmapsfx.GoogleMapView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -17,20 +20,23 @@ import java.util.Optional;
 
 public class MainController {
 
+    public static ObservableList<Contact> contacts;
     private ContactsController contactsPanel;
 
     @FXML
     public void initialize() {
-        SwitchScene<ContactsController> switchScene = new SwitchScene<>("../views/panels/Contacts.fxml");
-        contactsPanel = switchScene.loadToPane(rootPane);
-
-        contactsPanel.setMainController(this);
+        // load contacts from db
+        contacts = FXCollections.observableArrayList(DBConnection.getConnection().getAllContacts());
 
         // hide buttons
         manageAdditionalButtons(false);
 
         // Map initialization
         googleMapView.addMapInializedListener(() -> GoogleMapManager.configureMap(googleMapView, mapLoadingSpinner));
+
+        SwitchScene<ContactsController> switchScene = new SwitchScene<>("../views/panels/Contacts.fxml");
+        contactsPanel = switchScene.loadToPane(rootPane);
+        contactsPanel.setMainController(this);
     }
 
     @FXML
@@ -89,7 +95,7 @@ public class MainController {
         contactsPanel.contactsTable.getSelectionModel().clearSelection();
         manageAdditionalButtons(false);
 
-        GoogleMapManager.setAllMarkers(Main.data);
+        GoogleMapManager.setAllMarkers(MainController.contacts);
     }
 
     @FXML
@@ -105,7 +111,7 @@ public class MainController {
         Optional<ButtonType> result = removeConfirmAlert.showAndWait();
 
         if (result.get() == ButtonType.OK) {
-            Main.data.remove(contactsPanel.getSelectedContact());
+           // Main.data.remove(contactsPanel.getSelectedContact());
             onDeselectContacts();
         }
     }
