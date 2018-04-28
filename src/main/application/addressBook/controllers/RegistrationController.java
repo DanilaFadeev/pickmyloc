@@ -1,6 +1,7 @@
 package addressBook.controllers;
 
 import addressBook.helpers.Animations;
+import addressBook.helpers.DBConnection;
 import addressBook.helpers.SwitchScene;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -93,8 +94,14 @@ public class RegistrationController {
         }
 
         if (validated) {
-            SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml", true, true);
-            switchScene.loadScene(event);
+            int userId = DBConnection.getConnection().createUser(emailField.getText(), usernameField.getText(), pass1);
+
+            if (userId != 0) {
+                MainController.userId = userId;
+
+                SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml", true, true);
+                switchScene.loadScene(event);
+            }
         } else {
             errorMsg.setVisible(true);
         }

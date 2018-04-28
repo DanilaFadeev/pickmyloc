@@ -1,5 +1,6 @@
 package addressBook.helpers;
 
+import addressBook.controllers.MainController;
 import addressBook.data.Location;
 import addressBook.models.Contact;
 import com.lynden.gmapsfx.javascript.object.*;
@@ -51,10 +52,11 @@ public class DBConnection {
         }
     }
 
-    public ArrayList<Contact> getAllContacts() {
+    public ArrayList<Contact> getAllContacts(int userId) {
         ArrayList<Contact> contacts = new ArrayList<>();
 
-        String sql = "SELECT * FROM contacts LEFT JOIN locations l on contacts.location_id = l.id";
+        String sql = "SELECT * FROM contacts LEFT JOIN locations l on contacts.location_id = l.id" +
+                " WHERE user_id = " + userId + ";";
 
         try {
             Statement stmt = conn.createStatement();
@@ -184,12 +186,58 @@ public class DBConnection {
         if(contact.birthday != null)
             fields.put("birthday", contact.birthday);
 
-        fields.put("user_id", 1);
+        fields.put("user_id", MainController.userId);
 
         System.out.println(makeInsertSQL("contacts", fields));
 
         Statement stmt = conn.createStatement();
         stmt.execute(makeInsertSQL("contacts", fields));
+    }
+
+    public int createUser(String email, String username, String password) {
+        // check for the unique
+        try {
+            String sql = "SELECT COUNT(*) as total FROM `users` WHERE email=\"" + email + "\" OR username=\"" + username + "\";";
+            Statement stmt = conn.createStatement();
+
+            ResultSet resultSet = stmt.executeQuery(sql);
+            if (resultSet.next() && resultSet.getInt("total") != 0) {
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // crete user
+        try {
+            String sql = "INSERT INTO `users` (username, email, password) VALUES (\"" + username + "\", \""
+                    + email + "\", \"" + password + "\");";
+
+            Statement stmt = conn.createStatement();
+            stmt.execute(sql);
+
+            return stmt.getGeneratedKeys().getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public int checkUserLogin(String emailOrUsername, String password) {
+        try {
+            String sql = "SELECT id FROM `users` WHERE email=\"" + emailOrUsername + "\" OR username=\"" + emailOrUsername + "\" AND password=\"" + password + "\";";
+            Statement stmt = conn.createStatement();
+
+            ResultSet resultSet = stmt.executeQuery(sql);
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 }
 

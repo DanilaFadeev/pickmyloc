@@ -24,10 +24,12 @@ public class MainController {
     public static ObservableList<Contact> contacts;
     private ContactsController contactsPanel;
 
+    public static int userId = 0;
+
     @FXML
     public void initialize() {
         // load contacts from db
-        contacts = FXCollections.observableArrayList(DBConnection.getConnection().getAllContacts());
+        contacts = FXCollections.observableArrayList(DBConnection.getConnection().getAllContacts(userId));
 
         // hide buttons
         manageAdditionalButtons(false);
@@ -87,6 +89,8 @@ public class MainController {
 
     @FXML
     protected void onSignOut(ActionEvent event) {
+        userId = 0;
+
         SwitchScene<LoginController> switchScene = new SwitchScene<>("../views/forms/Login.fxml", true, false);
         switchScene.loadScene(event);
     }

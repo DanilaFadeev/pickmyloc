@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tooltip;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 
 import java.beans.*;
 import java.io.*;
@@ -105,9 +106,17 @@ public class SettingsController {
     }
 
     public void onImportContacts(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose source file with contacts data");
+
+        FileChooser.ExtensionFilter jpegExtension = new FileChooser.ExtensionFilter("XML files (.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(jpegExtension);
+
+        File imageFile = fileChooser.showOpenDialog(cbLanguage.getScene().getWindow());
+
         FileInputStream fis = null;
         try {
-            fis = new FileInputStream("contacts.xml");
+            fis = new FileInputStream(imageFile.getAbsolutePath());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package addressBook.controllers;
 
 import addressBook.helpers.Animations;
+import addressBook.helpers.DBConnection;
 import addressBook.helpers.SwitchScene;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -21,14 +22,14 @@ public class LoginController {
 
     @FXML
     public void onSignIn(ActionEvent event) {
-        // hardcoded values
-        String login = "admin";
-        String pass = "admin";
-
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        if (username.equals(login) && password.equals(pass)) {
+        int userId = DBConnection.getConnection().checkUserLogin(username, password);
+
+        if (userId != 0) {
+            MainController.userId = userId;
+
             SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml", true, true);
             switchScene.loadScene(event);
         } else {
