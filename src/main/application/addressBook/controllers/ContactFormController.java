@@ -1,6 +1,6 @@
 package addressBook.controllers;
 
-import addressBook.data.Location;
+import addressBook.models.Location;
 import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
 import addressBook.helpers.SwitchScene;

@@ -1,13 +1,12 @@
 package addressBook.helpers;
 
 import addressBook.controllers.MainController;
-import addressBook.data.Location;
+import addressBook.models.Location;
 import addressBook.models.Contact;
-import com.lynden.gmapsfx.javascript.object.*;
+import addressBook.models.Settings;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -239,6 +238,68 @@ public class DBConnection {
 
         return 0;
     }
+
+    public Settings getUserSettings(int userId) {
+        String sql = "SELECT lang, zoom, address, latitude, longitude FROM `settings` as s" +
+                " LEFT JOIN `locations` as l where s.default_location_id = l.id AND s.user_id = " + userId + ";";
+
+        Settings settings = null;
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(sql);
+
+            if (result.next()) {
+                String lang = result.getString("lang");
+                String address = result.getString("address");
+                int zoom = result.getInt("zoom");
+                double latitude = result.getDouble("latitude");
+                double longitude = result.getDouble("longitude");
+
+                Location location = new Location(address, latitude, longitude);
+                settings = new Settings(lang, zoom, location);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return settings;
+    }
+
+    public void updateUserSettings(int userId, Settings settings) {
+        int defaultLocationId = 0;
+
+        try {
+            String sql = "SELECT COUNT(*) as total, id FROM `locations` WHERE latitude=" + settings.getLocation().getLatitude()
+                    + " AND longitude=" + settings.getLocation().getLongitude() + ";";
+            Statement stmt = conn.createStatement();
+
+            ResultSet resultSet = stmt.executeQuery(sql);
+
+            if (resultSet.next() && resultSet.getInt("total") != 0) {
+                defaultLocationId = resultSet.getInt("id");
+            } else {
+                Map<String, Object> locationFields = new HashMap<>();
+
+                locationFields.put("address", settings.getLocation().getAddress());
+                locationFields.put("latitude", settings.getLocation().getLatitude());
+                locationFields.put("longitude", settings.getLocation().getLongitude());
+
+                stmt.execute( makeInsertSQL("locations", locationFields) );
+                defaultLocationId = stmt.getGeneratedKeys().getInt(1);
+            }
+
+            sql = "UPDATE settings SET " +
+                "lang = \"" + settings.getLang() + "\", " +
+                "zoom = " + settings.getZoom() + ", " +
+                "default_location_id = " + defaultLocationId + " " +
+                "WHERE user_id = " + userId + ";";
+
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 //    CREATE TABLE `users` (
@@ -272,3 +333,16 @@ public class DBConnection {
 //        FOREIGN KEY (user_id) REFERENCES `users` (id),
 //        FOREIGN KEY (location_id) REFERENCES `locations` (id)
 //    );
+
+//    CREATE TABLE `settings` (
+//        id INTEGER PRIMARY KEY AUTOINCREMENT,
+//        lang VARCHAR(20) NOT NULL,
+//        zoom INTEGER(2) NOT NULL,
+//        default_location_id INTEGER NOT NULL,
+//        user_id INTEGER NOT NULL,
+//        FOREIGN KEY (default_location_id) REFERENCES `locations`(id),
+//        FOREIGN KEY (user_id) REFERENCES `users` (id)
+//        );
+
+// INSERT INTO `locations` (address, latitude, longitude) VALUES ('Беларусь, Минск', 53.8840088, 27.5793043);
+// INSERT INTO `settings` (lang, zoom, default_location_id, user_id) VALUES ('ru', 11, 12, 1);

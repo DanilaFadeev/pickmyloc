@@ -1,44 +1,62 @@
 package addressBook.controllers;
 
 import addressBook.helpers.DBConnection;
+import addressBook.helpers.GoogleMapManager;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
+import addressBook.models.Location;
+import addressBook.models.Settings;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
+import com.lynden.gmapsfx.javascript.object.LatLong;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tooltip;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 
 import java.beans.*;
 import java.io.*;
-import java.net.SocketTimeoutException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SettingsController {
+    private final String ADDRESS_NOT_FOUND = "Not found";
+    private int location_id = 0;
+
     @FXML
     private void initialize() {
         ObservableList<String> options =
             FXCollections.observableArrayList(
                 "Russian",
-                "English",
-                "French"
+                "English"
             );
 
         cbLanguage.itemsProperty().set(options);
-        cbLanguage.setValue("Russian");
+
+        Settings settings = DBConnection.getConnection().getUserSettings(1);
+        setParams(settings);
 
         Tooltip ttLang = new Tooltip("Help!!!");
         ttLanguage.setTooltip(ttLang);
+
+        locationField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                LatLong centerCoords = GoogleMapManager.getCoordsByAddress( locationField.getText() );
+
+                if (centerCoords != null) {
+                    GoogleMapManager.setMapOptions(centerCoords, (int) sliderZoom.getValue());
+                } else {
+                    locationField.setText( ADDRESS_NOT_FOUND );
+                }
+            }
+        });
     }
 
     @FXML
@@ -57,8 +75,19 @@ public class SettingsController {
     private FontAwesomeIconView ttTakeFromMap;
 
     @FXML
-    void onTakeFromMap(ActionEvent event) {
+    private void onTakeFromMap(ActionEvent event) {
+        Settings settings = GoogleMapManager.getMapOptions();
+        setParams(settings);
+    }
 
+    @FXML
+    private void onApply(ActionEvent event) {
+        Settings settings = getParams();
+
+        LatLong center = new LatLong(settings.getLocation().getLatitude(), settings.getLocation().getLongitude());
+        GoogleMapManager.setMapOptions(center, settings.getZoom());
+
+        DBConnection.getConnection().updateUserSettings(1, settings);
     }
 
     @FXML
@@ -103,6 +132,60 @@ public class SettingsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setParams(Settings settings) {
+        if (!settings.getLang().isEmpty()) {
+            switch (settings.getLang()) {
+                case "ru": {
+                    cbLanguage.setValue("Russian");
+                    break;
+                }
+                default: {
+                    cbLanguage.setValue("English");
+                }
+            }
+        }
+
+        sliderZoom.setValue(settings.getZoom());
+
+        if (settings.getLocation().getAddress().isEmpty()) {
+            locationField.setText(settings.getLocation().getLatitude() + "," + settings.getLocation().getLongitude());
+        } else {
+            locationField.setText(settings.getLocation().getAddress());
+        }
+    }
+
+    private Settings getParams() {
+        String lang;
+
+        switch (cbLanguage.getValue()) {
+            case "Russian": {
+                lang = "ru";
+                break;
+            }
+            default: {
+                lang = "en";
+            }
+        }
+
+        Location location;
+
+        if (locationField.getText().matches("^\\d+\\.\\d+,\\d+\\.\\d+$")) {
+            String[] strCoords = locationField.getText().split(",");
+
+            Double latitude = Double.parseDouble(strCoords[0]);
+            Double longitude = Double.parseDouble(strCoords[1]);
+
+            location = new Location("", latitude, longitude);
+        } else {
+            LatLong coords = GoogleMapManager.getCoordsByAddress( locationField.getText() );
+            location = new Location(locationField.getText(), coords.getLatitude(), coords.getLongitude());
+        }
+
+        int zoom = (int) sliderZoom.getValue();
+
+        return new Settings(lang, zoom, location);
     }
 
     public void onImportContacts(ActionEvent event) {

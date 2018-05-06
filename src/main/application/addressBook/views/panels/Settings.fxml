@@ -20,8 +20,8 @@
         <Text layoutX="45.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Myra 4F Caps';" text="Zoom value:" />
         <Text layoutX="45.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Myra 4F Caps';" text="Default location:" />
         <JFXTextField fx:id="locationField" layoutX="191.0" layoutY="180.0" prefHeight="26.0" prefWidth="213.0" />
-        <JFXSlider fx:id="sliderZoom" layoutX="194.0" layoutY="152.0" max="12.0" min="6.0" value="10.0" />
-        <JFXButton layoutX="56.0" layoutY="233.0" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: #a7d16b;" text="Take from map" />
+        <JFXSlider fx:id="sliderZoom" layoutX="194.0" layoutY="152.0" max="20.0" min="6.0" prefHeight="16.0" prefWidth="213.0" value="10.0" />
+        <JFXButton layoutX="56.0" layoutY="233.0" onAction="#onTakeFromMap" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: #a7d16b;" text="Take from map" />
         <FontAwesomeIconView fx:id="ttTakeFromMap" glyphName="QUESTION_CIRCLE" layoutX="21.0" layoutY="256.0" size="18.0" />
         <JFXButton layoutX="14.0" layoutY="477.0" onAction="#backToHome" prefHeight="35.0" prefWidth="79.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-background-color: #003b60;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" />
       <JFXButton fx:id="ttLanguage" layoutX="15.0" layoutY="73.0" prefHeight="26.0" prefWidth="3.0" textOverrun="CLIP" />
@@ -35,5 +35,6 @@
             <FontAwesomeIconView fill="WHITE" glyphName="CLOUD_UPLOAD" size="16.0" />
          </graphic>
       </JFXButton>
+      <JFXButton layoutX="365.0" layoutY="476.0" onAction="#onApply" prefHeight="35.0" prefWidth="79.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-background-color: #003b60;" text="Apply" textFill="WHITE" />
     </children>
 </AnchorPane>

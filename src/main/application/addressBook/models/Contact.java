@@ -1,13 +1,10 @@
 package addressBook.models;
 
-import addressBook.data.Location;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Contact extends RecursiveTreeObject<Contact>{
     public int id = 0;

@@ -1,8 +1,9 @@
 package addressBook.helpers;
 
-import addressBook.Main;
 import addressBook.controllers.MainController;
 import addressBook.models.Contact;
+import addressBook.models.Location;
+import addressBook.models.Settings;
 import com.google.code.geocoder.Geocoder;
 import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.GeocodeResponse;
@@ -18,9 +19,6 @@ import javafx.collections.ObservableList;
 import java.util.List;
 
 public class GoogleMapManager {
-    private static final double initLatitude = 53.902174;
-    private static final double initLongitude = 27.5614256;
-    private static final int initZoom = 11;
     private static final int locationZoom = 14;
 
     private static GoogleMap map;
@@ -28,9 +26,12 @@ public class GoogleMapManager {
     public static void configureMap(GoogleMapView googleMapView, JFXSpinner spinner) {
         MapOptions mapOptions = new MapOptions();
 
+        double initLatitude = MainController.appSettings.getLocation().getLatitude();
+        double initLongitude = MainController.appSettings.getLocation().getLongitude();
+
         mapOptions.center(new LatLong(initLatitude, initLongitude))
                 .mapType(MapTypeIdEnum.ROADMAP)
-                .zoom(initZoom);
+                .zoom(MainController.appSettings.getZoom());
 
         map = googleMapView.createMap(mapOptions, false);
 
@@ -40,8 +41,21 @@ public class GoogleMapManager {
     }
 
     public static void setDefaultMapOptions() {
+        double initLatitude = MainController.appSettings.getLocation().getLatitude();
+        double initLongitude = MainController.appSettings.getLocation().getLongitude();
+
         map.setCenter(new LatLong(initLatitude, initLongitude));
-        map.setZoom(initZoom);
+        map.setZoom(MainController.appSettings.getZoom());
+    }
+
+    public static void setMapOptions(LatLong center, int zoom) {
+        map.setCenter(center);
+        map.setZoom(zoom);
+    }
+
+    public static Settings getMapOptions() {
+        Location location = new Location("", map.getCenter().getLatitude(), map.getCenter().getLongitude());
+        return new Settings("", map.getZoom(), location);
     }
 
     public static LatLong getCoordsByAddress(String address) {
@@ -49,7 +63,7 @@ public class GoogleMapManager {
 
         GeocoderRequest geocoderRequest = new GeocoderRequestBuilder()
                 .setAddress(address)
-                .setLanguage("ru")
+                .setLanguage(MainController.appSettings.getLang())
                 .getGeocoderRequest();
 
         GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
@@ -67,7 +81,7 @@ public class GoogleMapManager {
         return new LatLong(latitude, longitude);
     }
 
-    public static void setAllMarkers(ObservableList<Contact> contacts) { // need to be optimized
+    public static void setAllMarkers(ObservableList<Contact> contacts) {
         for (Contact c: contacts) {
             if (c.location == null)
                 continue;

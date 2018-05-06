@@ -41,7 +41,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" size="24.0" />
                </graphic>
             </JFXButton>
-            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="12.0" layoutY="410.0" onAction="#onSettings" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="12.0" layoutY="410.0" onAction="#onSettings" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="70.0">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="COGS" size="24.0" />
                </graphic>

@@ -29,35 +29,9 @@ public class Main extends Application {
 }
 
 // TODO list
-
-// Create select method which can get contacts from db
-// and convert to complete Contact object
-
-
-
-
-
-
-
-
 // ********* Add contact ***********
-// birthday field
 // upload and save image
 // validation: check address correct, phone and mobile(not letters)
-
-// ******** Settings ************
-// export / import in xml
-// choose lang for search
-// choose start coords for map: by click on map or type
-
-
-// ******** Details ************
-// make details form responsive with anchor panel
-
-
-// ******* DB SQLite ***********
-// connection to DB (SQLite)
-// CRUD operations
 
 
 // resizing trouble

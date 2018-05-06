@@ -4,6 +4,7 @@ import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
+import addressBook.models.Settings;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.lynden.gmapsfx.GoogleMapView;
@@ -14,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
-import org.sqlite.core.DB;
 
 import java.util.Optional;
 
@@ -22,12 +22,16 @@ import java.util.Optional;
 public class MainController {
 
     public static ObservableList<Contact> contacts;
+    public static Settings appSettings;
     private ContactsController contactsPanel;
 
     public static int userId = 0;
 
     @FXML
     public void initialize() {
+        // load settings for application
+        appSettings = DBConnection.getConnection().getUserSettings(userId);
+
         // load contacts from db
         contacts = FXCollections.observableArrayList(DBConnection.getConnection().getAllContacts(userId));
 
