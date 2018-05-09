@@ -48,8 +48,8 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="rootPane" prefHeight="526.0" prefWidth="461.0" HBox.hgrow="ALWAYS" />
-      <AnchorPane prefHeight="526.0" prefWidth="455.0" HBox.hgrow="SOMETIMES">
+      <AnchorPane fx:id="rootPane" prefHeight="526.0" prefWidth="461.0" style="-fx-background-color: #ecf1f6;" HBox.hgrow="ALWAYS" />
+      <AnchorPane prefHeight="526.0" prefWidth="455.0" style="-fx-background-color: #ecf1f6;" HBox.hgrow="SOMETIMES">
          <children>
             <GoogleMapView fx:id="googleMapView" layoutX="9.0" layoutY="15.0" prefHeight="497.0" prefWidth="438.0" AnchorPane.bottomAnchor="15.0" AnchorPane.topAnchor="15.0" />
             <JFXSpinner fx:id="mapLoadingSpinner" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="200.0" />

@@ -30,8 +30,7 @@ public class Main extends Application {
 
 // TODO list
 // ********* Add contact ***********
-// upload and save image
 // validation: check address correct, phone and mobile(not letters)
 
-
+// db default table creation
 // resizing trouble

@@ -1,10 +1,12 @@
 package addressBook.controllers;
 
+import addressBook.helpers.HelperUtils;
 import addressBook.models.Location;
 import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
+import ch.qos.logback.core.util.FileUtil;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.lynden.gmapsfx.GoogleMapView;
@@ -19,9 +21,11 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 
-import java.io.File;
+import java.io.*;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Random;
 
 
 public class ContactFormController {
@@ -71,6 +75,9 @@ public class ContactFormController {
     private JFXDatePicker birthdayField;
 
     @FXML
+    private Label imageFileLabel;
+
+    @FXML
     private Label errorLabel;
 
     @FXML
@@ -84,7 +91,8 @@ public class ContactFormController {
         FileChooser.ExtensionFilter pngExtension = new FileChooser.ExtensionFilter("Png files (.png)", "*.png");
         fileChooser.getExtensionFilters().add(pngExtension);
 
-        File imageFile = fileChooser.showOpenDialog(nameField.getScene().getWindow());
+        imageFile = fileChooser.showOpenDialog(nameField.getScene().getWindow());
+        imageFileLabel.setText( imageFile.getAbsolutePath() );
     }
 
     @FXML
@@ -128,6 +136,7 @@ public class ContactFormController {
 
     private Contact editingContact = null;
     private GoogleMapView googleMapView;
+    private File imageFile = null;
 
     public void setGoogleMapView(GoogleMapView googleMapView) {
         this.googleMapView = googleMapView;
@@ -155,6 +164,18 @@ public class ContactFormController {
         if (editingContact != null && editingContact.id != 0)
             DBConnection.getConnection().deleteContact(editingContact.id);
 
+        String imageHash = "";
+
+        if (imageFile != null) {
+            imageHash = HelperUtils.getSaltString();
+            File imageTemp = new File("images/" + imageHash);
+            try {
+                HelperUtils.copyFileUsingStream(imageFile, imageTemp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         Contact contact = new Contact(
             nameField.getText(),
             surnameField.getText(),
@@ -162,7 +183,7 @@ public class ContactFormController {
             emailField.getText(),
             phoneField.getText(),
             mobilePhoneField.getText(),
-            "",
+            imageHash,
             companyField.getText(),
             positionField.getText(),
             birthdayField.getValue(),

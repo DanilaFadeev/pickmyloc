@@ -173,8 +173,8 @@ public class DBConnection {
         if (!contact.mobile.getValue().isEmpty())
             fields.put("mobile", contact.mobile.getValue());
 
-//        if (!contact.imagePath.getValue().isEmpty())
-//            fields.put("image_path", contact.imagePath.getValue());
+        if (!contact.imagePath.getValue().isEmpty())
+            fields.put("image_path", contact.imagePath.getValue());
 
         if (!contact.company.getValue().isEmpty())
             fields.put("company", contact.company.getValue());

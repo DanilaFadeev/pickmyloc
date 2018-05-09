@@ -41,7 +41,7 @@ public class ContactsController {
         // Style preferences
         JFXTreeTableColumn[] columns = { nameColumn, surnameColumn, phoneColumn, addressColumn };
         for (JFXTreeTableColumn column: columns ) {
-            column.setStyle("-fx-font-size: 11px");
+            column.setStyle("-fx-font-size: 11px; -fx-alignment: center");
         }
 
         TreeItem<Contact> root = new RecursiveTreeItem<>(filteredContacts, RecursiveTreeObject::getChildren);

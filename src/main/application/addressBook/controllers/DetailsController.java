@@ -5,7 +5,10 @@ import addressBook.models.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.io.File;
 
 public class DetailsController {
 
@@ -62,6 +65,10 @@ public class DetailsController {
         positionField.setText(contact.position.getValue());
         addressField.setText(contact.location.getAddress());
         birthdayField.setText(contact.birthday.toString());
+
+        File image = new File("images/" + contact.getImagePath());
+        Image img = new Image(image.toURI().toString());
+        contactImageView.setImage(img);
     }
 
 }

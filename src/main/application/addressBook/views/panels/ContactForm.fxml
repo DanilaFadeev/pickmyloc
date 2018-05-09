@@ -113,5 +113,6 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label fx:id="imageFileLabel" layoutX="170.0" layoutY="413.0" prefHeight="16.0" prefWidth="250.0" />
          </children>
       </AnchorPane>
