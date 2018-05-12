@@ -38,12 +38,13 @@ public class MainController {
         // hide buttons
         manageAdditionalButtons(false);
 
-        // Map initialization
-        googleMapView.addMapInializedListener(() -> GoogleMapManager.configureMap(googleMapView, mapLoadingSpinner));
-
         SwitchScene<ContactsController> switchScene = new SwitchScene<>("../views/panels/Contacts.fxml");
         contactsPanel = switchScene.loadToPane(rootPane);
         contactsPanel.setMainController(this);
+
+        // Map initialization
+        googleMapView.addMapInializedListener(()
+                -> GoogleMapManager.configureMap(googleMapView, mapLoadingSpinner, contactsPanel));
     }
 
     @FXML
@@ -104,7 +105,7 @@ public class MainController {
         contactsPanel.contactsTable.getSelectionModel().clearSelection();
         manageAdditionalButtons(false);
 
-        GoogleMapManager.setAllMarkers(MainController.contacts);
+        GoogleMapManager.displayAllMarkers(true);
     }
 
     @FXML

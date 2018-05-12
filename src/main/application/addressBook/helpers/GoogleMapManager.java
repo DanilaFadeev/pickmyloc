@@ -18,8 +18,9 @@ import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GoogleMapManager {
     private static final int locationZoom = 14;
@@ -27,9 +28,9 @@ public class GoogleMapManager {
     private static GoogleMap map;
     private static GoogleMapView mapView;
 
-    private static ArrayList<Marker> mapMarkers;
+    private static Map<Integer, Marker> mapMarkers = new HashMap<>();
 
-    public static void configureMap(GoogleMapView googleMapView, JFXSpinner spinner) {
+    public static void configureMap(GoogleMapView googleMapView, JFXSpinner spinner, ContactsController cc) {
         MapOptions mapOptions = new MapOptions();
 
         double initLatitude = MainController.appSettings.getLocation().getLatitude();
@@ -44,7 +45,7 @@ public class GoogleMapManager {
 
         map.addStateEventHandler(MapStateEventType.tilesloaded, () -> spinner.setVisible(false));
 
-        setAllMarkers(MainController.contacts);
+        initContactsMarkers(MainController.contacts, cc);
     }
 
     public static void setDefaultMapOptions() {
@@ -95,49 +96,53 @@ public class GoogleMapManager {
         return new LatLong(latitude, longitude);
     }
 
-    public static void setAllMarkers(ObservableList<Contact> contacts) {
-        for (Contact c: contacts) {
-            if (c.location == null)
+    public static void initContactsMarkers(ObservableList<Contact> contacts, ContactsController contactsController) {
+        for (Contact contact: contacts) {
+            if (contact.location == null)
                 continue;
 
             MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position( new LatLong(c.location.getLatitude(), c.location.getLongitude()) );
-
-            map.addMarker( new Marker(markerOptions) );
-        }
-
-        setDefaultMapOptions();
-    }
-
-    public static void setAllMarkers(ObservableList<Contact> contacts, ContactsController contactsController) {
-        for (Contact c: contacts) {
-            if (c.location == null)
-                continue;
-
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position( new LatLong(c.location.getLatitude(), c.location.getLongitude()) );
+            markerOptions.position( new LatLong(
+                contact.location.getLatitude(),
+                contact.location.getLongitude())
+            );
 
             Marker marker = new Marker(markerOptions);
+            marker.setTitle(contact.getName() + " " + (contact.getSurname() != null ? contact.getSurname() : ""));
             map.addMarker( marker );
 
             map.addUIEventHandler(marker, UIEventType.click, param -> {
                 contactsController.onSelectContact();
-                setMarker(mapView, new LatLong(c.location.getLatitude(), c.location.getLongitude()));
+                setMarker(mapView, contact);
             });
+
+            mapMarkers.put(contact.hashCode(), marker);
         }
 
         setDefaultMapOptions();
     }
 
-    public static void setMarker(GoogleMapView googleMapView, LatLong coords) {
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(coords);
+    public static void displayAllMarkers(boolean isDisplayed) {
+        for (Map.Entry<Integer, Marker> m : mapMarkers.entrySet()) {
+            m.getValue().setVisible(isDisplayed);
+        }
 
-        map.clearMarkers();
+        if (isDisplayed) {
+            setDefaultMapOptions();
+        }
+    }
 
-        googleMapView.setCenter(coords.getLatitude(), coords.getLongitude());
+    public static void setMarker(GoogleMapView googleMapView, Contact contact) {
+        displayAllMarkers(false);
+
+        for (Map.Entry<Integer, Marker> m : mapMarkers.entrySet()) {
+            if (m.getKey() == contact.hashCode()) {
+                m.getValue().setVisible(true);
+                break;
+            }
+        }
+
+        googleMapView.setCenter(contact.location.getLatitude(), contact.location.getLongitude());
         googleMapView.setZoom(locationZoom);
-
-        map.addMarker( new Marker(markerOptions) );
     }
 }

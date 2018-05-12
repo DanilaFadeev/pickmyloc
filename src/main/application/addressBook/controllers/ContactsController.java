@@ -56,14 +56,9 @@ public class ContactsController {
                 mainController.manageAdditionalButtons(true);
 
                 if (getSelectedContact().location != null) {
-                    LatLong coords = new LatLong(
-                            getSelectedContact().location.getLatitude(),
-                            getSelectedContact().location.getLongitude()
-                    );
-
-                    GoogleMapManager.setMarker(mainController.googleMapView, coords);
+                    GoogleMapManager.setMarker(mainController.googleMapView, getSelectedContact());
                 } else {
-                    GoogleMapManager.setAllMarkers(filteredContacts, this);
+                    GoogleMapManager.displayAllMarkers(true);
                     GoogleMapManager.setDefaultMapOptions();
                 }
             }

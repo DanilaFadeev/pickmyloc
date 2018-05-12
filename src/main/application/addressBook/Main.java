@@ -34,3 +34,5 @@ public class Main extends Application {
 
 // db default table creation
 // resizing trouble
+
+// !!! select row in contact table when marker was clicked

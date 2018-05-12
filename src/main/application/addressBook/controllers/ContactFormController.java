@@ -98,12 +98,12 @@ public class ContactFormController {
         String address = addressField.getText();
         LatLong coords = GoogleMapManager.getCoordsByAddress(address);
 
-        if (coords != null)
-            GoogleMapManager.setMarker(googleMapView, coords);
-        else {
-            errorLabel.setText(ContactFormController.ADDRESS_ERROR);
-            errorLabel.setVisible(true);
-        }
+//        if (coords != null)
+//            GoogleMapManager.setMarker(googleMapView, coords);
+//        else {
+//            errorLabel.setText(ContactFormController.ADDRESS_ERROR);
+//            errorLabel.setVisible(true);
+//        }
     }
 
     @FXML
