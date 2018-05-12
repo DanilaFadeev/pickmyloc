@@ -36,3 +36,5 @@ public class Main extends Application {
 // resizing trouble
 
 // !!! select row in contact table when marker was clicked
+// style in css file
+// find address by coordinates bug
