@@ -99,7 +99,7 @@ public class RegistrationController {
             if (userId != 0) {
                 MainController.userId = userId;
 
-                SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml", true, true);
+                SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml", true, false);
                 switchScene.loadScene(event);
             }
         } else {
@@ -108,8 +108,8 @@ public class RegistrationController {
     }
 
     @FXML
-    void onBackToLogin(MouseEvent event) {
-        SwitchScene<LoginController> switchScene = new SwitchScene<>("../views/forms/Login.fxml");
+    void onBack(ActionEvent event) {
+        SwitchScene<LoginController> switchScene = new SwitchScene<>("../views/forms/Login.fxml", false, false);
         switchScene.loadScene(event);
     }
 }
