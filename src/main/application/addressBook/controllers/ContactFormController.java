@@ -1,34 +1,32 @@
 package addressBook.controllers;
 
-import addressBook.helpers.HelperUtils;
-import addressBook.models.Location;
 import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
+import addressBook.helpers.HelperUtils;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
-import ch.qos.logback.core.util.FileUtil;
+import addressBook.models.Location;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 
-import java.io.*;
-import java.nio.file.Files;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Random;
 
 
 public class ContactFormController {
+    private static final String ADDRESS_ERROR = "The address is not found. Type the full one";
+
     @FXML
     public void initialize() {
 
@@ -103,7 +101,7 @@ public class ContactFormController {
         if (coords != null)
             GoogleMapManager.setMarker(googleMapView, coords);
         else {
-            errorLabel.setText("The address is not found. Type the full one");
+            errorLabel.setText(ContactFormController.ADDRESS_ERROR);
             errorLabel.setVisible(true);
         }
     }
@@ -137,6 +135,7 @@ public class ContactFormController {
     private Contact editingContact = null;
     private GoogleMapView googleMapView;
     private File imageFile = null;
+    private LatLong coordinates;
 
     public void setGoogleMapView(GoogleMapView googleMapView) {
         this.googleMapView = googleMapView;
@@ -145,21 +144,42 @@ public class ContactFormController {
     public void setEditingContact(Contact contact) {
         editingContact = contact;
 
-        nameField.setText(contact.name.getValue());
-        surnameField.setText(contact.surname.getValue());
-        patronymicField.setText(contact.patronymic.getValue());
-        phoneField.setText(contact.phone.getValue());
-        mobilePhoneField.setText(contact.mobile.getValue());
-        emailField.setText(contact.email.getValue());
-        companyField.setText(contact.company.getValue());
-        positionField.setText(contact.position.getValue());
-        addressField.setText(contact.location.getAddress());
-        birthdayField.setValue(contact.birthday);
+        if (contact.name.getValue() != null)
+            nameField.setText(contact.name.getValue());
+
+        if (contact.surname.getValue() != null)
+            surnameField.setText(contact.surname.getValue());
+
+        if (contact.patronymic.getValue() != null)
+            patronymicField.setText(contact.patronymic.getValue());
+
+        if (contact.phone.getValue() != null)
+            phoneField.setText(contact.phone.getValue());
+
+        if (contact.mobile.getValue() != null)
+            mobilePhoneField.setText(contact.mobile.getValue());
+
+        if (contact.email.getValue() != null)
+            emailField.setText(contact.email.getValue());
+
+        if (contact.company.getValue() != null)
+            companyField.setText(contact.company.getValue());
+
+        if (contact.position.getValue() != null)
+            positionField.setText(contact.position.getValue());
+
+        if (contact.address.getValue() != null)
+            addressField.setText(contact.address.getValue());
+
+        if (contact.birthday != null)
+            birthdayField.setValue(contact.birthday);
     }
 
     public void createOrUpdateContact() {
-        LatLong coords = GoogleMapManager.getCoordsByAddress(addressField.getText());
-        Location location = new Location(addressField.getText(), coords.getLatitude(), coords.getLongitude());
+        Location location = null;
+        if (coordinates != null) {
+            location = new Location(addressField.getText(), coordinates.getLatitude(), coordinates.getLongitude());
+        }
 
         if (editingContact != null && editingContact.id != 0)
             DBConnection.getConnection().deleteContact(editingContact.id);
@@ -202,31 +222,19 @@ public class ContactFormController {
 
         if (nameField.getText().isEmpty()) {
             nameField.setStyle("-fx-background-color: #FBE9E7");
-
-            Tooltip tt = new Tooltip();
-            tt.setText("Error!");
-            tt.setStyle("-fx-padding: 10px");
-            nameField.setTooltip(tt);
-
-            Point2D p = nameField.localToScene(0.0, 0.0);
-            tt.show(nameField,
-                    p.getX() + nameField.getScene().getX() + nameField.getScene().getWindow().getX() + nameField.getWidth() + 10,
-                    p.getY() + nameField.getScene().getY() + nameField.getScene().getWindow().getY());
-
-
             validated = false;
         }
 
-        if (surnameField.getText().isEmpty()) {
-            surnameField.setStyle("-fx-background-color: #FBE9E7");
-            validated = false;
-        }
+        if (!addressField.getText().isEmpty()) {
+            coordinates = GoogleMapManager.getCoordsByAddress(addressField.getText());
 
-        if (addressField.getText().isEmpty()) {
-            addressField.setStyle("-fx-background-color: #FBE9E7");
-            validated = false;
+            if (coordinates == null) {
+                addressField.setStyle("-fx-background-color: #FBE9E7");
+                errorLabel.setVisible(true);
+                errorLabel.setText(ContactFormController.ADDRESS_ERROR);
+                validated = false;
+            }
         }
-
 
         return validated;
     }

@@ -54,7 +54,7 @@
             </Label>
             <JFXButton layoutX="375.0" layoutY="477.0" onAction="#saveContact" prefHeight="35.0" prefWidth="79.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-background-color: #003b60;" text="Save" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="10.0" />
             <JFXButton layoutX="14.0" layoutY="477.0" onAction="#backToHome" prefHeight="35.0" prefWidth="79.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-background-color: #003b60;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" />
-            <Label fx:id="errorLabel" layoutX="23.0" layoutY="405.0" prefWidth="191.0" text="" textFill="#e80404" visible="false" />
+            <Label fx:id="errorLabel" layoutX="23.0" layoutY="445.0" prefWidth="191.0" text="" textFill="#e80404" visible="false" />
             <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="406.0" layoutY="327.0" onAction="#onSearchAddress" prefHeight="35.0" prefWidth="33.0" textAlignment="CENTER">
          <graphic>
                   <FontAwesomeIconView glyphName="SEARCH" size="24.0" />

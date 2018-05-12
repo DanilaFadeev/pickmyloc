@@ -1,7 +1,6 @@
 package addressBook.controllers;
 
 import addressBook.helpers.GoogleMapManager;
-import addressBook.Main;
 import addressBook.models.Contact;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -36,7 +35,7 @@ public class ContactsController {
         phoneColumn.setCellValueFactory(param -> param.getValue().getValue().phone);
 
         JFXTreeTableColumn<Contact, String> addressColumn = new JFXTreeTableColumn<>("Address");
-        addressColumn.setCellValueFactory(param -> param.getValue().getValue().location.address);
+        addressColumn.setCellValueFactory(param -> param.getValue().getValue().address);
 
         // Style preferences
         JFXTreeTableColumn[] columns = { nameColumn, surnameColumn, phoneColumn, addressColumn };
@@ -55,11 +54,17 @@ public class ContactsController {
             if (newSelection != null) {
                 mainController.manageAdditionalButtons(true);
 
-                LatLong coords = new LatLong(
-                        getSelectedContact().location.getLatitude(),
-                        getSelectedContact().location.getLongitude()
-                );
-                GoogleMapManager.setMarker(mainController.googleMapView, coords);
+                if (getSelectedContact().location != null) {
+                    LatLong coords = new LatLong(
+                            getSelectedContact().location.getLatitude(),
+                            getSelectedContact().location.getLongitude()
+                    );
+
+                    GoogleMapManager.setMarker(mainController.googleMapView, coords);
+                } else {
+                    GoogleMapManager.setAllMarkers(filteredContacts);
+                    GoogleMapManager.setDefaultMapOptions();
+                }
             }
         });
 

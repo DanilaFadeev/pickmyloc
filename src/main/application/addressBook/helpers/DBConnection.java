@@ -73,12 +73,18 @@ public class DBConnection {
                 String company = result.getString("company");
                 String position = result.getString("position");
 
-                LocalDate birthday = LocalDate.parse( result.getString("birthday") );
+                LocalDate birthday = null;
+                if ( result.getString("birthday") != null ) {
+                    birthday = LocalDate.parse(result.getString("birthday"));
+                }
 
-                String address = result.getString("address");
-                Double latitude = result.getDouble("latitude");
-                Double longitude = result.getDouble("longitude");
-                Location location = new Location(address, latitude, longitude);
+                Location location = null;
+                if (result.getInt("location_id") != 0 ) {
+                    String address = result.getString("address");
+                    Double latitude = result.getDouble("latitude");
+                    Double longitude = result.getDouble("longitude");
+                    location = new Location(address, latitude, longitude);
+                }
 
                 Contact contact = new Contact(name, surname, patronymic, email, phone,
                         mobile, imagePath, company, position, birthday, location);

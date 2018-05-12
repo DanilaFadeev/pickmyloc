@@ -63,8 +63,11 @@ public class DetailsController {
         emailField.setText(contact.email.getValue());
         companyField.setText(contact.company.getValue());
         positionField.setText(contact.position.getValue());
-        addressField.setText(contact.location.getAddress());
-        birthdayField.setText(contact.birthday.toString());
+        addressField.setText(contact.address.getValue());
+
+        if (contact.birthday != null) {
+            birthdayField.setText(contact.birthday.toString());
+        }
 
         File image = new File("images/" + contact.getImagePath());
         Image img = new Image(image.toURI().toString());

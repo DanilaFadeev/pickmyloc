@@ -17,6 +17,7 @@ public class Contact extends RecursiveTreeObject<Contact>{
     public StringProperty imagePath;
     public StringProperty company;
     public StringProperty position;
+    public StringProperty address;
 
     public Contact() {
 
@@ -127,6 +128,12 @@ public class Contact extends RecursiveTreeObject<Contact>{
         this.position = new SimpleStringProperty(position);
         this.birthday = birthday;
         this.location = location;
+
+        if (location != null) {
+            this.address = location.address;
+        } else {
+            this.address = new SimpleStringProperty(null);
+        }
     }
 
     public void setId(int id) {

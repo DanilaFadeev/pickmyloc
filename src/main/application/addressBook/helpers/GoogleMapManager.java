@@ -69,6 +69,13 @@ public class GoogleMapManager {
         GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
         List<GeocoderResult> geoResults = geocoderResponse.getResults();
 
+        // the second try to load coordinates, because the first one
+        // is not always success
+        if (geoResults.size() == 0) {
+            geocoderResponse = geocoder.geocode(geocoderRequest);
+            geoResults = geocoderResponse.getResults();
+        }
+
         if (geoResults.size() == 0) {
             return null;
         }
