@@ -1,5 +1,6 @@
 package addressBook.helpers;
 
+import addressBook.controllers.ContactsController;
 import addressBook.controllers.MainController;
 import addressBook.models.Contact;
 import addressBook.models.Location;
@@ -13,15 +14,20 @@ import com.google.code.geocoder.model.GeocoderResult;
 import com.jfoenix.controls.JFXSpinner;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.javascript.event.MapStateEventType;
+import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleMapManager {
     private static final int locationZoom = 14;
 
     private static GoogleMap map;
+    private static GoogleMapView mapView;
+
+    private static ArrayList<Marker> mapMarkers;
 
     public static void configureMap(GoogleMapView googleMapView, JFXSpinner spinner) {
         MapOptions mapOptions = new MapOptions();
@@ -33,6 +39,7 @@ public class GoogleMapManager {
                 .mapType(MapTypeIdEnum.ROADMAP)
                 .zoom(MainController.appSettings.getZoom());
 
+        mapView = googleMapView;
         map = googleMapView.createMap(mapOptions, false);
 
         map.addStateEventHandler(MapStateEventType.tilesloaded, () -> spinner.setVisible(false));
@@ -93,10 +100,30 @@ public class GoogleMapManager {
             if (c.location == null)
                 continue;
 
-            MarkerOptions markerOptions1 = new MarkerOptions();
-            markerOptions1.position( new LatLong(c.location.getLatitude(), c.location.getLongitude()) );
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position( new LatLong(c.location.getLatitude(), c.location.getLongitude()) );
 
-            map.addMarker( new Marker(markerOptions1) );
+            map.addMarker( new Marker(markerOptions) );
+        }
+
+        setDefaultMapOptions();
+    }
+
+    public static void setAllMarkers(ObservableList<Contact> contacts, ContactsController contactsController) {
+        for (Contact c: contacts) {
+            if (c.location == null)
+                continue;
+
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position( new LatLong(c.location.getLatitude(), c.location.getLongitude()) );
+
+            Marker marker = new Marker(markerOptions);
+            map.addMarker( marker );
+
+            map.addUIEventHandler(marker, UIEventType.click, param -> {
+                contactsController.onSelectContact();
+                setMarker(mapView, new LatLong(c.location.getLatitude(), c.location.getLongitude()));
+            });
         }
 
         setDefaultMapOptions();

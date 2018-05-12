@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -62,7 +63,7 @@ public class ContactsController {
 
                     GoogleMapManager.setMarker(mainController.googleMapView, coords);
                 } else {
-                    GoogleMapManager.setAllMarkers(filteredContacts);
+                    GoogleMapManager.setAllMarkers(filteredContacts, this);
                     GoogleMapManager.setDefaultMapOptions();
                 }
             }
@@ -74,7 +75,10 @@ public class ContactsController {
                                 || treeItem.getValue().surname.get().toLowerCase().contains(newValue.toLowerCase())
                                 || treeItem.getValue().phone.get().contains(newValue)
                 ));
+    }
 
+    public void onSelectContact() {
+        mainController.manageAdditionalButtons(true);
     }
 
     private MainController mainController = null;
