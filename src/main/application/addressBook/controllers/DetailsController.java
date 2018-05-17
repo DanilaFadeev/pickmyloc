@@ -1,14 +1,23 @@
 package addressBook.controllers;
 
+import addressBook.Main;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
+import com.jfoenix.controls.JFXButton;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class DetailsController {
 
@@ -49,9 +58,23 @@ public class DetailsController {
     private Label errorAddressLabel;
 
     @FXML
+    private JFXButton sendBtn;
+
+    @FXML
     private void backToHome(ActionEvent event) {
         SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml");
         switchScene.loadScene(event);
+    }
+
+    @FXML
+    private void onSendMail(ActionEvent event) {
+        URI uri = null;
+        try {
+            uri = new URI("mailto", "john@example.com", null);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        Main.hostServices.showDocument("mailto:someone@example.com?Subject=Hello%20again");
     }
 
     void setContactInfo(Contact contact) {
@@ -72,6 +95,10 @@ public class DetailsController {
         File image = new File("images/" + contact.getImagePath());
         Image img = new Image(image.toURI().toString());
         contactImageView.setImage(img);
+
+        if (!contact.getEmail().isEmpty()) {
+            sendBtn.setDisable(false);
+        }
     }
 
 }

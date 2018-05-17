@@ -7,8 +7,6 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.lynden.gmapsfx.GoogleMapView;
-import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
@@ -72,8 +70,24 @@ public class ContactsController {
                 ));
     }
 
-    public void onSelectContact() {
+    public void onSelectContact(Contact contact) {
         mainController.manageAdditionalButtons(true);
+        contactsTable.requestFocus();
+
+        TreeItem<Contact> contactItem = null;
+
+        // find TreeItem element to select in TreeTableView via object
+        ObservableList<TreeItem<Contact>> contacts = contactsTable.getRoot().getChildren();
+        for (TreeItem<Contact> c : contacts) {
+            if (c.getValue().equals(contact)) {
+               contactItem = c;
+               break;
+            }
+        }
+
+        if (contactItem != null) {
+            contactsTable.getSelectionModel().select(contactItem);
+        }
     }
 
     private MainController mainController = null;

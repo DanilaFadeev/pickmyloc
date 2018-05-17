@@ -112,4 +112,9 @@ public class RegistrationController {
         SwitchScene<LoginController> switchScene = new SwitchScene<>("../views/forms/Login.fxml", false, false);
         switchScene.loadScene(event);
     }
+
+    @FXML
+    void onCloseApp(ActionEvent event) {
+        SwitchScene.closeStage(event);
+    }
 }

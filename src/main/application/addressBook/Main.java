@@ -1,21 +1,40 @@
 package addressBook;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Main extends Application {
+    public static double xOffset = 0;
+    public static double yOffset = 0;
+
+    public static HostServices hostServices;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("views/forms/Login.fxml"));
         primaryStage.setTitle("PickMyLoc");
 
+        hostServices = getHostServices();
+
+        root.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        root.setOnMouseDragged(event -> {
+            primaryStage.setX(event.getScreenX() - xOffset);
+            primaryStage.setY(event.getScreenY() - yOffset);
+        });
+
         Scene scene = new Scene(root);
         scene.getStylesheets().add("styles/main.css");
 
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
 
         primaryStage.setScene(scene);
@@ -29,12 +48,13 @@ public class Main extends Application {
 }
 
 // TODO list
-// ********* Add contact ***********
 // validation: check address correct, phone and mobile(not letters)
 
 // db default table creation
-// resizing trouble
 
-// !!! select row in contact table when marker was clicked
-// style in css file
-// find address by coordinates bug
+// make default settings row in DB
+// import and export success messages
+// import and export with images
+// email message to contact
+// prettify the details page (at all and when no field filled)
+// delete image with removing a contact

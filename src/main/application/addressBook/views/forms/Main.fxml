@@ -4,56 +4,73 @@
 <?import com.jfoenix.controls.JFXSpinner?>
 <?import com.lynden.gmapsfx.GoogleMapView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="525.0" minWidth="995.0" prefHeight="525.0" prefWidth="995.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.MainController">
+<VBox xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addressBook.controllers.MainController">
    <children>
-      <AnchorPane prefHeight="526.0" prefWidth="65.0" style="-fx-background-color: #003b60;">
+      <Pane prefHeight="25.0" prefWidth="995.0" style="-fx-background-color: #294469;">
          <children>
-            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#onAddContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="464.0" layoutY="5.0" text="PickMyLoc" textFill="WHITE" />
+            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="962.0" layoutY="-1.0" onAction="#onCloseApp">
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="24.0" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="contactInfoBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="70.0" onAction="#onShowContactInfo" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="USER" size="24.0" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="allContactsBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="130.0" onAction="#onDeselectContacts" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="USERS" size="24.0" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="editContactBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="190.0" onAction="#onEditContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="24.0" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="removeContactBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="250.0" onAction="#onRemoveContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="TRASH_ALT" size="24.0" />
-               </graphic>
-            </JFXButton>
-            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="12.0" layoutY="470.0" onAction="#onSignOut" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" size="24.0" />
-               </graphic>
-            </JFXButton>
-            <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="12.0" layoutY="410.0" onAction="#onSettings" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="70.0">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="COGS" size="24.0" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="18.0" />
                </graphic>
             </JFXButton>
          </children>
-      </AnchorPane>
-      <AnchorPane fx:id="rootPane" prefHeight="526.0" prefWidth="461.0" style="-fx-background-color: #ecf1f6;" HBox.hgrow="ALWAYS" />
-      <AnchorPane prefHeight="526.0" prefWidth="455.0" style="-fx-background-color: #ecf1f6;" HBox.hgrow="SOMETIMES">
+      </Pane>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="525.0" minWidth="995.0" prefHeight="533.0" prefWidth="995.0">
          <children>
-            <GoogleMapView fx:id="googleMapView" layoutX="9.0" layoutY="15.0" prefHeight="497.0" prefWidth="438.0" AnchorPane.bottomAnchor="15.0" AnchorPane.topAnchor="15.0" />
-            <JFXSpinner fx:id="mapLoadingSpinner" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="200.0" />
+            <AnchorPane prefHeight="594.0" prefWidth="65.0" style="-fx-background-color: #003b60;">
+               <children>
+                  <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#onAddContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="24.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="contactInfoBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="70.0" onAction="#onShowContactInfo" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER" size="24.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="allContactsBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="130.0" onAction="#onDeselectContacts" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USERS" size="24.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="editContactBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="190.0" onAction="#onEditContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="24.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="removeContactBtn" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="250.0" onAction="#onRemoveContact" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="TRASH_ALT" size="24.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="12.0" layoutY="470.0" onAction="#onSignOut" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" size="24.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="12.0" layoutY="410.0" onAction="#onSettings" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 50%; -fx-background-color: #a7d16b;" text=" " textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="70.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="COGS" size="24.0" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="rootPane" prefHeight="547.0" prefWidth="473.0" style="-fx-background-color: #ecf1f6;" HBox.hgrow="ALWAYS" />
+            <AnchorPane prefHeight="526.0" prefWidth="455.0" style="-fx-background-color: #ecf1f6;" HBox.hgrow="SOMETIMES">
+               <children>
+                  <GoogleMapView fx:id="googleMapView" layoutX="9.0" layoutY="15.0" prefHeight="497.0" prefWidth="438.0" AnchorPane.bottomAnchor="15.0" AnchorPane.topAnchor="15.0" />
+                  <JFXSpinner fx:id="mapLoadingSpinner" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="200.0" />
+               </children>
+            </AnchorPane>
          </children>
-      </AnchorPane>
+      </HBox>
    </children>
-</HBox>
+</VBox>

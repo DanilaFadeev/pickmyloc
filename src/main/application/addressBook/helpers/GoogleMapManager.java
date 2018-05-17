@@ -112,7 +112,7 @@ public class GoogleMapManager {
             map.addMarker( marker );
 
             map.addUIEventHandler(marker, UIEventType.click, param -> {
-                contactsController.onSelectContact();
+                contactsController.onSelectContact(contact);
                 setMarker(mapView, contact);
             });
 
@@ -143,6 +143,31 @@ public class GoogleMapManager {
         }
 
         googleMapView.setCenter(contact.location.getLatitude(), contact.location.getLongitude());
+        googleMapView.setZoom(locationZoom);
+    }
+
+    public static void removeMarker(Contact contact) {
+        Marker removedMarker = mapMarkers.remove(contact.hashCode());
+
+        map.removeMarker(removedMarker);
+    }
+
+    private static Marker activeMarker = null;
+    public static void setActiveMarker(GoogleMapView googleMapView, LatLong coordinates) {
+        if (activeMarker != null) {
+            map.removeMarker(activeMarker);
+            activeMarker = null;
+        } else {
+            displayAllMarkers(false);
+        }
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(coordinates);
+
+        activeMarker = new Marker(markerOptions);
+        map.addMarker(activeMarker);
+
+        googleMapView.setCenter(coordinates.getLatitude(), coordinates.getLongitude());
         googleMapView.setZoom(locationZoom);
     }
 }

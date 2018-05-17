@@ -103,7 +103,7 @@ public class DBConnection {
     public void deleteContact(Integer id) {
         String sql = "DELETE FROM `contacts` WHERE id=" + id;
 
-        Statement stmt = null;
+        Statement stmt;
         try {
             stmt = conn.createStatement();
             stmt.execute(sql);
@@ -213,7 +213,7 @@ public class DBConnection {
             e.printStackTrace();
         }
 
-        // crete user
+        // create user
         try {
             String sql = "INSERT INTO `users` (username, email, password) VALUES (\"" + username + "\", \""
                     + email + "\", \"" + password + "\");";
@@ -221,7 +221,13 @@ public class DBConnection {
             Statement stmt = conn.createStatement();
             stmt.execute(sql);
 
-            return stmt.getGeneratedKeys().getInt(1);
+            int created_id = stmt.getGeneratedKeys().getInt(1);
+
+            String sqlUserSettings = "INSERT INTO `settings` (lang, zoom, default_location_id, user_id)" +
+                    " VALUES (\"ru\", 11, 21, " + created_id + ")";
+            stmt.execute(sqlUserSettings);
+
+            return created_id;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -273,7 +279,7 @@ public class DBConnection {
     }
 
     public void updateUserSettings(int userId, Settings settings) {
-        int defaultLocationId = 0;
+        int defaultLocationId = 12;
 
         try {
             String sql = "SELECT COUNT(*) as total, id FROM `locations` WHERE latitude=" + settings.getLocation().getLatitude()

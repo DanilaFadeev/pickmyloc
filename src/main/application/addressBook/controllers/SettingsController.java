@@ -16,9 +16,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 
 import java.beans.*;
@@ -43,8 +46,14 @@ public class SettingsController {
         Settings settings = DBConnection.getConnection().getUserSettings(1);
         setParams(settings);
 
-        Tooltip ttLang = new Tooltip("Help!!!");
-        ttLanguage.setTooltip(ttLang);
+        Tooltip ttLang = new Tooltip("Language for address search");
+        ttAddressArea.setTooltip(ttLang);
+
+        Tooltip ttAddress = new Tooltip("Address shown as default");
+        ttLocationArea.setTooltip(ttAddress);
+
+        Tooltip ttTake = new Tooltip("Take current map coordinates");
+        ttTakeBtnArea.setTooltip(ttTake);
 
         locationField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -63,16 +72,19 @@ public class SettingsController {
     private JFXComboBox<String> cbLanguage;
 
     @FXML
-    private JFXButton ttLanguage;
-
-    @FXML
     private JFXTextField locationField;
 
     @FXML
     private JFXSlider sliderZoom;
 
     @FXML
-    private FontAwesomeIconView ttTakeFromMap;
+    private Label ttAddressArea;
+
+    @FXML
+    private Label ttLocationArea;
+
+    @FXML
+    private Label ttTakeBtnArea;
 
     @FXML
     private void onTakeFromMap(ActionEvent event) {

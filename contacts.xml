@@ -5,7 +5,7 @@
    <string>id</string>
    <void method="set">
     <object idref="Contact0"/>
-    <int>9</int>
+    <int>21</int>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
@@ -14,7 +14,7 @@
     <object idref="Contact0"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Lack</string>
+      <string>Logan</string>
      </void>
     </object>
    </void>
@@ -25,7 +25,7 @@
     <object idref="Contact0"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Samour</string>
+      <string>Paul</string>
      </void>
     </object>
    </void>
@@ -36,7 +36,7 @@
     <object idref="Contact0"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Therecit</string>
+      <string>Paulovich</string>
      </void>
     </object>
    </void>
@@ -47,7 +47,7 @@
     <object idref="Contact0"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>lack@gmail.com</string>
+      <string>logan@gmail.com</string>
      </void>
     </object>
    </void>
@@ -69,7 +69,7 @@
     <object idref="Contact0"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>+375 447 123 242</string>
+      <string>449 234 532</string>
      </void>
     </object>
    </void>
@@ -78,7 +78,11 @@
    <string>imagePath</string>
    <void method="set">
     <object idref="Contact0"/>
-    <object class="javafx.beans.property.SimpleStringProperty"/>
+    <object class="javafx.beans.property.SimpleStringProperty">
+     <void property="value">
+      <string>51UK8MI8GBXGCKI8LO</string>
+     </void>
+    </object>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
@@ -87,7 +91,7 @@
     <object idref="Contact0"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Google</string>
+      <string>YouTube</string>
      </void>
     </object>
    </void>
@@ -98,7 +102,18 @@
     <object idref="Contact0"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Sale manager</string>
+      <string>Blogger, Vlogger</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void class="addressBook.models.Contact" method="getField">
+   <string>address</string>
+   <void method="set">
+    <object idref="Contact0"/>
+    <object class="javafx.beans.property.SimpleStringProperty" id="SimpleStringProperty0">
+     <void property="value">
+      <string>г. Минск, ул. Гурского</string>
      </void>
     </object>
    </void>
@@ -108,7 +123,7 @@
    <void method="set">
     <object idref="Contact0"/>
     <object class="java.time.LocalDate" method="parse">
-     <string>1983-07-07</string>
+     <string>1980-02-19</string>
     </object>
    </void>
   </void>
@@ -121,18 +136,14 @@
       <string>address</string>
       <void method="set">
        <object idref="Location0"/>
-       <object class="javafx.beans.property.SimpleStringProperty">
-        <void property="value">
-         <string>г. Минск, см. Тракторный завод</string>
-        </void>
-       </object>
+       <object idref="SimpleStringProperty0"/>
       </void>
      </void>
      <void property="latitude">
-      <double>53.8892289</double>
+      <double>53.8831014</double>
      </void>
      <void property="longitude">
-      <double>27.61496199999999</double>
+      <double>27.48230250000006</double>
      </void>
     </object>
    </void>
@@ -143,7 +154,7 @@
    <string>id</string>
    <void method="set">
     <object idref="Contact1"/>
-    <int>10</int>
+    <int>23</int>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
@@ -152,7 +163,7 @@
     <object idref="Contact1"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Jhon</string>
+      <string>Lack</string>
      </void>
     </object>
    </void>
@@ -163,7 +174,7 @@
     <object idref="Contact1"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Doe</string>
+      <string>Samour</string>
      </void>
     </object>
    </void>
@@ -174,7 +185,7 @@
     <object idref="Contact1"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Neyman</string>
+      <string>Therecit</string>
      </void>
     </object>
    </void>
@@ -185,7 +196,7 @@
     <object idref="Contact1"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>jhon@mail.com</string>
+      <string>lack@gmail.com</string>
      </void>
     </object>
    </void>
@@ -196,7 +207,7 @@
     <object idref="Contact1"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>299 12 12</string>
+      <string>299 23 23</string>
      </void>
     </object>
    </void>
@@ -207,7 +218,7 @@
     <object idref="Contact1"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>+375 888 888</string>
+      <string>+375 447 123 242</string>
      </void>
     </object>
    </void>
@@ -216,7 +227,11 @@
    <string>imagePath</string>
    <void method="set">
     <object idref="Contact1"/>
-    <object class="javafx.beans.property.SimpleStringProperty"/>
+    <object class="javafx.beans.property.SimpleStringProperty">
+     <void property="value">
+      <string>UVNENMYE2HP1X24PMO</string>
+     </void>
+    </object>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
@@ -225,7 +240,7 @@
     <object idref="Contact1"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Codex</string>
+      <string>Google</string>
      </void>
     </object>
    </void>
@@ -236,7 +251,18 @@
     <object idref="Contact1"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>DevOps</string>
+      <string>Sale manager</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void class="addressBook.models.Contact" method="getField">
+   <string>address</string>
+   <void method="set">
+    <object idref="Contact1"/>
+    <object class="javafx.beans.property.SimpleStringProperty" id="SimpleStringProperty1">
+     <void property="value">
+      <string>г. Минск, см. Тракторный завод</string>
      </void>
     </object>
    </void>
@@ -246,7 +272,7 @@
    <void method="set">
     <object idref="Contact1"/>
     <object class="java.time.LocalDate" method="parse">
-     <string>1990-03-13</string>
+     <string>1983-07-07</string>
     </object>
    </void>
   </void>
@@ -259,18 +285,14 @@
       <string>address</string>
       <void method="set">
        <object idref="Location1"/>
-       <object class="javafx.beans.property.SimpleStringProperty">
-        <void property="value">
-         <string>г. Минск, пр. Победителей, 9</string>
-        </void>
-       </object>
+       <object idref="SimpleStringProperty1"/>
       </void>
      </void>
      <void property="latitude">
-      <double>53.90850649999999</double>
+      <double>53.8892289</double>
      </void>
      <void property="longitude">
-      <double>27.54859859999999</double>
+      <double>27.61496199999999</double>
      </void>
     </object>
    </void>
@@ -281,7 +303,7 @@
    <string>id</string>
    <void method="set">
     <object idref="Contact2"/>
-    <int>13</int>
+    <int>34</int>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
@@ -290,7 +312,7 @@
     <object idref="Contact2"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Lack</string>
+      <string>Danila</string>
      </void>
     </object>
    </void>
@@ -299,62 +321,46 @@
    <string>surname</string>
    <void method="set">
     <object idref="Contact2"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Samour</string>
-     </void>
-    </object>
+    <object class="javafx.beans.property.SimpleStringProperty"/>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
    <string>patronymic</string>
    <void method="set">
     <object idref="Contact2"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Therecit</string>
-     </void>
-    </object>
+    <object class="javafx.beans.property.SimpleStringProperty"/>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
    <string>email</string>
    <void method="set">
     <object idref="Contact2"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>lack@gmail.com</string>
-     </void>
-    </object>
+    <object class="javafx.beans.property.SimpleStringProperty"/>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
    <string>phone</string>
    <void method="set">
     <object idref="Contact2"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>299 23 23</string>
-     </void>
-    </object>
+    <object class="javafx.beans.property.SimpleStringProperty"/>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
    <string>mobile</string>
    <void method="set">
     <object idref="Contact2"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>+375 447 123 242</string>
-     </void>
-    </object>
+    <object class="javafx.beans.property.SimpleStringProperty"/>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
    <string>imagePath</string>
    <void method="set">
     <object idref="Contact2"/>
-    <object class="javafx.beans.property.SimpleStringProperty"/>
+    <object class="javafx.beans.property.SimpleStringProperty">
+     <void property="value">
+      <string>5060QXJ5JFKIIYH1J7</string>
+     </void>
+    </object>
    </void>
   </void>
   <void class="addressBook.models.Contact" method="getField">
@@ -363,7 +369,7 @@
     <object idref="Contact2"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Google</string>
+      <string>Codex</string>
      </void>
     </object>
    </void>
@@ -374,7 +380,18 @@
     <object idref="Contact2"/>
     <object class="javafx.beans.property.SimpleStringProperty">
      <void property="value">
-      <string>Sale manager</string>
+      <string>DevOps (not really)</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void class="addressBook.models.Contact" method="getField">
+   <string>address</string>
+   <void method="set">
+    <object idref="Contact2"/>
+    <object class="javafx.beans.property.SimpleStringProperty" id="SimpleStringProperty2">
+     <void property="value">
+      <string>г. Минск, ул. Янки Лучины</string>
      </void>
     </object>
    </void>
@@ -384,7 +401,7 @@
    <void method="set">
     <object idref="Contact2"/>
     <object class="java.time.LocalDate" method="parse">
-     <string>1983-07-07</string>
+     <string>2000-07-10</string>
     </object>
    </void>
   </void>
@@ -397,432 +414,14 @@
       <string>address</string>
       <void method="set">
        <object idref="Location2"/>
-       <object class="javafx.beans.property.SimpleStringProperty">
-        <void property="value">
-         <string>г. Минск, см. Тракторный завод</string>
-        </void>
-       </object>
+       <object idref="SimpleStringProperty2"/>
       </void>
      </void>
      <void property="latitude">
-      <double>53.8892289</double>
+      <double>53.83947819999999</double>
      </void>
      <void property="longitude">
-      <double>27.61496199999999</double>
-     </void>
-    </object>
-   </void>
-  </void>
- </object>
- <object class="addressBook.models.Contact" id="Contact3">
-  <void class="addressBook.models.Contact" method="getField">
-   <string>id</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <int>16</int>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>name</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Jhon</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>surname</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Doe</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>patronymic</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Neyman</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>email</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>jhon@mail.com</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>phone</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>299 12 12</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>mobile</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>+375 888 888</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>imagePath</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="javafx.beans.property.SimpleStringProperty"/>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>company</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Codex</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>position</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>DevOps</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>birthday</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="java.time.LocalDate" method="parse">
-     <string>1990-03-13</string>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>location</string>
-   <void method="set">
-    <object idref="Contact3"/>
-    <object class="addressBook.models.Location" id="Location3">
-     <void class="addressBook.models.Location" method="getField">
-      <string>address</string>
-      <void method="set">
-       <object idref="Location3"/>
-       <object class="javafx.beans.property.SimpleStringProperty">
-        <void property="value">
-         <string>г. Минск, пр. Победителей, 9</string>
-        </void>
-       </object>
-      </void>
-     </void>
-     <void property="latitude">
-      <double>53.90850649999999</double>
-     </void>
-     <void property="longitude">
-      <double>27.54859859999999</double>
-     </void>
-    </object>
-   </void>
-  </void>
- </object>
- <object class="addressBook.models.Contact" id="Contact4">
-  <void class="addressBook.models.Contact" method="getField">
-   <string>id</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <int>18</int>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>name</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Lack</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>surname</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Samour</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>patronymic</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Therecit</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>email</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>lack@gmail.com</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>phone</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>299 23 23</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>mobile</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>+375 447 123 242</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>imagePath</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="javafx.beans.property.SimpleStringProperty"/>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>company</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Google</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>position</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Sale manager</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>birthday</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="java.time.LocalDate" method="parse">
-     <string>1983-07-07</string>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>location</string>
-   <void method="set">
-    <object idref="Contact4"/>
-    <object class="addressBook.models.Location" id="Location4">
-     <void class="addressBook.models.Location" method="getField">
-      <string>address</string>
-      <void method="set">
-       <object idref="Location4"/>
-       <object class="javafx.beans.property.SimpleStringProperty">
-        <void property="value">
-         <string>г. Минск, см. Тракторный завод</string>
-        </void>
-       </object>
-      </void>
-     </void>
-     <void property="latitude">
-      <double>53.8892289</double>
-     </void>
-     <void property="longitude">
-      <double>27.61496199999999</double>
-     </void>
-    </object>
-   </void>
-  </void>
- </object>
- <object class="addressBook.models.Contact" id="Contact5">
-  <void class="addressBook.models.Contact" method="getField">
-   <string>id</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <int>19</int>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>name</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Jhon</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>surname</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Doe</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>patronymic</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Neyman</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>email</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>jhon@mail.com</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>phone</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>299 12 12</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>mobile</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>+375 888 888</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>imagePath</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="javafx.beans.property.SimpleStringProperty"/>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>company</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>Codex</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>position</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="javafx.beans.property.SimpleStringProperty">
-     <void property="value">
-      <string>DevOps</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>birthday</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="java.time.LocalDate" method="parse">
-     <string>1990-03-13</string>
-    </object>
-   </void>
-  </void>
-  <void class="addressBook.models.Contact" method="getField">
-   <string>location</string>
-   <void method="set">
-    <object idref="Contact5"/>
-    <object class="addressBook.models.Location" id="Location5">
-     <void class="addressBook.models.Location" method="getField">
-      <string>address</string>
-      <void method="set">
-       <object idref="Location5"/>
-       <object class="javafx.beans.property.SimpleStringProperty">
-        <void property="value">
-         <string>г. Минск, пр. Победителей, 9</string>
-        </void>
-       </object>
-      </void>
-     </void>
-     <void property="latitude">
-      <double>53.90850649999999</double>
-     </void>
-     <void property="longitude">
-      <double>27.54859859999999</double>
+      <double>27.577789100000018</double>
      </void>
     </object>
    </void>

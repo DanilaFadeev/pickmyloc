@@ -28,10 +28,10 @@
             <Text fx:id="errorMsg" fill="#dd0000" layoutX="38.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Myra 4F Caps'; -fx-font-size: 12px;" text="Please, check your data one more time" visible="false" />
             <Label layoutX="123.0" layoutY="33.0" text="Sign Up">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
-            <JFXButton layoutX="49.0" layoutY="261.0" onAction="#onBack" prefHeight="35.0" prefWidth="210.0" style="-fx-background-color: #9CCC#03A9F465;" text="Sign Up" />
+            <JFXButton layoutX="49.0" layoutY="261.0" onAction="#onRegister" prefHeight="35.0" prefWidth="210.0" style="-fx-background-color: #9CCC#03A9F465;" text="Sign Up" />
          </children>
       </Pane>
       <Label layoutX="43.0" layoutY="111.0" prefHeight="35.0" prefWidth="262.0" text="Welcome to PickMyLoc">
@@ -42,5 +42,10 @@
       <FontAwesomeIconView glyphName="MAP" layoutX="281.0" layoutY="137.0" size="24.0" />
       <Label layoutX="44.0" layoutY="152.0" prefHeight="43.0" prefWidth="233.0" text="Keep all your connections in one place and enjoi the process." wrapText="true" />
       <JFXButton layoutX="43.0" layoutY="214.0" onAction="#onBack" prefHeight="35.0" prefWidth="210.0" style="-fx-background-color: #9CCC#03A9F465;" text="Back" />
+      <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="663.0" onAction="#onCloseApp">
+         <graphic>
+            <FontAwesomeIconView glyphName="TIMES" size="18.0" />
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

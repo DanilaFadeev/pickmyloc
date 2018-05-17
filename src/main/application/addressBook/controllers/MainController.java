@@ -124,6 +124,7 @@ public class MainController {
             DBConnection.getConnection().deleteContact(contactsPanel.getSelectedContact().id);
             MainController.contacts.remove(contactsPanel.getSelectedContact());
 
+            GoogleMapManager.removeMarker(contactsPanel.getSelectedContact());
             onDeselectContacts();
         }
     }
@@ -132,6 +133,11 @@ public class MainController {
     protected void onSettings() {
         SwitchScene<SettingsController> switchScene = new SwitchScene<>("../views/panels/Settings.fxml");
         switchScene.loadToPane(rootPane);
+    }
+
+    @FXML
+    protected void onCloseApp(ActionEvent event) {
+        SwitchScene.closeStage(event);
     }
 
     public void manageAdditionalButtons(boolean isShow) {

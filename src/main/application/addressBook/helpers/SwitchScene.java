@@ -1,5 +1,6 @@
 package addressBook.helpers;
 
+import addressBook.Main;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -59,6 +60,16 @@ public class SwitchScene<Controller> {
         Scene scene = new Scene(mainForm);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
+        mainForm.setOnMousePressed(e -> {
+            Main.xOffset = e.getSceneX();
+            Main.yOffset = e.getSceneY();
+        });
+
+        mainForm.setOnMouseDragged(e -> {
+            stage.setX(e.getScreenX() - Main.xOffset);
+            stage.setY(e.getScreenY() - Main.yOffset);
+        });
+
         stage.setScene(scene);
 
         if (isCentered) {
@@ -68,6 +79,11 @@ public class SwitchScene<Controller> {
         stage.setResizable(isResizible);
 
         return Loader.getController();
+    }
+
+    public static void closeStage(Event event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }
 

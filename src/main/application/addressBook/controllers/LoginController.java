@@ -8,7 +8,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 
 public class LoginController {
     @FXML
@@ -48,5 +47,10 @@ public class LoginController {
         SwitchScene<RegistrationController> switchScene =
                 new SwitchScene<>("../views/forms/Registration.fxml", false, false);
         switchScene.loadScene(event);
+    }
+
+    @FXML
+    public void onCloseApp(ActionEvent event) {
+        SwitchScene.closeStage(event);
     }
 }
