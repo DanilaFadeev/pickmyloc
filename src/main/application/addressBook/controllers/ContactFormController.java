@@ -1,8 +1,8 @@
 package addressBook.controllers;
 
-import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
 import addressBook.helpers.HelperUtils;
+import addressBook.helpers.HibernateUtil;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
 import addressBook.models.Location;
@@ -20,8 +20,9 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 
 public class ContactFormController {
@@ -171,50 +172,61 @@ public class ContactFormController {
         if (contact.address.getValue() != null)
             addressField.setText(contact.address.getValue());
 
-        if (contact.birthday != null)
-            birthdayField.setValue(contact.birthday);
+        if (contact.getBirthday() != null)
+            birthdayField.setValue( LocalDate.parse( contact.getBirthday().toString() ) );
     }
 
-    public void createOrUpdateContact() {
-        Location location = null;
-        if (coordinates != null) {
-            location = new Location(addressField.getText(), coordinates.getLatitude(), coordinates.getLongitude());
+    private void createOrUpdateContact() {
+        Contact contact;
+
+        if (editingContact == null) {
+            contact = new Contact();
+        } else {
+            contact = editingContact;
         }
 
-        if (editingContact != null && editingContact.id != 0)
-            DBConnection.getConnection().deleteContact(editingContact.id);
+        contact.setName( nameField.getText() );
+        contact.setSurname( surnameField.getText() );
+        contact.setPatronymic( patronymicField.getText() );
+        contact.setEmail( emailField.getText() );
+        contact.setPhone( phoneField.getText() );
+        contact.setCompany( companyField.getText() );
+        contact.setPosition( positionField.getText() );
 
-        String imageHash = "";
+        Date birthday = Date.from(
+            birthdayField.getValue()
+                    .atStartOfDay()
+                    .atZone(ZoneId.systemDefault())
+                    .toInstant()
+        );
+
+        contact.setBirthday( birthday );
 
         if (imageFile != null) {
-            imageHash = HelperUtils.getSaltString();
+            String imageHash = HelperUtils.getSaltString();
             File imageTemp = new File("images/" + imageHash);
+
             try {
                 HelperUtils.copyFileUsingStream(imageFile, imageTemp);
+                contact.setImagePath(imageHash);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        Contact contact = new Contact(
-            nameField.getText(),
-            surnameField.getText(),
-            patronymicField.getText(),
-            emailField.getText(),
-            phoneField.getText(),
-            mobilePhoneField.getText(),
-            imageHash,
-            companyField.getText(),
-            positionField.getText(),
-            birthdayField.getValue(),
-            location
-        );
+        if (coordinates != null) {
+            Location location = new Location(
+                addressField.getText(),
+                coordinates.getLatitude(),
+                coordinates.getLongitude()
+            );
 
-        try {
-            DBConnection.getConnection().createContact(contact);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            contact.setLocation( location );
         }
+
+        contact.setUser(MainController.currentUser);
+
+        HibernateUtil.getInstance().save(contact);
     }
 
     private boolean validation() {

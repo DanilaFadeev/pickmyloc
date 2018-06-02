@@ -2,9 +2,11 @@ package addressBook.controllers;
 
 import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
+import addressBook.helpers.HibernateUtil;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
 import addressBook.models.Settings;
+import addressBook.models.User;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.lynden.gmapsfx.GoogleMapView;
@@ -25,15 +27,17 @@ public class MainController {
     public static Settings appSettings;
     private ContactsController contactsPanel;
 
-    public static int userId = 0;
+    public static User currentUser;
 
     @FXML
     public void initialize() {
-        // load settings for application
-        appSettings = DBConnection.getConnection().getUserSettings(userId);
+        // load user settings
+        appSettings = currentUser.getSettings();
 
-        // load contacts from db
-        contacts = FXCollections.observableArrayList(DBConnection.getConnection().getAllContacts(userId));
+        // load user contacts list
+        contacts = FXCollections.observableArrayList(
+                HibernateUtil.getInstance().getUserContacts( currentUser.getId() )
+        );
 
         // hide buttons
         manageAdditionalButtons(false);
@@ -94,7 +98,7 @@ public class MainController {
 
     @FXML
     protected void onSignOut(ActionEvent event) {
-        userId = 0;
+        currentUser = null;
 
         SwitchScene<LoginController> switchScene = new SwitchScene<>("../views/forms/Login.fxml", true, false);
         switchScene.loadScene(event);
@@ -121,10 +125,11 @@ public class MainController {
         Optional<ButtonType> result = removeConfirmAlert.showAndWait();
 
         if (result.get() == ButtonType.OK) {
-            DBConnection.getConnection().deleteContact(contactsPanel.getSelectedContact().id);
-            MainController.contacts.remove(contactsPanel.getSelectedContact());
+            HibernateUtil.getInstance().deleteContact( contactsPanel.getSelectedContact() );
 
-            GoogleMapManager.removeMarker(contactsPanel.getSelectedContact());
+            MainController.contacts.remove( contactsPanel.getSelectedContact() );
+            GoogleMapManager.removeMarker( contactsPanel.getSelectedContact() );
+
             onDeselectContacts();
         }
     }

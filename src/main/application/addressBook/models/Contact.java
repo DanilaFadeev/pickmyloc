@@ -4,27 +4,44 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.util.Date;
 
-public class Contact extends RecursiveTreeObject<Contact>{
-    public int id = 0;
-    public StringProperty name;
-    public StringProperty surname;
-    public StringProperty patronymic;
-    public StringProperty email;
-    public StringProperty phone;
-    public StringProperty mobile;
-    public StringProperty imagePath;
-    public StringProperty company;
-    public StringProperty position;
-    public StringProperty address;
+@Entity
+@Table(name = "contacts")
+@Access(AccessType.PROPERTY)
+public class Contact extends RecursiveTreeObject<Contact> {
+
+    public int id;
+
+    private Date birthday;
+    private Location location;
+
+    public StringProperty name = new SimpleStringProperty();
+    public StringProperty surname = new SimpleStringProperty();
+    public StringProperty patronymic = new SimpleStringProperty();
+    public StringProperty email = new SimpleStringProperty();
+    public StringProperty phone = new SimpleStringProperty();
+    public StringProperty mobile = new SimpleStringProperty();
+    public StringProperty imagePath = new SimpleStringProperty();
+    public StringProperty company = new SimpleStringProperty();
+    public StringProperty position = new SimpleStringProperty();
+    public StringProperty address = new SimpleStringProperty();
 
     public Contact() {
 
     }
 
+    private User user;
+
+    @Id
+    @GeneratedValue
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -77,6 +94,7 @@ public class Contact extends RecursiveTreeObject<Contact>{
         this.mobile.set(mobile);
     }
 
+    @Column(name = "image_path")
     public String getImagePath() {
         return imagePath.get();
     }
@@ -104,39 +122,35 @@ public class Contact extends RecursiveTreeObject<Contact>{
         this.position.set(position);
     }
 
-    public String getBirthday() {
-        return birthday.toString();
+    @Temporal(TemporalType.DATE)
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = LocalDate.parse(birthday);
-    }
-
-    public LocalDate birthday;
-    public Location location;
-
-    public Contact(String name, String surname, String patronymic, String email, String phone, String mobile,
-               String imagePath, String company, String position, LocalDate birthday, Location location) {
-        this.name = new SimpleStringProperty(name);
-        this.surname = new SimpleStringProperty(surname);
-        this.patronymic = new SimpleStringProperty(patronymic);
-        this.email = new SimpleStringProperty(email);
-        this.phone = new SimpleStringProperty(phone);
-        this.mobile = new SimpleStringProperty(mobile);
-        this.imagePath = new SimpleStringProperty(imagePath);
-        this.company = new SimpleStringProperty(company);
-        this.position = new SimpleStringProperty(position);
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
-        this.location = location;
-
-        if (location != null) {
-            this.address = location.address;
-        } else {
-            this.address = new SimpleStringProperty(null);
-        }
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id")
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+        if (location != null) {
+            this.address = new SimpleStringProperty(location.getAddress());
+        }
     }
 }

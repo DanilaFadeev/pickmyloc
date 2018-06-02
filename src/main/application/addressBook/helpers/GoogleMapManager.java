@@ -98,13 +98,13 @@ public class GoogleMapManager {
 
     public static void initContactsMarkers(ObservableList<Contact> contacts, ContactsController contactsController) {
         for (Contact contact: contacts) {
-            if (contact.location == null)
+            if (contact.getLocation() == null)
                 continue;
 
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position( new LatLong(
-                contact.location.getLatitude(),
-                contact.location.getLongitude())
+                contact.getLocation().getLatitude(),
+                contact.getLocation().getLongitude())
             );
 
             Marker marker = new Marker(markerOptions);
@@ -142,7 +142,7 @@ public class GoogleMapManager {
             }
         }
 
-        googleMapView.setCenter(contact.location.getLatitude(), contact.location.getLongitude());
+        googleMapView.setCenter(contact.getLocation().getLatitude(), contact.getLocation().getLongitude());
         googleMapView.setZoom(locationZoom);
     }
 

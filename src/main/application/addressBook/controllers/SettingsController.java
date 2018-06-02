@@ -2,16 +2,15 @@ package addressBook.controllers;
 
 import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
+import addressBook.helpers.HibernateUtil;
 import addressBook.helpers.SwitchScene;
 import addressBook.models.Contact;
 import addressBook.models.Location;
 import addressBook.models.Settings;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import com.lynden.gmapsfx.javascript.object.LatLong;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,8 +19,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 
 import java.beans.*;
@@ -43,7 +40,7 @@ public class SettingsController {
 
         cbLanguage.itemsProperty().set(options);
 
-        Settings settings = DBConnection.getConnection().getUserSettings(1);
+        Settings settings = MainController.currentUser.getSettings();
         setParams(settings);
 
         Tooltip ttLang = new Tooltip("Language for address search");
@@ -94,12 +91,13 @@ public class SettingsController {
 
     @FXML
     private void onApply(ActionEvent event) {
-        Settings settings = getParams();
+        Settings userSettings = MainController.currentUser.getSettings();
+        updateSettings(userSettings);
 
-        LatLong center = new LatLong(settings.getLocation().getLatitude(), settings.getLocation().getLongitude());
-        GoogleMapManager.setMapOptions(center, settings.getZoom());
+        LatLong center = new LatLong(userSettings.getLocation().getLatitude(), userSettings.getLocation().getLongitude());
+        GoogleMapManager.setMapOptions(center, userSettings.getZoom());
 
-        DBConnection.getConnection().updateUserSettings(1, settings);
+        HibernateUtil.getInstance().save(userSettings);
     }
 
     @FXML
@@ -146,60 +144,7 @@ public class SettingsController {
         }
     }
 
-    private void setParams(Settings settings) {
-        if (!settings.getLang().isEmpty()) {
-            switch (settings.getLang()) {
-                case "ru": {
-                    cbLanguage.setValue("Russian");
-                    break;
-                }
-                default: {
-                    cbLanguage.setValue("English");
-                }
-            }
-        }
-
-        sliderZoom.setValue(settings.getZoom());
-
-        if (settings.getLocation().getAddress().isEmpty()) {
-            locationField.setText(settings.getLocation().getLatitude() + "," + settings.getLocation().getLongitude());
-        } else {
-            locationField.setText(settings.getLocation().getAddress());
-        }
-    }
-
-    private Settings getParams() {
-        String lang;
-
-        switch (cbLanguage.getValue()) {
-            case "Russian": {
-                lang = "ru";
-                break;
-            }
-            default: {
-                lang = "en";
-            }
-        }
-
-        Location location;
-
-        if (locationField.getText().matches("^\\d+\\.\\d+,\\d+\\.\\d+$")) {
-            String[] strCoords = locationField.getText().split(",");
-
-            Double latitude = Double.parseDouble(strCoords[0]);
-            Double longitude = Double.parseDouble(strCoords[1]);
-
-            location = new Location("", latitude, longitude);
-        } else {
-            LatLong coords = GoogleMapManager.getCoordsByAddress( locationField.getText() );
-            location = new Location(locationField.getText(), coords.getLatitude(), coords.getLongitude());
-        }
-
-        int zoom = (int) sliderZoom.getValue();
-
-        return new Settings(lang, zoom, location);
-    }
-
+    @FXML
     public void onImportContacts(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose source file with contacts data");
@@ -237,5 +182,58 @@ public class SettingsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setParams(Settings settings) {
+        if (!settings.getLang().isEmpty()) {
+            switch (settings.getLang()) {
+                case "ru": {
+                    cbLanguage.setValue("Russian");
+                    break;
+                }
+                default: {
+                    cbLanguage.setValue("English");
+                }
+            }
+        }
+
+        sliderZoom.setValue(settings.getZoom());
+
+        if (settings.getLocation().getAddress().isEmpty()) {
+            locationField.setText(settings.getLocation().getLatitude() + "," + settings.getLocation().getLongitude());
+        } else {
+            locationField.setText(settings.getLocation().getAddress());
+        }
+    }
+
+    private void updateSettings(Settings settings) {
+        switch (cbLanguage.getValue()) {
+            case "Russian": {
+                settings.setLang("ru");
+                break;
+            }
+            default: {
+                settings.setLang("en");
+            }
+        }
+
+        Location location;
+
+        if (locationField.getText().matches("^\\d+\\.\\d+,\\d+\\.\\d+$")) {
+            String[] strCoords = locationField.getText().split(",");
+
+            Double latitude = Double.parseDouble(strCoords[0]);
+            Double longitude = Double.parseDouble(strCoords[1]);
+
+            location = new Location("", latitude, longitude);
+        } else {
+            LatLong coords = GoogleMapManager.getCoordsByAddress( locationField.getText() );
+            location = new Location(locationField.getText(), coords.getLatitude(), coords.getLongitude());
+        }
+
+        settings.setLocation(location);
+
+        int zoom = (int) sliderZoom.getValue();
+        settings.setZoom(zoom);
     }
 }

@@ -1,8 +1,9 @@
 package addressBook.controllers;
 
 import addressBook.helpers.Animations;
-import addressBook.helpers.DBConnection;
+import addressBook.helpers.HibernateUtil;
 import addressBook.helpers.SwitchScene;
+import addressBook.models.User;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -24,10 +25,10 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        int userId = DBConnection.getConnection().checkUserLogin(username, password);
+        User user = HibernateUtil.getInstance().getUser(username, password);
 
-        if (userId != 0) {
-            MainController.userId = userId;
+        if (user != null) {
+            MainController.currentUser = user;
 
             SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml", true, true);
             switchScene.loadScene(event);

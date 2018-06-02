@@ -1,8 +1,8 @@
 package addressBook.helpers;
 
 import addressBook.controllers.MainController;
-import addressBook.models.Location;
 import addressBook.models.Contact;
+import addressBook.models.Location;
 import addressBook.models.Settings;
 
 import java.sql.*;
@@ -19,22 +19,18 @@ public class DBConnection {
     private DBConnection() {}
 
     public static DBConnection getConnection() {
-        if (instance != null) {
-            return instance;
-        }
-
         instance = new DBConnection();
 
-        try {
-            conn = DriverManager.getConnection("jdbc:sqlite:" + DEFAULT_DB);
-
-            if (conn != null) {
-                DatabaseMetaData metaData = conn.getMetaData();
-                System.out.println("Connected: " + metaData);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            conn = DriverManager.getConnection("jdbc:sqlite:" + DEFAULT_DB);
+//
+//            if (conn != null) {
+//                DatabaseMetaData metaData = conn.getMetaData();
+//                System.out.println("Connected: " + metaData);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
         return instance;
     }
@@ -86,11 +82,11 @@ public class DBConnection {
                     location = new Location(address, latitude, longitude);
                 }
 
-                Contact contact = new Contact(name, surname, patronymic, email, phone,
-                        mobile, imagePath, company, position, birthday, location);
-                contact.setId(id);
-
-                contacts.add(contact);
+//                Contact contact = new Contact(name, surname, patronymic, email, phone,
+//                        mobile, imagePath, company, position, birthday, location);
+//                contact.setId(id);
+//
+//                contacts.add(contact);
             }
 
         } catch (SQLException e) {
@@ -138,28 +134,28 @@ public class DBConnection {
     public void createContact(Contact contact) throws SQLException {
         Map<String, Object> fields = new HashMap<>();
 
-        if (contact.location != null) {
-            String sqlLocation = "SELECT COUNT(*) AS total, id FROM `locations` " +
-                    "WHERE address=\"" + contact.location.getAddress() + "\"";
-
-            Statement st = conn.createStatement();
-            ResultSet locationResult = st.executeQuery(sqlLocation);
-
-            if (locationResult.getInt("total") == 0) {
-                Map<String, Object> locationFields = new HashMap<>();
-
-                locationFields.put("address", contact.location.getAddress());
-                locationFields.put("latitude", contact.location.getLatitude());
-                locationFields.put("longitude", contact.location.getLongitude());
-
-                st.execute( makeInsertSQL("locations", locationFields) );
-
-                Integer locationId = st.getGeneratedKeys().getInt(1);
-                fields.put("location_id", locationId);
-            } else {
-                fields.put("location_id", locationResult.getInt("id"));
-            }
-        }
+//        if (contact.location != null) {
+//            String sqlLocation = "SELECT COUNT(*) AS total, id FROM `locations` " +
+//                    "WHERE address=\"" + contact.location.getAddress() + "\"";
+//
+//            Statement st = conn.createStatement();
+//            ResultSet locationResult = st.executeQuery(sqlLocation);
+//
+//            if (locationResult.getInt("total") == 0) {
+//                Map<String, Object> locationFields = new HashMap<>();
+//
+//                locationFields.put("address", contact.location.getAddress());
+//                locationFields.put("latitude", contact.location.getLatitude());
+//                locationFields.put("longitude", contact.location.getLongitude());
+//
+//                st.execute( makeInsertSQL("locations", locationFields) );
+//
+//                Integer locationId = st.getGeneratedKeys().getInt(1);
+//                fields.put("location_id", locationId);
+//            } else {
+//                fields.put("location_id", locationResult.getInt("id"));
+//            }
+//        }
 
         if (!contact.name.getValue().isEmpty())
             fields.put("name", contact.name.getValue());
@@ -188,10 +184,10 @@ public class DBConnection {
         if (!contact.position.getValue().isEmpty())
             fields.put("position", contact.position.getValue());
 
-        if(contact.birthday != null)
-            fields.put("birthday", contact.birthday);
+//        if(contact.birthday != null)
+//            fields.put("birthday", contact.birthday);
 
-        fields.put("user_id", MainController.userId);
+        //fields.put("user_id", MainController.userId);
 
         System.out.println(makeInsertSQL("contacts", fields));
 
@@ -228,22 +224,6 @@ public class DBConnection {
             stmt.execute(sqlUserSettings);
 
             return created_id;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return 0;
-    }
-
-    public int checkUserLogin(String emailOrUsername, String password) {
-        try {
-            String sql = "SELECT id FROM `users` WHERE email=\"" + emailOrUsername + "\" OR username=\"" + emailOrUsername + "\" AND password=\"" + password + "\";";
-            Statement stmt = conn.createStatement();
-
-            ResultSet resultSet = stmt.executeQuery(sql);
-            if (resultSet.next()) {
-                return resultSet.getInt("id");
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

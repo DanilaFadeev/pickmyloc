@@ -3,7 +3,30 @@ package addressBook.models;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="locations")
+@Access(AccessType.PROPERTY)
 public class Location {
+
+    private int id;
+    private StringProperty address = new SimpleStringProperty("");
+    private Double latitude;
+    private Double longitude;
+
+    public Location(String address, Double latitude, Double longitude) {
+        this.address = new SimpleStringProperty(address);
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public Location() {}
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setAddress(String address) {
         this.address.set(address);
     }
@@ -16,17 +39,11 @@ public class Location {
         this.longitude = longitude;
     }
 
-    public StringProperty address;
-    private Double latitude;
-    private Double longitude;
-
-    public Location(String address, Double latitude, Double longitude) {
-        this.address = new SimpleStringProperty(address);
-        this.latitude = latitude;
-        this.longitude = longitude;
+    @Id
+    @GeneratedValue
+    public int getId() {
+        return id;
     }
-
-    public Location() {}
 
     public String getAddress() {
         return address.getValue();

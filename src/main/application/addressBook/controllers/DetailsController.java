@@ -88,8 +88,8 @@ public class DetailsController {
         positionField.setText(contact.position.getValue());
         addressField.setText(contact.address.getValue());
 
-        if (contact.birthday != null) {
-            birthdayField.setText(contact.birthday.toString());
+        if (contact.getBirthday() != null) {
+            birthdayField.setText(contact.getBirthday().toString());
         }
 
         File image = new File("images/" + contact.getImagePath());

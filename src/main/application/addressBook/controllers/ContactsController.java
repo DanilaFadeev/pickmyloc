@@ -53,7 +53,7 @@ public class ContactsController {
             if (newSelection != null) {
                 mainController.manageAdditionalButtons(true);
 
-                if (getSelectedContact().location != null) {
+                if (getSelectedContact().getLocation() != null) {
                     GoogleMapManager.setMarker(mainController.googleMapView, getSelectedContact());
                 } else {
                     GoogleMapManager.displayAllMarkers(true);

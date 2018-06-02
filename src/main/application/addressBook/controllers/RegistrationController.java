@@ -97,7 +97,7 @@ public class RegistrationController {
             int userId = DBConnection.getConnection().createUser(emailField.getText(), usernameField.getText(), pass1);
 
             if (userId != 0) {
-                MainController.userId = userId;
+                //MainController.userId = userId;
 
                 SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml", true, false);
                 switchScene.loadScene(event);
