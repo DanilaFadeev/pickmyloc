@@ -1,9 +1,6 @@
 package addressBook.controllers;
 
-import addressBook.helpers.DBConnection;
-import addressBook.helpers.GoogleMapManager;
-import addressBook.helpers.HibernateUtil;
-import addressBook.helpers.SwitchScene;
+import addressBook.helpers.*;
 import addressBook.models.Contact;
 import addressBook.models.Location;
 import addressBook.models.Settings;
@@ -15,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
@@ -25,6 +24,8 @@ import java.beans.*;
 import java.io.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Optional;
 
 public class SettingsController {
     private final String ADDRESS_NOT_FOUND = "Not found";
@@ -108,39 +109,22 @@ public class SettingsController {
 
     @FXML
     private void onExportContacts(ActionEvent event) {
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream("contacts.xml");
+        final String EXPORT_FILE_NAME = "contacts.xml";
 
-            XMLEncoder encoder = new XMLEncoder(fos);
+        Alert exportAlert = new Alert( Alert.AlertType.CONFIRMATION );
+        exportAlert.setGraphic(null);
+        exportAlert.setHeaderText(null);
+        exportAlert.setHeaderText("Export");
+        exportAlert.setContentText("Do you want to export " + MainController.contacts.size() +
+                " to " + EXPORT_FILE_NAME + " file?");
 
-            encoder.setExceptionListener(new ExceptionListener() {
-                public void exceptionThrown(Exception e) {
-                    System.out.println("Exception! :"+e.toString());
-                }
-            });
+        Optional<ButtonType> result = exportAlert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            HelperUtils.xmlDecode(EXPORT_FILE_NAME, MainController.contacts);
 
-            encoder.setPersistenceDelegate(LocalDate.class,
-                    new PersistenceDelegate() {
-                        @Override
-                        protected Expression instantiate(Object localDate, Encoder encdr) {
-                            return new Expression(localDate,
-                                    LocalDate.class,
-                                    "parse",
-                                    new Object[]{localDate.toString()});
-                        }
-                    });
-
-            for (Contact contact: MainController.contacts) {
-                encoder.writeObject(contact);
-            }
-
-            encoder.close();
-
-            fos.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            Alert success = new Alert(Alert.AlertType.INFORMATION);
+            success.setContentText("All contacts were exported!");
+            success.show();
         }
     }
 
@@ -152,35 +136,25 @@ public class SettingsController {
         FileChooser.ExtensionFilter jpegExtension = new FileChooser.ExtensionFilter("XML files (.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(jpegExtension);
 
-        File imageFile = fileChooser.showOpenDialog(cbLanguage.getScene().getWindow());
+        File importFile = fileChooser.showOpenDialog(cbLanguage.getScene().getWindow());
+        ArrayList<Contact> contacts = HelperUtils.xmlEncode(importFile.getAbsolutePath());
 
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(imageFile.getAbsolutePath());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Alert importAlert = new Alert(Alert.AlertType.CONFIRMATION);
 
-        XMLDecoder decoder = new XMLDecoder(fis);
+        importAlert.setGraphic(null);
+        importAlert.setHeaderText(null);
+        importAlert.setHeaderText("Import");
+        importAlert.setContentText("Do you want to import " + contacts.size() +
+                " from " + importFile.getName() + " file?");
 
-        try {
-            for (;;) {
-                Contact contact = (Contact) decoder.readObject();
-                DBConnection.getConnection().createContact(contact);
+        Optional<ButtonType> result = importAlert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            for (Contact contact : contacts) {
+                contact.setId(0);
+                contact.setUser(MainController.currentUser);
+                HibernateUtil.getInstance().save(contact);
             }
-        } catch (ArrayIndexOutOfBoundsException exc) {
-            // do nothing
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        decoder.close();
-
-        try {
-            fis.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
