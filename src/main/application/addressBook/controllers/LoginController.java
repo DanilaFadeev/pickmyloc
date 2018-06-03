@@ -30,7 +30,7 @@ public class LoginController {
         if (user != null) {
             MainController.currentUser = user;
 
-            SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml", true, true);
+            SwitchScene<MainController> switchScene = new SwitchScene<>("forms/Main.fxml", true, true);
             switchScene.loadScene(event);
         } else {
             errorMsgLabel.setVisible(true);
@@ -46,7 +46,7 @@ public class LoginController {
     @FXML
     public void onSignUp(ActionEvent event) {
         SwitchScene<RegistrationController> switchScene =
-                new SwitchScene<>("../views/forms/Registration.fxml", false, false);
+                new SwitchScene<>("forms/Registration.fxml", false, false);
         switchScene.loadScene(event);
     }
 

@@ -8,6 +8,22 @@
     <int>21</int>
    </void>
   </void>
+  <void property="location">
+   <object class="addressBook.models.Location">
+    <void property="address">
+     <string>г. Минск, ул. Гурского</string>
+    </void>
+    <void property="id">
+     <int>11</int>
+    </void>
+    <void property="latitude">
+     <double>53.8831014</double>
+    </void>
+    <void property="longitude">
+     <double>27.48230250000006</double>
+    </void>
+   </object>
+  </void>
   <void property="user">
    <object class="addressBook.models.User" id="User0">
     <void property="email">
@@ -26,19 +42,22 @@
       </void>
       <void property="location">
        <object class="addressBook.models.Location">
+        <void property="address">
+         <string>Беларусь, г. Минск</string>
+        </void>
         <void property="id">
-         <int>37</int>
+         <int>41</int>
         </void>
         <void property="latitude">
-         <double>54.686718297959125</double>
+         <double>53.90453979999999</double>
         </void>
         <void property="longitude">
-         <double>25.278508222493315</double>
+         <double>27.561524400000053</double>
         </void>
        </object>
       </void>
       <void property="zoom">
-       <int>13</int>
+       <int>11</int>
       </void>
      </object>
     </void>
@@ -53,35 +72,6 @@
    <string>id</string>
    <void method="set">
     <object idref="Contact1"/>
-    <int>46</int>
-   </void>
-  </void>
-  <void property="birthday">
-   <object class="java.sql.Date">
-    <long>1515963600000</long>
-   </object>
-  </void>
-  <void property="user">
-   <object idref="User0"/>
-  </void>
- </object>
- <object class="addressBook.models.Contact" id="Contact2">
-  <void class="addressBook.models.Contact" method="getField">
-   <string>id</string>
-   <void method="set">
-    <object idref="Contact2"/>
-    <int>47</int>
-   </void>
-  </void>
-  <void property="user">
-   <object idref="User0"/>
-  </void>
- </object>
- <object class="addressBook.models.Contact" id="Contact3">
-  <void class="addressBook.models.Contact" method="getField">
-   <string>id</string>
-   <void method="set">
-    <object idref="Contact3"/>
     <int>48</int>
    </void>
   </void>
@@ -91,7 +81,7 @@
      <string>г. Минск, Чижовка Арена</string>
     </void>
     <void property="id">
-     <int>27</int>
+     <int>42</int>
     </void>
     <void property="latitude">
      <double>53.8445557</double>
@@ -105,11 +95,11 @@
    <object idref="User0"/>
   </void>
  </object>
- <object class="addressBook.models.Contact" id="Contact4">
+ <object class="addressBook.models.Contact" id="Contact2">
   <void class="addressBook.models.Contact" method="getField">
    <string>id</string>
    <void method="set">
-    <object idref="Contact4"/>
+    <object idref="Contact2"/>
     <int>50</int>
    </void>
   </void>
@@ -138,11 +128,11 @@
    <object idref="User0"/>
   </void>
  </object>
- <object class="addressBook.models.Contact" id="Contact5">
+ <object class="addressBook.models.Contact" id="Contact3">
   <void class="addressBook.models.Contact" method="getField">
    <string>id</string>
    <void method="set">
-    <object idref="Contact5"/>
+    <object idref="Contact3"/>
     <int>51</int>
    </void>
   </void>
@@ -166,13 +156,29 @@
    <object idref="User0"/>
   </void>
  </object>
- <object class="addressBook.models.Contact" id="Contact6">
+ <object class="addressBook.models.Contact" id="Contact4">
   <void class="addressBook.models.Contact" method="getField">
    <string>id</string>
    <void method="set">
-    <object idref="Contact6"/>
-    <int>52</int>
+    <object idref="Contact4"/>
+    <int>61</int>
    </void>
+  </void>
+  <void property="location">
+   <object class="addressBook.models.Location">
+    <void property="address">
+     <string>Беларусь, ул. Красноармейская</string>
+    </void>
+    <void property="id">
+     <int>43</int>
+    </void>
+    <void property="latitude">
+     <double>53.8966677</double>
+    </void>
+    <void property="longitude">
+     <double>27.572388899999964</double>
+    </void>
+   </object>
   </void>
   <void property="user">
    <object idref="User0"/>
@@ -181,15 +187,15 @@
 <void class="addressBook.models.Contact" id="Field0" method="getField">
  <string>position</string>
  <void id="SimpleStringProperty0" method="get">
-  <object idref="Contact6"/>
+  <object idref="Contact0"/>
   <void property="value">
-   <string></string>
+   <string>Blogger, Vlogger</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty0"/>
 <void class="addressBook.models.Contact" id="Field1" method="getField">
- <string>imagePath</string>
+ <string>patronymic</string>
  <void id="SimpleStringProperty1" method="get">
   <object idref="Contact2"/>
   <void property="value">
@@ -199,9 +205,9 @@
 </void>
 <void idref="SimpleStringProperty1"/>
 <void class="addressBook.models.Contact" id="Field2" method="getField">
- <string>patronymic</string>
+ <string>company</string>
  <void id="SimpleStringProperty2" method="get">
-  <object idref="Contact3"/>
+  <object idref="Contact1"/>
   <void property="value">
    <string></string>
   </void>
@@ -209,19 +215,19 @@
 </void>
 <void idref="SimpleStringProperty2"/>
 <void class="addressBook.models.Contact" id="Field3" method="getField">
- <string>mobile</string>
+ <string>surname</string>
  <void id="SimpleStringProperty3" method="get">
   <object idref="Contact2"/>
   <void property="value">
-   <string>Go here</string>
+   <string>JS Developer</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty3"/>
 <void class="addressBook.models.Contact" id="Field4" method="getField">
- <string>patronymic</string>
+ <string>email</string>
  <void id="SimpleStringProperty4" method="get">
-  <object idref="Contact4"/>
+  <object idref="Contact3"/>
   <void property="value">
    <string></string>
   </void>
@@ -229,71 +235,71 @@
 </void>
 <void idref="SimpleStringProperty4"/>
 <void class="addressBook.models.Contact" id="Field5" method="getField">
- <string>phone</string>
+ <string>company</string>
  <void id="SimpleStringProperty5" method="get">
-  <object idref="Contact3"/>
-  <void property="value">
-   <string>1234321</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty5"/>
-<void class="addressBook.models.Contact" id="Field6" method="getField">
- <string>address</string>
- <void id="SimpleStringProperty6" method="get">
-  <object idref="Contact3"/>
-  <void property="value">
-   <string>г. Минск, Чижовка Арена</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty6"/>
-<void class="addressBook.models.Contact" id="Field7" method="getField">
- <string>position</string>
- <void id="SimpleStringProperty7" method="get">
   <object idref="Contact4"/>
   <void property="value">
    <string></string>
   </void>
  </void>
 </void>
-<void idref="SimpleStringProperty7"/>
-<void class="addressBook.models.Contact" id="Field8" method="getField">
- <string>surname</string>
- <void id="SimpleStringProperty8" method="get">
+<void idref="SimpleStringProperty5"/>
+<void class="addressBook.models.Contact" id="Field6" method="getField">
+ <string>name</string>
+ <void id="SimpleStringProperty6" method="get">
   <object idref="Contact1"/>
   <void property="value">
-   <string>Peter</string>
+   <string>Danila</string>
+  </void>
+ </void>
+</void>
+<void idref="SimpleStringProperty6"/>
+<void class="addressBook.models.Contact" id="Field7" method="getField">
+ <string>surname</string>
+ <void id="SimpleStringProperty7" method="get">
+  <object idref="Contact1"/>
+  <void property="value">
+   <string>Edited</string>
+  </void>
+ </void>
+</void>
+<void idref="SimpleStringProperty7"/>
+<void class="addressBook.models.Contact" id="Field8" method="getField">
+ <string>imagePath</string>
+ <void id="SimpleStringProperty8" method="get">
+  <object idref="Contact0"/>
+  <void property="value">
+   <string>51UK8MI8GBXGCKI8LO</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty8"/>
 <void class="addressBook.models.Contact" id="Field9" method="getField">
- <string>company</string>
+ <string>phone</string>
  <void id="SimpleStringProperty9" method="get">
   <object idref="Contact2"/>
   <void property="value">
-   <string></string>
+   <string>222 - 23 - 342</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty9"/>
 <void class="addressBook.models.Contact" id="Field10" method="getField">
- <string>mobile</string>
+ <string>phone</string>
  <void id="SimpleStringProperty10" method="get">
   <object idref="Contact0"/>
   <void property="value">
-   <string>449 234 532</string>
+   <string>299 23 23</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty10"/>
 <void class="addressBook.models.Contact" id="Field11" method="getField">
- <string>phone</string>
+ <string>patronymic</string>
  <void id="SimpleStringProperty11" method="get">
-  <object idref="Contact5"/>
+  <object idref="Contact4"/>
   <void property="value">
-   <string>324 423 235</string>
+   <string></string>
   </void>
  </void>
 </void>
@@ -301,67 +307,67 @@
 <void class="addressBook.models.Contact" id="Field12" method="getField">
  <string>email</string>
  <void id="SimpleStringProperty12" method="get">
-  <object idref="Contact4"/>
-  <void property="value">
-   <string></string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty12"/>
-<void class="addressBook.models.Contact" id="Field13" method="getField">
- <string>address</string>
- <void id="SimpleStringProperty13" method="get">
-  <object idref="Contact5"/>
-  <void property="value">
-   <string>г. Минск, ул. Рокоссовского</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty13"/>
-<void class="addressBook.models.Contact" id="Field14" method="getField">
- <string>email</string>
- <void id="SimpleStringProperty14" method="get">
   <object idref="Contact0"/>
   <void property="value">
    <string>logan@gmail.com</string>
   </void>
  </void>
 </void>
-<void idref="SimpleStringProperty14"/>
-<void class="addressBook.models.Contact" id="Field15" method="getField">
- <string>company</string>
- <void id="SimpleStringProperty15" method="get">
-  <object idref="Contact0"/>
+<void idref="SimpleStringProperty12"/>
+<void class="addressBook.models.Contact" id="Field13" method="getField">
+ <string>surname</string>
+ <void id="SimpleStringProperty13" method="get">
+  <object idref="Contact3"/>
   <void property="value">
-   <string>YouTube</string>
+   <string>Lol</string>
   </void>
  </void>
 </void>
-<void idref="SimpleStringProperty15"/>
-<void class="addressBook.models.Contact" id="Field16" method="getField">
- <string>patronymic</string>
- <void id="SimpleStringProperty16" method="get">
-  <object idref="Contact2"/>
+<void idref="SimpleStringProperty13"/>
+<void class="addressBook.models.Contact" id="Field14" method="getField">
+ <string>position</string>
+ <void id="SimpleStringProperty14" method="get">
+  <object idref="Contact3"/>
   <void property="value">
    <string></string>
   </void>
  </void>
 </void>
+<void idref="SimpleStringProperty14"/>
+<void class="addressBook.models.Contact" id="Field15" method="getField">
+ <string>address</string>
+ <void id="SimpleStringProperty15" method="get">
+  <object idref="Contact4"/>
+  <void property="value">
+   <string>Беларусь, ул. Красноармейская</string>
+  </void>
+ </void>
+</void>
+<void idref="SimpleStringProperty15"/>
+<void class="addressBook.models.Contact" id="Field16" method="getField">
+ <string>mobile</string>
+ <void id="SimpleStringProperty16" method="get">
+  <object idref="Contact0"/>
+  <void property="value">
+   <string>449 234 532</string>
+  </void>
+ </void>
+</void>
 <void idref="SimpleStringProperty16"/>
 <void class="addressBook.models.Contact" id="Field17" method="getField">
- <string>surname</string>
+ <string>name</string>
  <void id="SimpleStringProperty17" method="get">
-  <object idref="Contact6"/>
+  <object idref="Contact3"/>
   <void property="value">
-   <string>Im Late</string>
+   <string>Cotton</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty17"/>
 <void class="addressBook.models.Contact" id="Field18" method="getField">
- <string>company</string>
+ <string>email</string>
  <void id="SimpleStringProperty18" method="get">
-  <object idref="Contact1"/>
+  <object idref="Contact2"/>
   <void property="value">
    <string></string>
   </void>
@@ -369,51 +375,51 @@
 </void>
 <void idref="SimpleStringProperty18"/>
 <void class="addressBook.models.Contact" id="Field19" method="getField">
- <string>patronymic</string>
+ <string>company</string>
  <void id="SimpleStringProperty19" method="get">
   <object idref="Contact0"/>
   <void property="value">
-   <string>Paulovich</string>
+   <string>YouTube</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty19"/>
 <void class="addressBook.models.Contact" id="Field20" method="getField">
- <string>company</string>
- <void id="SimpleStringProperty20" method="get">
-  <object idref="Contact3"/>
-  <void property="value">
-   <string></string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty20"/>
-<void class="addressBook.models.Contact" id="Field21" method="getField">
  <string>name</string>
- <void id="SimpleStringProperty21" method="get">
+ <void id="SimpleStringProperty20" method="get">
   <object idref="Contact0"/>
   <void property="value">
    <string>Logan</string>
   </void>
  </void>
 </void>
+<void idref="SimpleStringProperty20"/>
+<void class="addressBook.models.Contact" id="Field21" method="getField">
+ <string>position</string>
+ <void id="SimpleStringProperty21" method="get">
+  <object idref="Contact2"/>
+  <void property="value">
+   <string></string>
+  </void>
+ </void>
+</void>
 <void idref="SimpleStringProperty21"/>
 <void class="addressBook.models.Contact" id="Field22" method="getField">
- <string>name</string>
+ <string>address</string>
  <void id="SimpleStringProperty22" method="get">
-  <object idref="Contact6"/>
+  <object idref="Contact2"/>
   <void property="value">
-   <string>Sorry</string>
+   <string>г. Минск, ул. Романовская Слабода</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty22"/>
 <void class="addressBook.models.Contact" id="Field23" method="getField">
- <string>company</string>
+ <string>surname</string>
  <void id="SimpleStringProperty23" method="get">
-  <object idref="Contact6"/>
+  <object idref="Contact4"/>
   <void property="value">
-   <string></string>
+   <string>Birthday</string>
   </void>
  </void>
 </void>
@@ -421,7 +427,7 @@
 <void class="addressBook.models.Contact" id="Field24" method="getField">
  <string>position</string>
  <void id="SimpleStringProperty24" method="get">
-  <object idref="Contact2"/>
+  <object idref="Contact1"/>
   <void property="value">
    <string></string>
   </void>
@@ -429,19 +435,19 @@
 </void>
 <void idref="SimpleStringProperty24"/>
 <void class="addressBook.models.Contact" id="Field25" method="getField">
- <string>phone</string>
+ <string>email</string>
  <void id="SimpleStringProperty25" method="get">
-  <object idref="Contact0"/>
+  <object idref="Contact1"/>
   <void property="value">
-   <string>299 23 23</string>
+   <string></string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty25"/>
 <void class="addressBook.models.Contact" id="Field26" method="getField">
- <string>email</string>
+ <string>patronymic</string>
  <void id="SimpleStringProperty26" method="get">
-  <object idref="Contact2"/>
+  <object idref="Contact1"/>
   <void property="value">
    <string></string>
   </void>
@@ -449,69 +455,69 @@
 </void>
 <void idref="SimpleStringProperty26"/>
 <void class="addressBook.models.Contact" id="Field27" method="getField">
- <string>surname</string>
+ <string>phone</string>
  <void id="SimpleStringProperty27" method="get">
-  <object idref="Contact4"/>
+  <object idref="Contact1"/>
   <void property="value">
-   <string>JS Developer</string>
+   <string>1234321</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty27"/>
 <void class="addressBook.models.Contact" id="Field28" method="getField">
- <string>surname</string>
+ <string>imagePath</string>
  <void id="SimpleStringProperty28" method="get">
-  <object idref="Contact5"/>
+  <object idref="Contact1"/>
   <void property="value">
-   <string>Lol</string>
+   <string></string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty28"/>
 <void class="addressBook.models.Contact" id="Field29" method="getField">
- <string>imagePath</string>
+ <string>surname</string>
  <void id="SimpleStringProperty29" method="get">
-  <object idref="Contact3"/>
+  <object idref="Contact0"/>
   <void property="value">
-   <string></string>
+   <string>Paul</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty29"/>
 <void class="addressBook.models.Contact" id="Field30" method="getField">
- <string>imagePath</string>
+ <string>patronymic</string>
  <void id="SimpleStringProperty30" method="get">
   <object idref="Contact0"/>
   <void property="value">
-   <string>51UK8MI8GBXGCKI8LO</string>
+   <string>Paulovich</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty30"/>
 <void class="addressBook.models.Contact" id="Field31" method="getField">
- <string>phone</string>
+ <string>imagePath</string>
  <void id="SimpleStringProperty31" method="get">
   <object idref="Contact2"/>
   <void property="value">
-   <string>8 800 555 35 35</string>
+   <string>IJVHF02Z20TE96NBMI</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty31"/>
 <void class="addressBook.models.Contact" id="Field32" method="getField">
- <string>email</string>
+ <string>address</string>
  <void id="SimpleStringProperty32" method="get">
-  <object idref="Contact6"/>
+  <object idref="Contact0"/>
   <void property="value">
-   <string></string>
+   <string>г. Минск, ул. Гурского</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty32"/>
 <void class="addressBook.models.Contact" id="Field33" method="getField">
- <string>email</string>
+ <string>patronymic</string>
  <void id="SimpleStringProperty33" method="get">
-  <object idref="Contact1"/>
+  <object idref="Contact3"/>
   <void property="value">
    <string></string>
   </void>
@@ -519,9 +525,9 @@
 </void>
 <void idref="SimpleStringProperty33"/>
 <void class="addressBook.models.Contact" id="Field34" method="getField">
- <string>patronymic</string>
+ <string>company</string>
  <void id="SimpleStringProperty34" method="get">
-  <object idref="Contact1"/>
+  <object idref="Contact2"/>
   <void property="value">
    <string></string>
   </void>
@@ -529,51 +535,51 @@
 </void>
 <void idref="SimpleStringProperty34"/>
 <void class="addressBook.models.Contact" id="Field35" method="getField">
- <string>position</string>
+ <string>phone</string>
  <void id="SimpleStringProperty35" method="get">
-  <object idref="Contact0"/>
+  <object idref="Contact4"/>
   <void property="value">
-   <string>Blogger, Vlogger</string>
+   <string>12345678</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty35"/>
 <void class="addressBook.models.Contact" id="Field36" method="getField">
- <string>imagePath</string>
+ <string>phone</string>
  <void id="SimpleStringProperty36" method="get">
-  <object idref="Contact1"/>
+  <object idref="Contact3"/>
   <void property="value">
-   <string></string>
+   <string>324 423 235</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty36"/>
 <void class="addressBook.models.Contact" id="Field37" method="getField">
- <string>phone</string>
+ <string>address</string>
  <void id="SimpleStringProperty37" method="get">
   <object idref="Contact1"/>
   <void property="value">
-   <string>123321</string>
+   <string>г. Минск, Чижовка Арена</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty37"/>
 <void class="addressBook.models.Contact" id="Field38" method="getField">
- <string>email</string>
+ <string>name</string>
  <void id="SimpleStringProperty38" method="get">
-  <object idref="Contact3"/>
+  <object idref="Contact4"/>
   <void property="value">
-   <string></string>
+   <string>Without</string>
   </void>
  </void>
 </void>
 <void idref="SimpleStringProperty38"/>
 <void class="addressBook.models.Contact" id="Field39" method="getField">
- <string>position</string>
+ <string>address</string>
  <void id="SimpleStringProperty39" method="get">
   <object idref="Contact3"/>
   <void property="value">
-   <string></string>
+   <string>г. Минск, ул. Рокоссовского</string>
   </void>
  </void>
 </void>
@@ -581,7 +587,7 @@
 <void class="addressBook.models.Contact" id="Field40" method="getField">
  <string>company</string>
  <void id="SimpleStringProperty40" method="get">
-  <object idref="Contact5"/>
+  <object idref="Contact3"/>
   <void property="value">
    <string></string>
   </void>
@@ -589,9 +595,9 @@
 </void>
 <void idref="SimpleStringProperty40"/>
 <void class="addressBook.models.Contact" id="Field41" method="getField">
- <string>position</string>
+ <string>email</string>
  <void id="SimpleStringProperty41" method="get">
-  <object idref="Contact5"/>
+  <object idref="Contact4"/>
   <void property="value">
    <string></string>
   </void>
@@ -599,193 +605,33 @@
 </void>
 <void idref="SimpleStringProperty41"/>
 <void class="addressBook.models.Contact" id="Field42" method="getField">
- <string>patronymic</string>
- <void id="SimpleStringProperty42" method="get">
-  <object idref="Contact6"/>
-  <void property="value">
-   <string></string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty42"/>
-<void class="addressBook.models.Contact" id="Field43" method="getField">
- <string>surname</string>
- <void id="SimpleStringProperty43" method="get">
-  <object idref="Contact0"/>
-  <void property="value">
-   <string>Paul</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty43"/>
-<void class="addressBook.models.Contact" id="Field44" method="getField">
- <string>name</string>
- <void id="SimpleStringProperty44" method="get">
-  <object idref="Contact4"/>
-  <void property="value">
-   <string>Danila</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty44"/>
-<void class="addressBook.models.Contact" id="Field45" method="getField">
- <string>phone</string>
- <void id="SimpleStringProperty45" method="get">
-  <object idref="Contact4"/>
-  <void property="value">
-   <string>222 - 23 - 342</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty45"/>
-<void class="addressBook.models.Contact" id="Field46" method="getField">
- <string>phone</string>
- <void id="SimpleStringProperty46" method="get">
-  <object idref="Contact6"/>
-  <void property="value">
-   <string></string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty46"/>
-<void class="addressBook.models.Contact" id="Field47" method="getField">
- <string>name</string>
- <void id="SimpleStringProperty47" method="get">
-  <object idref="Contact1"/>
-  <void property="value">
-   <string>Ololoshka</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty47"/>
-<void class="addressBook.models.Contact" id="Field48" method="getField">
- <string>address</string>
- <void id="SimpleStringProperty48" method="get">
-  <object idref="Contact4"/>
-  <void property="value">
-   <string>г. Минск, ул. Романовская Слабода</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty48"/>
-<void class="addressBook.models.Contact" id="Field49" method="getField">
- <string>name</string>
- <void id="SimpleStringProperty49" method="get">
-  <object idref="Contact2"/>
-  <void property="value">
-   <string>Piter</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty49"/>
-<void class="addressBook.models.Contact" id="Field50" method="getField">
- <string>surname</string>
- <void id="SimpleStringProperty50" method="get">
-  <object idref="Contact2"/>
-  <void property="value">
-   <string>Parker</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty50"/>
-<void class="addressBook.models.Contact" id="Field51" method="getField">
  <string>mobile</string>
- <void id="SimpleStringProperty51" method="get">
-  <object idref="Contact3"/>
+ <void id="SimpleStringProperty42" method="get">
+  <object idref="Contact1"/>
   <void property="value">
    <string>7845324</string>
   </void>
  </void>
 </void>
-<void idref="SimpleStringProperty51"/>
-<void class="addressBook.models.Contact" id="Field52" method="getField">
+<void idref="SimpleStringProperty42"/>
+<void class="addressBook.models.Contact" id="Field43" method="getField">
  <string>name</string>
- <void id="SimpleStringProperty52" method="get">
-  <object idref="Contact5"/>
-  <void property="value">
-   <string>Cotton</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty52"/>
-<void class="addressBook.models.Contact" id="Field53" method="getField">
- <string>mobile</string>
- <void id="SimpleStringProperty53" method="get">
-  <object idref="Contact1"/>
-  <void property="value">
-   <string></string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty53"/>
-<void class="addressBook.models.Contact" id="Field54" method="getField">
- <string>name</string>
- <void id="SimpleStringProperty54" method="get">
-  <object idref="Contact3"/>
+ <void id="SimpleStringProperty43" method="get">
+  <object idref="Contact2"/>
   <void property="value">
    <string>Danila</string>
   </void>
  </void>
 </void>
-<void idref="SimpleStringProperty54"/>
-<void class="addressBook.models.Contact" id="Field55" method="getField">
- <string>imagePath</string>
- <void id="SimpleStringProperty55" method="get">
-  <object idref="Contact4"/>
-  <void property="value">
-   <string>IJVHF02Z20TE96NBMI</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty55"/>
-<void class="addressBook.models.Contact" id="Field56" method="getField">
- <string>company</string>
- <void id="SimpleStringProperty56" method="get">
-  <object idref="Contact4"/>
-  <void property="value">
-   <string></string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty56"/>
-<void class="addressBook.models.Contact" id="Field57" method="getField">
+<void idref="SimpleStringProperty43"/>
+<void class="addressBook.models.Contact" id="Field44" method="getField">
  <string>position</string>
- <void id="SimpleStringProperty57" method="get">
-  <object idref="Contact1"/>
+ <void id="SimpleStringProperty44" method="get">
+  <object idref="Contact4"/>
   <void property="value">
    <string></string>
   </void>
  </void>
 </void>
-<void idref="SimpleStringProperty57"/>
-<void class="addressBook.models.Contact" id="Field58" method="getField">
- <string>email</string>
- <void id="SimpleStringProperty58" method="get">
-  <object idref="Contact5"/>
-  <void property="value">
-   <string></string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty58"/>
-<void class="addressBook.models.Contact" id="Field59" method="getField">
- <string>surname</string>
- <void id="SimpleStringProperty59" method="get">
-  <object idref="Contact3"/>
-  <void property="value">
-   <string>Danila</string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty59"/>
-<void class="addressBook.models.Contact" id="Field60" method="getField">
- <string>patronymic</string>
- <void id="SimpleStringProperty60" method="get">
-  <object idref="Contact5"/>
-  <void property="value">
-   <string></string>
-  </void>
- </void>
-</void>
-<void idref="SimpleStringProperty60"/>
+<void idref="SimpleStringProperty44"/>
 </java>

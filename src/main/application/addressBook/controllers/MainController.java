@@ -1,5 +1,6 @@
 package addressBook.controllers;
 
+import addressBook.Main;
 import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
 import addressBook.helpers.HibernateUtil;
@@ -42,7 +43,7 @@ public class MainController {
         // hide buttons
         manageAdditionalButtons(false);
 
-        SwitchScene<ContactsController> switchScene = new SwitchScene<>("../views/panels/Contacts.fxml");
+        SwitchScene<ContactsController> switchScene = new SwitchScene<>("panels/Contacts.fxml");
         contactsPanel = switchScene.loadToPane(rootPane);
         contactsPanel.setMainController(this);
 
@@ -74,7 +75,7 @@ public class MainController {
 
     @FXML
     protected void onAddContact() {
-        SwitchScene<ContactFormController> switchScene = new SwitchScene<>("../views/panels/ContactForm.fxml");
+        SwitchScene<ContactFormController> switchScene = new SwitchScene<>("panels/ContactForm.fxml");
 
         ContactFormController addPanelController = switchScene.loadToPane(rootPane);
         addPanelController.setGoogleMapView(googleMapView);
@@ -82,7 +83,7 @@ public class MainController {
 
     @FXML
     protected void onEditContact() {
-        SwitchScene<ContactFormController> switchScene = new SwitchScene<>("../views/panels/ContactForm.fxml");
+        SwitchScene<ContactFormController> switchScene = new SwitchScene<>("panels/ContactForm.fxml");
 
         ContactFormController addPanelController = switchScene.loadToPane(rootPane);
         addPanelController.setEditingContact(contactsPanel.getSelectedContact());
@@ -90,7 +91,7 @@ public class MainController {
     }
 
     @FXML void onShowContactInfo() {
-        SwitchScene<DetailsController> switchScene = new SwitchScene<>("../views/panels/Details.fxml");
+        SwitchScene<DetailsController> switchScene = new SwitchScene<>("panels/Details.fxml");
 
         DetailsController detailsPanel = switchScene.loadToPane(rootPane);
         detailsPanel.setContactInfo(contactsPanel.getSelectedContact());
@@ -100,7 +101,7 @@ public class MainController {
     protected void onSignOut(ActionEvent event) {
         currentUser = null;
 
-        SwitchScene<LoginController> switchScene = new SwitchScene<>("../views/forms/Login.fxml", true, false);
+        SwitchScene<LoginController> switchScene = new SwitchScene<>("forms/Login.fxml", true, false);
         switchScene.loadScene(event);
     }
 
@@ -136,12 +137,13 @@ public class MainController {
 
     @FXML
     protected void onSettings() {
-        SwitchScene<SettingsController> switchScene = new SwitchScene<>("../views/panels/Settings.fxml");
+        SwitchScene<SettingsController> switchScene = new SwitchScene<>("panels/Settings.fxml");
         switchScene.loadToPane(rootPane);
     }
 
     @FXML
     protected void onCloseApp(ActionEvent event) {
+        HibernateUtil.getInstance().closeConnection();
         SwitchScene.closeStage(event);
     }
 

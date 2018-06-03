@@ -123,13 +123,13 @@ public class ContactFormController {
 
         createOrUpdateContact();
 
-        SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml");
+        SwitchScene<MainController> switchScene = new SwitchScene<>("forms/Main.fxml");
         switchScene.loadScene(event);
     }
 
     @FXML
     private void backToHome(ActionEvent event) {
-        SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml");
+        SwitchScene<MainController> switchScene = new SwitchScene<>("forms/Main.fxml");
         switchScene.loadScene(event);
     }
 
@@ -193,14 +193,16 @@ public class ContactFormController {
         contact.setCompany( companyField.getText() );
         contact.setPosition( positionField.getText() );
 
-        Date birthday = Date.from(
-            birthdayField.getValue()
-                    .atStartOfDay()
-                    .atZone(ZoneId.systemDefault())
-                    .toInstant()
-        );
+        if (birthdayField.getValue() != null) {
+            Date birthday = Date.from(
+                    birthdayField.getValue()
+                            .atStartOfDay()
+                            .atZone(ZoneId.systemDefault())
+                            .toInstant()
+            );
 
-        contact.setBirthday( birthday );
+            contact.setBirthday( birthday );
+        }
 
         if (imageFile != null) {
             String imageHash = HelperUtils.getSaltString();

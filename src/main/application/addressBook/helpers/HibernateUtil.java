@@ -37,6 +37,10 @@ public class HibernateUtil {
         return instance;
     }
 
+    public void closeConnection() {
+        sessionFactory.close();
+    }
+
     private static SessionFactory getSessionFactory() {
         System.setProperty("org.jboss.logging.provider", "jdk");
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);

@@ -6,12 +6,12 @@
     <session-factory>
         <property name="dialect">com.enigmabridge.hibernate.dialect.SQLiteDialect</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
-        <property name="connection.url">jdbc:sqlite:src/main/resources/database.db</property>
+        <property name="connection.url">jdbc:sqlite:database.db</property>
         <property name="connection.username"></property>
         <property name="connection.password"></property>
 
-        <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">false</property>
 
         <mapping class="addressBook.models.Location" />
         <mapping class="addressBook.models.User" />

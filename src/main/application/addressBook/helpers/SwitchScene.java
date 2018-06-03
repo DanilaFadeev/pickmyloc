@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SwitchScene<Controller> {
+    private final String VIEWS_DIR = "/views/";
+
     public SwitchScene(String fxml) {
         Loader = new FXMLLoader();
         this.fxml = fxml;
@@ -33,7 +35,7 @@ public class SwitchScene<Controller> {
 
     public Controller loadToPane(Pane rootPane) {
         Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource(fxml));
+        Loader.setLocation(getClass().getResource(VIEWS_DIR + fxml));
 
         try {
             Pane pane = Loader.load();
@@ -47,7 +49,7 @@ public class SwitchScene<Controller> {
 
     public Controller loadScene(Event event) {
         Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource(fxml));
+        Loader.setLocation(getClass().getResource(VIEWS_DIR + fxml));
 
         Parent mainForm = null;
 

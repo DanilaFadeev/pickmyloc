@@ -16,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("views/forms/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/forms/Login.fxml"));
         primaryStage.setTitle("PickMyLoc");
 
         hostServices = getHostServices();
@@ -43,7 +43,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        launch(args);
+        Main.launch(args);
     }
 }
 

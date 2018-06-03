@@ -103,7 +103,7 @@ public class SettingsController {
 
     @FXML
     private void backToHome(ActionEvent event) {
-        SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml");
+        SwitchScene<MainController> switchScene = new SwitchScene<>("forms/Main.fxml");
         switchScene.loadScene(event);
     }
 
