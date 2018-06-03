@@ -48,13 +48,14 @@ public class Main extends Application {
 }
 
 // TODO list
-// validation: check address correct, phone and mobile(not letters)
 
-// db default table creation
+  /// PRODUCTION:
+ // db default table creation
 
-// make default settings row in DB
-// import and export success messages
-// import and export with images
-// email message to contact
-// prettify the details page (at all and when no field filled)
+      /// DEVELOPMENT:
+     // error when address deleted
+    // password hash
+   // import and export with images
+  // email message to contact
+ // prettify the details page (at all and when no field filled)
 // delete image with removing a contact

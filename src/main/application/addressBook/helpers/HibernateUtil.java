@@ -87,7 +87,7 @@ public class HibernateUtil {
         return contacts;
     }
 
-    public void save(Object object) {
+    public Object save(Object object) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -95,6 +95,8 @@ public class HibernateUtil {
 
         transaction.commit();
         session.close();
+
+        return object;
     }
 
     public void deleteContact(Contact contact) {

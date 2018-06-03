@@ -1,13 +1,13 @@
 package addressBook.controllers;
 
-import addressBook.helpers.Animations;
-import addressBook.helpers.DBConnection;
-import addressBook.helpers.SwitchScene;
+import addressBook.helpers.*;
+import addressBook.models.Location;
+import addressBook.models.Settings;
+import addressBook.models.User;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -94,10 +94,14 @@ public class RegistrationController {
         }
 
         if (validated) {
-            int userId = DBConnection.getConnection().createUser(emailField.getText(), usernameField.getText(), pass1);
+            Location defaultLocation = new Location("", 50.0641917, 27.421875);
+            Settings defaultSettings = new Settings("en", 4, defaultLocation);
+            User newUser = new User(emailField.getText(), usernameField.getText(), pass1, defaultSettings);
 
-            if (userId != 0) {
-                //MainController.userId = userId;
+            HibernateUtil.getInstance().save(newUser);
+
+            if (newUser.getId() != 0) {
+                MainController.currentUser = newUser;
 
                 SwitchScene<MainController> switchScene = new SwitchScene<>("../views/forms/Main.fxml", true, false);
                 switchScene.loadScene(event);

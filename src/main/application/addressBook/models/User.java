@@ -17,9 +17,19 @@ public class User {
 
     private String password;
 
+    public User(String email, String username, String password, Settings settings) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.settings = settings;
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "settings_id")
     private Settings settings;
+
+    public User() {
+    }
 
     public int getId() {
         return id;
