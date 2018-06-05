@@ -26,6 +26,7 @@ import java.util.Date;
 
 
 public class ContactFormController {
+    private static final String IMAGES_DIR = "images";
     private static final String ADDRESS_ERROR = "The address is not found. Type the full one";
 
     @FXML
@@ -205,8 +206,14 @@ public class ContactFormController {
         }
 
         if (imageFile != null) {
+
+            File img_directory = new File(IMAGES_DIR);
+            if (!img_directory.isDirectory() || !img_directory.exists()) {
+                img_directory.mkdir();
+            }
+
             String imageHash = HelperUtils.getSaltString();
-            File imageTemp = new File("images/" + imageHash);
+            File imageTemp = new File(IMAGES_DIR + "/" + imageHash);
 
             try {
                 HelperUtils.copyFileUsingStream(imageFile, imageTemp);

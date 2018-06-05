@@ -1,5 +1,7 @@
 package addressBook;
 
+import addressBook.helpers.HelperUtils;
+import addressBook.helpers.HibernateUtil;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.File;
 
 public class Main extends Application {
     public static double xOffset = 0;
@@ -31,6 +35,8 @@ public class Main extends Application {
             primaryStage.setY(event.getScreenY() - yOffset);
         });
 
+        HibernateUtil.getInstance();
+
         Scene scene = new Scene(root);
         scene.getStylesheets().add("styles/main.css");
 
@@ -50,7 +56,9 @@ public class Main extends Application {
 // TODO list
 
   /// PRODUCTION:
- // db default table creation
+// remove a contact with address (because markers initializing called one time when
+// application is loading and when we add a new contacts his location is not appear in
+// markers array map)
 
       /// DEVELOPMENT:
      // error when address deleted

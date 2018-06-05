@@ -56,22 +56,24 @@ public class HibernateUtil {
 
     public User getUser(String emailOrUsername, String password) {
         session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
 
         Criterion email = Restrictions.eq("username", emailOrUsername);
         Criterion username = Restrictions.eq("email", emailOrUsername);
         LogicalExpression loginCondition = Restrictions.or(email, username);
 
         Criteria criteria = session.createCriteria(User.class);
-        criteria.add(loginCondition);
+        criteria.add( loginCondition );
         criteria.add( Restrictions.eq("password", password) );
 
         List resultsList = criteria.list();
+
+        transaction.commit();
+        session.close();
+
         if (resultsList.isEmpty()) {
             return null;
         }
-
-        session.createCriteria(CriteriaBuilder.class);
-        session.close();
 
         return (User) resultsList.get(0);
     }

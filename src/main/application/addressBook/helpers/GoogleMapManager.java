@@ -147,8 +147,9 @@ public class GoogleMapManager {
     }
 
     public static void removeMarker(Contact contact) {
+        System.out.println(contact.hashCode());
         Marker removedMarker = mapMarkers.remove(contact.hashCode());
-
+        System.out.println(removedMarker);
         map.removeMarker(removedMarker);
     }
 
