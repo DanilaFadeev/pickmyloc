@@ -1,7 +1,5 @@
 package addressBook.controllers;
 
-import addressBook.Main;
-import addressBook.helpers.DBConnection;
 import addressBook.helpers.GoogleMapManager;
 import addressBook.helpers.HibernateUtil;
 import addressBook.helpers.SwitchScene;
@@ -129,7 +127,7 @@ public class MainController {
             HibernateUtil.getInstance().deleteContact( contactsPanel.getSelectedContact() );
 
             MainController.contacts.remove( contactsPanel.getSelectedContact() );
-            GoogleMapManager.removeMarker( contactsPanel.getSelectedContact() );
+            GoogleMapManager.initContactsMarkers(contacts, contactsPanel);
 
             onDeselectContacts();
         }

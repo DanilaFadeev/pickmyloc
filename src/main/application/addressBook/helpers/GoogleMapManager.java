@@ -97,6 +97,8 @@ public class GoogleMapManager {
     }
 
     public static void initContactsMarkers(ObservableList<Contact> contacts, ContactsController contactsController) {
+        map.clearMarkers();
+
         for (Contact contact: contacts) {
             if (contact.getLocation() == null)
                 continue;
@@ -144,13 +146,6 @@ public class GoogleMapManager {
 
         googleMapView.setCenter(contact.getLocation().getLatitude(), contact.getLocation().getLongitude());
         googleMapView.setZoom(locationZoom);
-    }
-
-    public static void removeMarker(Contact contact) {
-        System.out.println(contact.hashCode());
-        Marker removedMarker = mapMarkers.remove(contact.hashCode());
-        System.out.println(removedMarker);
-        map.removeMarker(removedMarker);
     }
 
     private static Marker activeMarker = null;

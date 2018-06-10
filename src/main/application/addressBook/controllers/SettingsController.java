@@ -29,7 +29,6 @@ import java.util.Optional;
 
 public class SettingsController {
     private final String ADDRESS_NOT_FOUND = "Not found";
-    private int location_id = 0;
 
     @FXML
     private void initialize() {
